@@ -1,0 +1,20 @@
+charset,UTF-8
+
+name,Aster™ Boredom Simulator
+type,ghost
+
+shiori,yaya.dll
+
+craftman,logicpng
+craftmanw,logic.png
+craftmanurl,https://logicpng.neocities.org/
+
+sakura.name,SOL™ Personal Computer
+kero.name,CaelOS Image Viewer
+
+icon,SPUTNIK.ico
+
+sstp.allowunspecifiedsend,0
+
+balloon,Sputnik Messenger
+recommended.balloon,Sputnik Messenger

@@ -1,0 +1,530 @@
+//many terrible things have happened here
+
+//custom dialogue script, because way too much shit is required to make the ghost work the way i want to
+OnTranslate
+{
+	_talk = reference0
+	_wordNum = 0
+	
+	//This is what makes %(embedded_elements) work in script input
+	if reference1 == "" && reference2 == "" //If this is from the input box
+	{ //send input box : no event (ref2) , no special flag (ref1)
+		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
+	}
+
+	//failsafe in case fronter is blanked out
+	if scheme == 4; _talk = "\![bind,CaelOS Scheme,Early Sunrise]" + _talk
+
+	//workaround for the default RSS and Email checks calling surface0, wiping the messages on the screen
+	if "\s[0]" _in_ _talk && (SHIORI3FW.EventId != "OnFirstBoot" && SHIORI3FW.EventId != "OnBoot" && SHIORI3FW.EventId != "OnWindowStateRestore"); _talk = REPLACE(_talk,"\s[0]","\s[0]%(OnMessageScroll)")
+
+	//force underline in links for non-supported balloons
+	if SHIORI3FW.BalloonName != "Sputnik Messenger"
+	{
+		if "\__q" _in_ _talk; _talk = REPLACE(_talk,"\__q","\f[cursornotselectstyle,underline]\__q")
+		if "\_a" _in_ _talk; _talk = REPLACE(_talk,"\_a","\f[anchornotselectstyle,underline]\f[anchorvisitedstyle,underline]\_a")
+	}
+
+	//toggles
+	if isVibrate == 0; _talk = REPLACE(_talk,"\i[1]","")
+	if (isSFX == 0 && reference2 != "OnTestVolume") || (isExternalSFX == 0 && ("OnExtra" _in_ reference2 || "\![extranotif]" _in_ _talk));_talk = RE_REPLACEEX(_talk,"\\!\[sound,([^\]]+)\]","")
+
+	_talkTemp = SHIORI3FW.RemoveAllTags(_talk) //remove tags to calculate for message scroll function
+	SETDELIM(_talkTemp,' ')
+
+	//get word count after initial conversion
+	if "\![rigel," _in_ _talk || "\![vega," _in_ _talk || "\![al," _in_ _talk || "\![urs," _in_ _talk
+	{
+		_wordNum = ARRAYSIZE(_talkTemp)
+	}
+	
+	//first script translation layer, replace contents within curly brackets
+	//second layer is OnReply and OnSystemMessage
+	if "{rigel" _in_ _talk || "{vega" _in_ _talk || "{al" _in_ _talk || "{urs" _in_ _talk
+	{
+		_talk = RE_REPLACEEX(_talk,"\{(rigel|urs|vega|al)(\d),([^\}]+)}","\\![embed,OnReply$2,""\\![$1,$2]$3""]")
+	}
+	if "{sys," _in_ _talk
+	{
+		_talk = RE_REPLACEEX(_talk,"\{sys,(.+)}","\\0\\![embed,OnSystemMessage,""$1""]")
+	}
+
+	if _wordNum != 0
+	{
+		_msgLength = 0 //picks which length the dummy message length on the shell will show up
+		case _wordNum
+		{
+			when 0; return
+			when 1-5; _msgLength = 1
+			when 6-15; _msgLength = 2
+			when 16-25; _msgLength = 3
+			others; _msgLength = 4
+		}
+
+		//use the appropiate balloon decoration depending on the speaker, + insert message scroll animation
+		if "\![rigel," _in_ _talk || "\![vega," _in_ _talk || "\![al," _in_ _talk || "\![urs," _in_ _talk
+		{
+			_talk = RE_REPLACEEX(_talk,'\\!\[(rigel|urs|vega|al),(\d)\]',"\\0\\![embed,OnMessageScroll,%(_msgLength),$1]\\p[$2]\\![embed,OnDecorateSpeaker,$1]")
+		}
+	}
+	
+	//If you want to add anything to OnTranslate, like text replacement, I would put it after this point, generally. Just make sure it's before the TOSTR(_talk)
+	
+	TOSTR(_talk)
+}
+
+//reply system, second layer of parsing the custom script
+//for \![talkN] see OnTranslateInternal.Kero
+
+//reply from 4rd character balloon
+OnReply3
+{
+	_talk = "\![talk3]\c"+ reference0
+	_talk
+}
+
+//reply from 3rd character balloon
+OnReply2
+{
+	_talk = "\![talk2]\c"+ reference0
+	_talk
+}
+
+//reply from side char/kero balloon
+OnReply1
+{
+	_talk = "\![talk1]\c"+ reference0
+	_talk
+}
+
+//reply from main char/sakura baloon
+OnReply0
+{
+	_talk = "\0\c"+ reference0
+	_talk
+}
+
+//system message. honestly might be hardly used lol
+OnSystemMessage
+{
+	_talk = "\0\c\b[0]" + reference0
+	_talk
+}
+
+//allows simpler script tags for changing the character on the screen
+//change is done via dressup items in the shell
+//usually Switch is first used and then whichever other character
+OnTranslateInternal.Theme
+{
+	_talk = _argv[0]
+	//shorten theme switch commands
+	if "\![theme,rigel]" _in_ _talk; _talk = REPLACE(_talk,"\![theme,rigel]","\![bind,CaelOS Scheme,Early Sunrise]")
+	if "\![theme,vega]" _in_ _talk; _talk = REPLACE(_talk,"\![theme,vega]","\![bind,CaelOS Scheme,Northern Lights]")
+	if "\![theme,aldebaran]" _in_ _talk; _talk = REPLACE(_talk,"\![theme,aldebaran]","\![bind,CaelOS Scheme,Evening Carnival]")
+	if "\![theme,switch]" _in_ _talk; _talk = REPLACE(_talk,"\![theme,switch]","\![bind,CaelOS Scheme,Please wait...]")
+
+	TOSTR(_talk)
+}
+
+//moves the invisible secondary characters (kero, p2, p3) to coordinates of the laptop. this is done so that the balloons are always appearing at least around the laptop
+OnTranslateInternal.Kero
+{
+	_talk = _argv[0]
+	//if additional balloons are needed:
+	if "\![talk1]" _in_ _talk; _talk = REPLACE(_talk,"\![talk1]","\1\s[10]\![get,property,OnCoordSakura,currentghost.scope0.rect]\![embed,OnMaskKero]")
+	if "\![talk2]" _in_ _talk; _talk = REPLACE(_talk,"\![talk2]","\p[2]\s[10]\![get,property,OnCoordSakura,currentghost.scope0.rect]\![embed,OnMaskKero]")
+	if "\![talk3]" _in_ _talk; _talk = REPLACE(_talk,"\![talk3]","\p[3]\s[10]\![get,property,OnCoordSakura,currentghost.scope0.rect]\![embed,OnMaskKero]")
+
+	TOSTR(_talk)
+}
+
+
+OnTranslateInternal.Image
+{
+	_talk = _argv[0]
+	//image display
+	if "\![imagevert]" _in_ _talk; _talk = REPLACE(_talk,"\![imagevert]","\1\![embed,OnColorKero]\![get,property,OnCoordSakura,currentghost.scope0.rect]\![get,property,OnCoordKero,currentghost.scope0.rect]\![embed,OnCorrectKero]")
+	if "\![imagehor]" _in_ _talk; _talk = REPLACE(_talk,"\![imagehor]","\1\![embed,OnColorKero]\![get,property,OnCoordSakura,currentghost.scope0.rect]\![get,property,OnCoordKero,currentghost.scope0.rect]\![embed,OnCorrectKero]")
+	if "\![imageclose]" _in_ _talk; _talk = REPLACE(_talk,"\![imageclose]","\1\s[-1]\![embed,OnMaskKero]")
+
+	TOSTR(_talk)
+}
+
+//indicate current speaker
+OnDecorateSpeaker
+{
+	//select balloon based on speaker
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"
+	{
+		_balloon = ""
+		case reference0
+		{
+			when 'rigel'; _balloon = "\b[4]"
+			when 'vega'; _balloon = "\b[6]"
+			when 'al'; _balloon = "\b[8]"
+			when 'urs'; _balloon = "\b[10]"
+		}
+		_balloon
+	}
+	else
+	{
+		_prefix = ""
+		case reference0
+		{
+			when 'rigel'; _prefix = "\_q[ \f[bold,1]Aster_Sunrise says:\f[bold,0] ]\n[150]\_q"
+			when 'vega'; _prefix = "\_q[ \f[bold,1]x_nightfallsymphony_x says:\f[bold,0] ]\n[150]\_q"
+			when 'al'; _prefix = "\_q[ \f[bold,1]TERRORSTAR says:\f[bold,0] ]\n[150]\_q"
+			when 'urs'; _prefix = "\_q[ \f[bold,1]minty_cub says:\f[bold,0] ]\n[150]\_q"
+		}
+		_prefix
+	}
+}
+
+//function controlling the message scroll in the shell's chat window
+//on shell's side the messages (and icons) exlude other messages (and icons) taking up the same spot, allowing to replace them without overlap
+//_argv[0] - word count in message, _argv[1] - urs(3)/rigel(0)/vega(1)/al(2), speakers
+//no arguments will return the previously generated scroll string, used in OnWindowStateRestore
+OnMessageScroll
+{	
+	_icon = 0
+	case reference1
+	{
+		when 'rigel'; _icon = "0"
+		when 'vega'; _icon = "1"
+		when 'al'; _icon = "2"
+		when 'urs'; _icon = "3"
+	}
+
+	//sometimes shiori events will pass their references into msg scroll.
+	//idk how well this will help but this should at least ensure string refs don't fall (OnClose was passing "user", which resulted in a blank message box being added to the sequence)
+	//hense if TOINT(reference0) != 0
+
+	//fill up the screen first
+	if msgA == -1
+	{
+		if TOINT(reference0) != 0
+		{
+			msgA = reference0
+			varA = RAND(3)
+			iconA = _icon
+			"\i[%(msgA)%(varA)00]\i[5%(iconA)00]"
+		} 
+	}
+	elseif msgB == -1
+	{
+		if TOINT(reference0) != 0
+		{
+			msgB = reference0
+			varB = RAND(3)
+			iconB = _icon
+			"\i[%(msgA)%(varA)01]\i[5%(iconA)01]\i[%(msgB)%(varB)00]\i[5%(iconB)00]"
+		} 
+		else; "\i[%(msgA)%(varA)00]\i[5%(iconA)00]"
+	}
+	elseif msgC == -1
+	{
+		if TOINT(reference0) != 0
+		{
+			msgC = reference0
+			varC = RAND(3)
+			iconC = _icon
+			"\i[%(msgA)%(varA)02]\i[5%(iconA)02]\i[%(msgB)%(varB)01]\i[5%(iconB)01]\i[%(msgC)%(varC)00]\i[5%(iconC)00]"
+		} 
+		else; "\i[%(msgA)%(varA)01]\i[5%(iconA)01]\i[%(msgB)%(varB)00]\i[5%(iconB)00]"
+	}
+	elseif msgD == -1
+	{
+		if TOINT(reference0) != 0
+		{
+			msgD = reference0
+			varD = RAND(3)
+			iconD = _icon
+			"\i[%(msgA)%(varA)03]\i[5%(iconA)03]\i[%(msgB)%(varB)02]\i[5%(iconB)02]\i[%(msgC)%(varC)01]\i[5%(iconC)01]\i[%(msgD)%(varD)00]\i[5%(iconD)00]"
+		} 
+		else; "\i[%(msgA)%(varA)02]\i[5%(iconA)02]\i[%(msgB)%(varB)01]\i[5%(iconB)01]\i[%(msgC)%(varC)00]\i[5%(iconC)00]"
+	}
+	else //further scrolling
+	{
+		case order
+		{
+			when 0
+			{
+				if TOINT(reference0) != 0
+				{
+					msgA = reference0
+					varA = RAND(3)
+					iconA = _icon
+					order = 1
+					"\i[%(msgB)%(varB)03]\i[5%(iconB)03]\i[%(msgC)%(varC)02]\i[5%(iconC)02]\i[%(msgD)%(varD)01]\i[5%(iconD)01]\i[%(msgA)%(varA)00]\i[5%(iconA)00]"
+				}
+				else; "\i[%(msgA)%(varA)03]\i[5%(iconA)03]\i[%(msgB)%(varB)02]\i[5%(iconB)02]\i[%(msgC)%(varC)01]\i[5%(iconC)01]\i[%(msgD)%(varD)00]\i[5%(iconD)00]"
+			}
+			when 1
+			{
+				if TOINT(reference0) != 0
+				{
+					msgB = reference0
+					varB = RAND(3)
+					iconB = _icon
+					order = 2
+					"\i[%(msgC)%(varC)03]\i[5%(iconC)03]\i[%(msgD)%(varD)02]\i[5%(iconD)02]\i[%(msgA)%(varA)01]\i[5%(iconA)01]\i[%(msgB)%(varB)00]\i[5%(iconB)00]"
+				} 
+				else; "\i[%(msgB)%(varB)03]\i[5%(iconB)03]\i[%(msgC)%(varC)02]\i[5%(iconC)02]\i[%(msgD)%(varD)01]\i[5%(iconD)01]\i[%(msgA)%(varA)00]\i[5%(iconA)00]"
+			}
+			when 2
+			{
+				if TOINT(reference0) != 0
+				{
+					msgC = reference0
+					varC = RAND(3)
+					iconC = _icon
+					order = 3
+					"\i[%(msgD)%(varD)03]\i[5%(iconD)03]\i[%(msgA)%(varA)02]\i[5%(iconA)02]\i[%(msgB)%(varB)01]\i[5%(iconB)01]\i[%(msgC)%(varC)00]\i[5%(iconC)00]"
+				}
+				else; "\i[%(msgC)%(varC)03]\i[5%(iconC)03]\i[%(msgD)%(varD)02]\i[5%(iconD)02]\i[%(msgA)%(varA)01]\i[5%(iconA)01]\i[%(msgB)%(varB)00]\i[5%(iconB)00]"
+			}
+			when 3
+			{
+				if TOINT(reference0) != 0
+				{
+					msgD = reference0
+					varD = RAND(3)
+					iconD = _icon
+					order = 0
+					"\i[%(msgA)%(varA)03]\i[5%(iconA)03]\i[%(msgB)%(varB)02]\i[5%(iconB)02]\i[%(msgC)%(varC)01]\i[5%(iconC)01]\i[%(msgD)%(varD)00]\i[5%(iconD)00]"
+				}
+				else; "\i[%(msgD)%(varD)03]\i[5%(iconD)03]\i[%(msgA)%(varA)02]\i[5%(iconA)02]\i[%(msgB)%(varB)01]\i[5%(iconB)01]\i[%(msgC)%(varC)00]\i[5%(iconC)00]"
+			}
+		}
+	}
+}
+
+//sakura and kero's dressups have to be set separately lol
+OnColorKero
+{
+	if scheme != schemeKero //only change if the scheme between sakura and kero doesn't much, otherwise it'll flip itself back to Early Sunrise
+	{
+		case scheme
+		{
+			when 1; "\![bind,CaelOS Scheme,Early Sunrise]"
+			when 2; "\![bind,CaelOS Scheme,Northern Lights]"
+			when 3; "\![bind,CaelOS Scheme,Evening Carnival]"
+			others; "\![bind,CaelOS Scheme,Please wait...]"
+		}
+	}
+}
+
+//Nonsense for correcting char position
+OnCoordSakura
+{
+	sakuraCoord = reference0
+}
+
+OnCoordKero
+{
+	keroCoord = reference0
+}
+
+OnDisplayChange
+{
+	displaywidth = reference1
+	displayheight = reference2
+}
+
+On_installedballoonname 
+{
+	balloonlist = ""
+
+	foreach reference; _balloon
+	{
+		balloonlist += "%(_balloon),"
+	}
+}
+
+//will be used for image display
+//reusing the function from Assistant Software written up right before starting this ghost. huge thanks to Zi for helping me figure out how to get coords without resorting to SAORI
+OnCorrectKero 
+{
+	_sideX = 0
+	_sideY = 0 //coordinates of the side panel
+
+	//Value2: Window coordinates (left, top, right, bottom)
+	_sideX = TOINT(keroCoord[0]) + TOINT(keroCoord[2]) / 2
+
+	_astX = (TOINT(sakuraCoord[0]) + TOINT(sakuraCoord[2])) /2 //aster's horisontal coord
+	_astY = (TOINT(sakuraCoord[1]) + TOINT(sakuraCoord[3])) /2 //vertical coord, will only be needed for moving side panel
+
+	//important thing of note is that the coordinates are relative to the PRIMARY window, meaning if your secondary display is to the left the coordinates can very easily be negative, and to the right can go way beyound your display actual width
+
+	//so what we do now is check if aster is reasonably close to the right or left edges of the screen
+	//no real need to consider multiple screens as the worst that'll happen is that they'll cross the intersection of the screen
+
+	//calculate middle point of the screen (function in etc.dic)
+	_screenMid = displaywidth / 2
+	
+	//setting side panel X coordinate
+	//(!) scale variable from OnShellScale
+	if !ISVAR('scale'); scale = 100
+	//if aster is in the left half of the screen, side panel will appear to the right of Aster
+	//for Boredom Simulator has to be offset due to sakura's shape
+	if _astX < _screenMid; _sideX = _astX + ( 600 * scale / 100 )
+	//if aster is in the right half of the screen, side panel will appear to the left of Aster
+	elseif _astX >= _screenMid; _sideX = _astX + ( 20 * scale / 100 )
+	
+	//side panel should be slightly lower than aster's center
+	_sideY = _astY + ( 200 * scale / 100 )
+
+	//resulting string
+	"\![move,--X=%(_sideX),--Y=%(_sideY),--base=primaryscreen,--move-offset=center.center,--options=ignore-sticky-window]"
+
+	ERASEVAR('sakuraCoord') //no longer necessary
+	ERASEVAR('keroCoord')
+}
+
+//Hide kero directly behind sakura, may be necessary for consequtive speech in more than one balloon
+//derivative of code above
+OnMaskKero
+{
+	_keroX = 0
+	_keroY = 0 //coordinates of the side panel
+
+	//Value2: Window coordinates (left, top, right, bottom)
+	_keroX = TOINT(sakuraCoord[0])
+	_keroY = TOINT(sakuraCoord[1])
+
+	"\![move,--X=%(_keroX),--Y=%(_keroY),--base=primaryscreen,--options=ignore-sticky-window]"
+}
+
+//This is just here so you can use anchors to link to websites if you want. You can link to websites with normal menu choice tags! If you do, a handy URL preview will show up in the balloon!
+OnAnchorSelectEx
+{
+	if reference2 == "extra"; "\t\*\_q[ This link leads to an external site. Proceed? ]\n[150]\f[align,center]\![*]\q[Yes,script:\j[""%(reference1)""\]]  \![*]\q[No,OnExtra]"
+	if reference2 == "playlist"; "\t\*\_q[ This link leads to a YouTube playlist. Proceed? ]\n[150]\f[align,center]\![*]\q[Yes,script:\j[""%(reference1)""\]]  \![*]\q[No,blankfornow]"
+}
+
+OnAnchorSelect
+{
+	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
+}
+
+//Hotkeys
+OnKeyPress
+{
+	if reference0 == "f1"; "\![open,readme]"
+	elseif reference0 == "t"; OnAiTalk
+	elseif reference0 == "r"; OnLastTalk
+	elseif reference0 == "s" && SHIORI3FW.DebugMode == 1; "\![reload,shiori]"
+	elseif reference0 == "x" && SHIORI3FW.DebugMode == 1; OnTest
+}
+
+//Happens about 30 seconds after a script ends, by default, to bring them back to normal poses
+OnSurfaceRestore
+{
+	"\![set,sticky-window,0,1,2,3]\1\s[-1]\p[2]\s[-1]\p[3]\s[-1]\0\![set,alpha,100]"
+}
+
+//Happens when the ghost is unminimized. Restarts the automaton and restores the messages
+OnWindowStateRestore
+{
+	"\![set,sticky-window,0,1,2,3]\1\s[-1]\p[2]\s[-1]\p[3]\s[-1]\0\s[0]%(OnMessageScroll)"
+}
+
+//Network update url. Make sure you have a / on the end of the url or it will give a warning every time users try to update! If you don't plan to use network updates you can remove this
+//IF YOU'RE USING GITHUB FOR NETWORK UPDATES: DO NOT USE github.io URLS! It will cause you pain and suffering. USE raw.githubusercontent!!!
+//To get the raw.githubusercontent link super easy:
+//• Open your ghost's repo online
+//• navigate to the ghost's folder (the top level one, with install.txt, readme.txt, etc)
+//• Click on install.txt, or another text file on that level
+//• Once on that page, click the "raw" button. You should see the url now starts with raw.githubusercontent
+//• Copy that url exactly as is, but *leave off the "install.txt" or whatever file name at the end.*
+//Tada! That's your url! Make sure you test it! The dev palette and script/network log can help with that
+On_homeurl
+{
+	""
+}
+
+
+//—————————————————————————————— Right click menu links ——————————————————————————————
+
+On_hidebutton.caption //i don't really like the term iconify and i feel like it may be confusing for new users, as it was for me!! sorry!!
+{
+	"Minimize"
+}
+
+//Takes an array of alternating names and urls, and formats them for use with the right click menu
+FormatLinks : all
+{
+	for _i = 0; _i < ARRAYSIZE(_argv); _i++
+	{
+		_argv[_i] //Add the link/title
+		//Alternate between adding %ASC(1) or %ASC(2)
+		if _i % 2 == 1; "%ASC(2)"
+		else; "%ASC(1)"
+	}
+}
+
+On_recommendrootbutton.caption
+{
+	"About this computer"
+}
+
+On_portalrootbutton.caption
+{
+	"Resources used"
+}
+
+
+On_sakura.recommendsites
+{
+	FormatLinks(recommendsites_sakura)
+}
+
+//These are the websites linked in the top option of the sakura's right click menu. The format is simple; write the label of the link on the left followed by a semicolon, and then on the right, the url to link to. These should be separate strings.
+recommendsites_sakura : array
+{
+	"Logic.png @ NyxOS";	"https://logicpng.neocities.org/"
+	"More about CaelOS...";	"https://logicpng.neocities.org/caelos"
+	"Devlog (Tumblr)";	"https://logicpng.tumblr.com/tagged/aster%20boredom%20simulator%20devlog"
+}
+
+On_sakura.portalsites 
+{
+	FormatLinks(portalsites_sakura)
+}
+
+//These are the websites linked in the second option of the sakura's right click menu. Same as above
+portalsites_sakura : array
+{
+	"UKADOC Project (EN)";	"https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
+	"UKADOC Project (JP)";	"https://ssp.shillest.net/ukadoc/manual/index.html"
+	"Simplicity template";	"https://ukagaka.zichqec.com/template/simplicity_template"
+	"AYAYA Wiki";	"https://emily.shillest.net/ayaya/index.php"
+	"YAYA Fundamentals";	"https://zichqec.github.io/YAYA_Fundamentals/"
+}
+
+// On_kero.recommendsites
+// {
+// 	FormatLinks(recommendsites_kero)
+// }
+
+// //These are the websites linked in the first option of the kero's right click menu. Same as above
+// recommendsites_kero : array
+// {
+// 	"These labels can be anything you want";	"https://link.example.com/link/to/whatever/here/once/more/"
+// }
+
+//hide owner draw menu for non-sakura characters entierly
+On_kero.popupmenu.visible
+{
+	0
+}
+
+On_char2.popupmenu.visible
+{
+	0
+}
+
+On_char3.popupmenu.visible
+{
+	0
+}

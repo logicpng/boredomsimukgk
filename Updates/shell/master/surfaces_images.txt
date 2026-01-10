@@ -1,0 +1,87 @@
+//images to display in image viewer
+
+descript
+{
+	version,1
+}
+
+//horisontal images
+//consider an append when there's more to attach the frame
+
+//Terrabyte office hallway
+surface90000
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//First screenshot
+surface90001
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Vega petting Halley
+surface90002
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,20,0,0,0
+}
+
+//Aldebaran about to have a crisis
+surface90003
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,20,0,0,0
+}
+
+//Urs' Net Pet
+surface90004
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Rigel's drawing: CometCrits
+surface90005
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Rigel's drawing: Mercury
+surface90006
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Rigel's drawing: Alien duo
+surface90007
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,20,0,0,0
+}
+
+//Extras:
+//Rigel with the Utah Teapot
+surface90008
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Vega blepping
+surface90009
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,30,0,0,0
+}
+
+//Urs blepping
+surface90010
+{
+    animation0.interval,runonce
+    animation0.pattern0,overlay,20,0,0,0
+}

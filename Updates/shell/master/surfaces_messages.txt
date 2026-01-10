@@ -1,0 +1,539 @@
+descript
+{
+	version,1
+}
+
+surface.append0-3
+{
+    	//ICONS
+	//5000,5001,5002,5003,5100,5101,5102,5103,5104,5200,5201,5202,5203,5300,5301,5302,5303
+	//Rigel - red aster flower
+	//bottom
+	animation5000.interval,never
+	animation5000.pattern0,parallelstop,(5100,5200,5300)
+	animation5000.pattern1,overlay,400,0,0,0
+	
+	//mid low
+	animation5001.interval,never
+	animation5001.pattern0,parallelstop,(5101,5201,5301)
+	animation5001.pattern1,overlay,400,0,3,-23
+
+	//mid high
+	animation5002.interval,never
+	animation5002.pattern0,parallelstop,(5102,5202,5302)
+	animation5002.pattern1,overlay,400,0,6,-46
+
+	//top
+	animation5003.interval,never
+	animation5003.pattern0,parallelstop,(5103,5203,5303)
+	animation5003.pattern1,overlay,400,0,9,-69
+
+	//Vega - wolf with the moon
+	//bottom
+	animation5100.interval,never
+	animation5100.pattern0,parallelstop,(5000,5200,5300)
+	animation5100.pattern1,overlay,401,0,0,0
+	
+	//mid low
+	animation5101.interval,never
+	animation5101.pattern0,parallelstop,(5001,5201,5301)
+	animation5101.pattern1,overlay,401,0,3,-23
+
+	//mid high
+	animation5102.interval,never
+	animation5102.pattern0,parallelstop,(5002,5202,5302)
+	animation5102.pattern1,overlay,401,0,6,-46
+
+	//top
+	animation5103.interval,never
+	animation5103.pattern0,parallelstop,(5003,5203,5303)
+	animation5103.pattern1,overlay,401,0,9,-69
+
+	//Aldebaran - purple giant star
+	//bottom
+	animation5200.interval,never
+	animation5200.pattern0,parallelstop,(5000,5100,5300)
+	animation5200.pattern1,overlay,402,0,0,0
+	
+	//mid low
+	animation5201.interval,never
+	animation5201.pattern0,parallelstop,(5001,5101,5301)
+	animation5201.pattern1,overlay,402,0,3,-23
+
+	//mid high
+	animation5202.interval,never
+	animation5202.pattern0,parallelstop,(5002,5102,5302)
+	animation5202.pattern1,overlay,402,0,6,-46
+
+	//top
+	animation5203.interval,never
+	animation5203.pattern0,parallelstop,(5003,5103,5303)
+	animation5203.pattern1,overlay,402,0,9,-69
+
+	//Urs - mint confused bear
+	//bottom
+	animation5300.interval,never
+	animation5300.pattern0,parallelstop,(5000,5100,5200)
+	animation5300.pattern1,overlay,403,0,0,0
+	
+	//mid low
+	animation5301.interval,never
+	animation5301.pattern0,parallelstop,(5001,5101,5201)
+	animation5301.pattern1,overlay,403,0,3,-23
+
+	//mid high
+	animation5302.interval,never
+	animation5302.pattern0,parallelstop,(5002,5102,5202)
+	animation5302.pattern1,overlay,403,0,6,-46
+
+	//top
+	animation5303.interval,never
+	animation5303.pattern0,parallelstop,(5003,5103,5203)
+	animation5303.pattern1,overlay,403,0,9,-69
+
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
+    //MESSAGES
+
+	//short bottom
+	animation1000.interval,never
+	animation1000.pattern0,parallelstop,(2000,3000,4000,2100,3100,4100,2200,3200,4200,2300,3300,4300,1100,1200,1300)
+	animation1000.pattern1,overlay,1000,0,0,0
+
+	//short middle low
+	animation1001.interval,never
+	animation1001.pattern0,parallelstop,(2001,3001,4001,2101,3101,4101,2201,3201,4201,2301,3301,4301,1101,1201,1301)
+	animation1001.pattern1,overlay,1000,0,3,-23
+
+	//short middle high
+	animation1002.interval,never
+	animation1002.pattern0,parallelstop,(2002,3002,4002,2102,3102,4102,2202,3202,4202,2302,3302,4302,1102,1202,1302)
+	animation1002.pattern1,overlay,1000,0,6,-46
+
+	//short top
+	animation1003.interval,never
+	animation1003.pattern0,parallelstop,(2003,3003,4003,2103,3103,4103,2203,3203,4203,2303,3303,4303,1103,1203,1303)
+	animation1003.pattern1,overlay,1000,0,9,-69
+
+	//var1
+
+	//short bottom
+	animation1100.interval,never
+	animation1100.pattern0,parallelstop,(2000,3000,4000,2100,3100,4100,2200,3200,4200,2300,3300,4300,1000,1200,1300)
+	animation1100.pattern1,overlay,1100,0,0,0
+
+	//short middle low
+	animation1101.interval,never
+	animation1101.pattern0,parallelstop,(2001,3001,4001,2101,3101,4101,2201,3201,4201,2301,3301,4301,1001,1201,1301)
+	animation1101.pattern1,overlay,1100,0,3,-23
+
+	//short middle high
+	animation1102.interval,never
+	animation1102.pattern0,parallelstop,(2002,3002,4002,2102,3102,4102,2202,3202,4202,2302,3302,4302,1002,1202,1302)
+	animation1102.pattern1,overlay,1100,0,6,-46
+
+	//short top
+	animation1103.interval,never
+	animation1103.pattern0,parallelstop,(2003,3003,4003,2103,3103,4103,2203,3203,4203,2303,3303,4303,1003,1203,1303)
+	animation1103.pattern1,overlay,1100,0,9,-69
+	
+	//var2
+
+	//short bottom
+	animation1200.interval,never
+	animation1200.pattern0,parallelstop,(2000,3000,4000,2100,3100,4100,2200,3200,4200,2300,3300,4300,1000,1100,1300)
+	animation1200.pattern1,overlay,1200,0,0,0
+
+	//short middle low
+	animation1201.interval,never
+	animation1201.pattern0,parallelstop,(2001,3001,4001,2101,3101,4101,2201,3201,4201,2301,3301,4301,1001,1101,1301)
+	animation1201.pattern1,overlay,1200,0,3,-23
+
+	//short middle high
+	animation1202.interval,never
+	animation1202.pattern0,parallelstop,(2002,3002,4002,2102,3102,4102,2202,3202,4202,2302,3302,4302,1002,1102,1302)
+	animation1202.pattern1,overlay,1200,0,6,-46
+
+	//short top
+	animation1203.interval,never
+	animation1203.pattern0,parallelstop,(2003,3003,4003,2103,3103,4103,2203,3203,4203,2303,3303,4303,1003,1103,1303)
+	animation1203.pattern1,overlay,1200,0,9,-69
+
+	//var3
+
+	//short bottom
+	animation1300.interval,never
+	animation1300.pattern0,parallelstop,(2000,3000,4000,2100,3100,4100,2200,3200,4200,2300,3300,4300,1000,1100,1200)
+	animation1300.pattern1,overlay,1300,0,0,0
+
+	//short middle low
+	animation1301.interval,never
+	animation1301.pattern0,parallelstop,(2001,3001,4001,2101,3101,4101,2201,3201,4201,2301,3301,4301,1001,1101,1201)
+	animation1301.pattern1,overlay,1300,0,3,-23
+
+	//short middle high
+	animation1302.interval,never
+	animation1302.pattern0,parallelstop,(2002,3002,4002,2102,3102,4102,2202,3202,4202,2302,3302,4302,1002,1102,1202)
+	animation1302.pattern1,overlay,1300,0,6,-46
+
+	//short top
+	animation1303.interval,never
+	animation1303.pattern0,parallelstop,(2003,3003,4003,2103,3103,4103,2203,3203,4203,2303,3303,4303,1003,1103,1203)
+	animation1303.pattern1,overlay,1300,0,9,-69
+
+	// ---------------------------------------
+
+	//long bottom
+	animation2000.interval,never
+	animation2000.pattern0,parallelstop,(1000,3000,4000,1100,3100,4100,1200,3200,4200,1300,3300,4300,2300,2100,2200)
+	animation2000.pattern1,overlay,2000,0,0,0
+
+	//long middle low
+
+	animation2001.interval,never
+	animation2001.pattern0,parallelstop,(1001,3001,4001,1101,3101,4101,1201,3201,4201,1301,3301,4301,2301,2101,2201)
+	animation2001.pattern1,overlay,2000,0,3,-23
+	//long middle high
+
+	animation2002.interval,never
+	animation2002.pattern0,parallelstop,(1002,3002,4002,1102,3102,4102,1202,3202,4202,1302,3302,4302,2302,2102,2202)
+	animation2002.pattern1,overlay,2000,0,6,-46
+
+	//long top
+	animation2003.interval,never
+	animation2003.pattern0,parallelstop,(1003,3003,4003,1103,3103,4103,1203,3203,4203,1303,3303,4303,2303,2103,2203)
+	animation2003.pattern1,overlay,2000,0,9,-69
+
+	//var 1
+
+	//long bottom
+	animation2100.interval,never
+	animation2100.pattern0,parallelstop,(1000,3000,4000,1100,3100,4100,1200,3200,4200,1300,3300,4300,2000,2300,2200)
+	animation2100.pattern1,overlay,2100,0,0,0
+
+	//long middle low
+
+	animation2101.interval,never
+	animation2101.pattern0,parallelstop,(1001,3001,4001,1101,3101,4101,1201,3201,4201,1301,3301,4301,2001,2301,2201)
+	animation2101.pattern1,overlay,2100,0,3,-23
+	//long middle high
+
+	animation2102.interval,never
+	animation2102.pattern0,parallelstop,(1002,3002,4002,1102,3102,4102,1202,3202,4202,1302,3302,4302,2002,2302,2202)
+	animation2102.pattern1,overlay,2100,0,6,-46
+
+	//long top
+	animation2103.interval,never
+	animation2103.pattern0,parallelstop,(1003,3003,4003,1103,3103,4103,1203,3203,4203,1303,3303,4303,2003,2303,2203)
+	animation2103.pattern1,overlay,2100,0,9,-69
+
+	//var2
+
+	//long bottom
+	animation2200.interval,never
+	animation2200.pattern0,parallelstop,(1000,3000,4000,1100,3100,4100,1200,3200,4200,1300,3300,4300,2000,2300,2100)
+	animation2200.pattern1,overlay,2200,0,0,0
+
+	//long middle low
+
+	animation2201.interval,never
+	animation2201.pattern0,parallelstop,(1001,3001,4001,1101,3101,4101,1201,3201,4201,1301,3301,4301,2001,2301,2101)
+	animation2201.pattern1,overlay,2200,0,3,-23
+	//long middle high
+
+	animation2202.interval,never
+	animation2202.pattern0,parallelstop,(1002,3002,4002,1102,3102,4102,1202,3202,4202,1302,3302,4302,2002,2302,2102)
+	animation2202.pattern1,overlay,2200,0,6,-46
+
+	//long top
+	animation2203.interval,never
+	animation2203.pattern0,parallelstop,(1003,3003,4003,1103,3103,4103,1203,3203,4203,1303,3303,4303,2003,2303,2103)
+	animation2203.pattern1,overlay,2200,0,9,-69
+
+	//var3
+
+	//long bottom
+	animation2300.interval,never
+	animation2300.pattern0,parallelstop,(1000,3000,4000,1100,3100,4100,1200,3200,4200,1300,3300,4300,2000,2200,2100)
+	animation2300.pattern1,overlay,2300,0,0,0
+
+	//long middle low
+
+	animation2301.interval,never
+	animation2301.pattern0,parallelstop,(1001,3001,4001,1101,3101,4101,1201,3201,4201,1301,3301,4301,2001,2201,2101)
+	animation2301.pattern1,overlay,2300,0,3,-23
+	//long middle high
+
+	animation2302.interval,never
+	animation2302.pattern0,parallelstop,(1002,3002,4002,1102,3102,4102,1202,3202,4202,1302,3302,4302,2002,2202,2102)
+	animation2302.pattern1,overlay,2300,0,6,-46
+
+	//long top
+	animation2303.interval,never
+	animation2303.pattern0,parallelstop,(1003,3003,4003,1103,3103,4103,1203,3203,4203,1303,3303,4303,2003,2203,2103)
+	animation2303.pattern1,overlay,2300,0,9,-69
+	// ---------------------------------------
+
+	//2line bottom
+	animation3000.interval,never
+	animation3000.pattern0,parallelstop,(1000,2000,4000,1100,2100,4100,1200,2200,4200,1300,2300,4300,3100,3200,3300)
+	animation3000.pattern1,overlay,3000,0,0,0
+
+	//2line middle low
+	animation3001.interval,never
+	animation3001.pattern0,parallelstop,(1001,2001,4001,1101,2101,4101,1201,2201,4201,1301,2301,4301,3101,3201,3301)
+	animation3001.pattern1,overlay,3000,0,3,-23
+
+	//2line middle high
+	animation3002.interval,never
+	animation3002.pattern0,parallelstop,(1002,2002,4002,1102,2102,4102,1202,2202,4202,1302,2302,4302,3102,3202,3302)
+	animation3002.pattern1,overlay,3000,0,6,-46
+
+	//2line top
+	animation3003.interval,never
+	animation3003.pattern0,parallelstop,(1003,2003,4003,1103,2103,4103,1203,2203,4203,1303,2303,4303,3103,3203,3303)
+	animation3003.pattern1,overlay,3000,0,9,-69
+
+	//var1
+
+	//2line bottom
+	animation3100.interval,never
+	animation3100.pattern0,parallelstop,(1000,2000,4000,1100,2100,4100,1200,2200,4200,1300,2300,4300,3000,3200,3300)
+	animation3100.pattern1,overlay,3100,0,0,0
+
+	//2line middle low
+	animation3101.interval,never
+	animation3101.pattern0,parallelstop,(1001,2001,4001,1101,2101,4101,1201,2201,4201,1301,2301,4301,3001,3201,3301)
+	animation3101.pattern1,overlay,3100,0,3,-23
+
+	//2line middle high
+	animation3102.interval,never
+	animation3102.pattern0,parallelstop,(1002,2002,4002,1102,2102,4102,1202,2202,4202,1302,2302,4302,3002,3202,3302)
+	animation3102.pattern1,overlay,3100,0,6,-46
+
+	//2line top
+	animation3103.interval,never
+	animation3103.pattern0,parallelstop,(1003,2003,4003,1103,2103,4103,1203,2203,4203,1303,2303,4303,3003,3203,3303)
+	animation3103.pattern1,overlay,3100,0,9,-69
+
+	//var2
+
+	//2line bottom
+	animation3200.interval,never
+	animation3200.pattern0,parallelstop,(1000,2000,4000,1100,2100,4100,1200,2200,4200,1300,2300,4300,3100,3000,3300)
+	animation3200.pattern1,overlay,3200,0,0,0
+
+	//2line middle low
+	animation3201.interval,never
+	animation3201.pattern0,parallelstop,(1001,2001,4001,1101,2101,4101,1201,2201,4201,1301,2301,4301,3101,3001,3301)
+	animation3201.pattern1,overlay,3200,0,3,-23
+
+	//2line middle high
+	animation3202.interval,never
+	animation3202.pattern0,parallelstop,(1002,2002,4002,1102,2102,4102,1202,2202,4202,1302,2302,4302,3102,3002,3302)
+	animation3202.pattern1,overlay,3200,0,6,-46
+
+	//2line top
+	animation3203.interval,never
+	animation3203.pattern0,parallelstop,(1003,2003,4003,1103,2103,4103,1203,2203,4203,1303,2303,4303,3103,3003,3303)
+	animation3203.pattern1,overlay,3200,0,9,-69
+
+	//var3
+
+	//2line bottom
+	animation3300.interval,never
+	animation3300.pattern0,parallelstop,(1000,2000,4000,1100,2100,4100,1200,2200,4200,1300,2300,4300,3100,3000,3200)
+	animation3300.pattern1,overlay,3300,0,0,0
+
+	//2line middle low
+	animation3301.interval,never
+	animation3301.pattern0,parallelstop,(1001,2001,4001,1101,2101,4101,1201,2201,4201,1301,2301,4301,3101,3001,3201)
+	animation3301.pattern1,overlay,3300,0,3,-23
+
+	//2line middle high
+	animation3302.interval,never
+	animation3302.pattern0,parallelstop,(1002,2002,4002,1102,2102,4102,1202,2202,4202,1302,2302,4302,3102,3002,3202)
+	animation3302.pattern1,overlay,3300,0,6,-46
+
+	//2line top
+	animation3303.interval,never
+	animation3303.pattern0,parallelstop,(1003,2003,4003,1103,2103,4103,1203,2203,4203,1303,2303,4303,3103,3003,3203)
+	animation3303.pattern1,overlay,3300,0,9,-69
+
+	// ---------------------------------------
+
+	//3line bottom
+	animation4000.interval,never
+	animation4000.pattern0,parallelstop,(1000,2000,3000,1100,2100,3100,1200,2200,3200,1300,2300,3300,4100,4200,4300)
+	animation4000.pattern1,overlay,4000,0,0,0
+	//3line middle low
+	animation4001.interval,never
+	animation4001.pattern0,parallelstop,(1001,2001,3001,1101,2101,3101,1201,2201,3201,1301,2301,3301,4101,4201,4301)
+	animation4001.pattern1,overlay,4000,0,3,-23
+	//3line middle high
+	animation4002.interval,never
+	animation4002.pattern0,parallelstop,(1002,2002,3002,1102,2102,3102,1202,2202,3202,1302,2302,3302,4102,4202,4302)
+	animation4002.pattern1,overlay,4000,0,6,-46
+	//3line top
+	animation4003.interval,never
+	animation4003.pattern0,parallelstop,(1003,2003,3003,1103,2103,3103,1203,2203,3203,1303,2303,3303,4103,4203,4303)
+	animation4003.pattern1,overlay,4000,0,9,-69
+
+	//var1
+	//3line bottom
+	animation4100.interval,never
+	animation4100.pattern0,parallelstop,(1000,2000,3000,1100,2100,3100,1200,2200,3200,1300,2300,3300,4000,4200,4300)
+	animation4100.pattern1,overlay,4100,0,0,0
+	//3line middle low
+	animation4101.interval,never
+	animation4101.pattern0,parallelstop,(1001,2001,3001,1101,2101,3101,1201,2201,3201,1301,2301,3301,4001,4201,4301)
+	animation4101.pattern1,overlay,4100,0,3,-23
+	//3line middle high
+	animation4102.interval,never
+	animation4102.pattern0,parallelstop,(1002,2002,3002,1102,2102,3102,1202,2202,3202,1302,2302,3302,4002,4202,4302)
+	animation4102.pattern1,overlay,4100,0,6,-46
+	//3line top
+	animation4103.interval,never
+	animation4103.pattern0,parallelstop,(1003,2003,3003,1103,2103,3103,1203,2203,3203,1303,2303,3303,4003,4203,4303)
+	animation4103.pattern1,overlay,4100,0,9,-69
+
+	//var2
+	//3line bottom
+	animation4200.interval,never
+	animation4200.pattern0,parallelstop,(1000,2000,3000,1100,2100,3100,1200,2200,3200,1300,2300,3300,4000,4100,4300)
+	animation4200.pattern1,overlay,4200,0,0,0
+	//3line middle low
+	animation4201.interval,never
+	animation4201.pattern0,parallelstop,(1001,2001,3001,1101,2101,3101,1201,2201,3201,1301,2301,3301,4001,4101,4301)
+	animation4201.pattern1,overlay,4200,0,3,-23
+	//3line middle high
+	animation4202.interval,never
+	animation4202.pattern0,parallelstop,(1002,2002,3002,1102,2102,3102,1202,2202,3202,1302,2302,3302,4002,4102,4302)
+	animation4202.pattern1,overlay,4200,0,6,-46
+	//3line top
+	animation4203.interval,never
+	animation4203.pattern0,parallelstop,(1003,2003,3003,1103,2103,3103,1203,2203,3203,1303,2303,3303,4003,4103,4303)
+	animation4203.pattern1,overlay,4200,0,9,-69
+
+
+	//var3
+	//3line bottom
+	animation4300.interval,never
+	animation4300.pattern0,parallelstop,(1000,2000,3000,1100,2100,3100,1200,2200,3200,1300,2300,3300,4000,4100,4200)
+	animation4300.pattern1,overlay,4300,0,0,0
+	//3line middle low
+	animation4301.interval,never
+	animation4301.pattern0,parallelstop,(1001,2001,3001,1101,2101,3101,1201,2201,3201,1301,2301,3301,4001,4101,4201)
+	animation4301.pattern1,overlay,4300,0,3,-23
+	//3line middle high
+	animation4302.interval,never
+	animation4302.pattern0,parallelstop,(1002,2002,3002,1102,2102,3102,1202,2202,3202,1302,2302,3302,4002,4102,4202)
+	animation4302.pattern1,overlay,4300,0,6,-46
+	//3line top
+	animation4303.interval,never
+	animation4303.pattern0,parallelstop,(1003,2003,3003,1103,2103,3103,1203,2203,3203,1303,2303,3303,4003,4103,4203)
+	animation4303.pattern1,overlay,4300,0,9,-69
+}
+
+//message surfaces to add bg
+surface1000
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface1000.png,0,0
+}
+
+surface2000
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface2000.png,0,0
+}
+
+surface3000
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface3000.png,0,0
+}
+
+surface4000
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface4000.png,0,0
+}
+
+//VAR1
+surface1100
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface1100.png,0,0
+}
+
+surface2100
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface2100.png,0,0
+}
+
+surface3100
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface3100.png,0,0
+}
+
+surface4100
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface4100.png,0,0
+}
+
+//VAR2
+//message surfaces to add bg
+surface1200
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface1200.png,0,0
+}
+
+surface2200
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface2200.png,0,0
+}
+
+surface3200
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface3200.png,0,0
+}
+
+surface4200
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface4200.png,0,0
+}
+
+//VAR3
+//message surfaces to add bg
+surface1300
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface1300.png,0,0
+}
+
+surface2300
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface2300.png,0,0
+}
+
+surface3300
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface3300.png,0,0
+}
+
+surface4300
+{
+	element0,overlay,surface210.png,0,0
+	element1,overlay,surface4300.png,0,0
+}

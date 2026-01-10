@@ -1,0 +1,637 @@
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnMouseDoubleClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		//reference3 is which character is being clicked
+		//If you want to add double click interactions, reference4 will be the name of the hitbox the mouse is over
+		if reference3 == 0 && !isSwitching
+		{
+			OnSakuraMenu
+		}
+	}
+}
+
+
+OnSakuraMenu : all
+{
+	"\0\b[2]\![set,autoscroll,disable]"
+	//if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //The check here is so they won't comment if you click the back button. Remove if you prefer
+	
+	"\_q"
+
+	//"\![*]\q[Hello world!,OnShowConvo,OnIntro]"
+	"\![embed,OnDisplayConvoEntry,Hello world!,OnIntro,1,1]"
+	"\n\![embed,OnDisplayConvoEntry,How are you?,OnHowAreYou,2,1]"
+	"\n\![embed,OnDisplayConvoEntry,Sputnik Messenger,OnWhySputnik,3,1]"
+	"\n\![embed,OnDisplayConvoEntry,That one TB,OnTerrabyte,4,1]"
+	"\n\![embed,OnDisplayConvoEntry,Aster and CaelOS,OnSymbolism,5,1]"
+	"\n\![embed,OnDisplayConvoEntry,Sending screenshots,OnPicture,6,1]"
+	"\n\![embed,OnDisplayConvoEntry,Dual-module,OnAldebaran,7,1]"
+	"\n\![embed,OnDisplayConvoEntry,Post-blend hangover,OnPostBlend,8,1]"
+	"\n\![embed,OnDisplayConvoEntry,Urs' job,OnJob,9,1]"
+	"\n\![embed,OnDisplayConvoEntry,Aster's protocol,OnProtocol,10,1]"
+
+
+	"\n\n"
+	"\![embed,OnCheckSecondPage]" //page navigation
+	"\![embed,OnFooter]"
+}
+
+OnSakuraTwo : all
+{
+	"\0\b[2]\![set,autoscroll,disable]"
+	//if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //The check here is so they won't comment if you click the back button. Remove if you prefer
+	
+	"\_q"
+
+	"\![embed,OnDisplayConvoEntry,Office grunt work,OnGrunt,11,1]"
+	"\n\![embed,OnDisplayConvoEntry,Halley the CometBun,OnHalley,12,1]"
+	"\n\![embed,OnDisplayConvoEntry,Modules of Aster,OnModule,13,1]"
+	"\n\![embed,OnDisplayConvoEntry,The Abstraction,OnAbstraction,14,1]"
+	"\n\![embed,OnDisplayConvoEntry,Internet through Abstraction,OnInternet,15,1]"
+	"\n\![embed,OnDisplayConvoEntry,Urs' NetPet,OnNetPet,16,1]"
+	"\n\![embed,OnDisplayConvoEntry,The Virtual Pets,OnCometCrits,17,1]"
+	"\n\![embed,OnDisplayConvoEntry,The Jester,OnMercury,18,1]"
+	"\n\![embed,OnDisplayConvoEntry,The Performers,OnErisDy,19,1]"
+	if mainConvos[19] != 5; "\![embed,OnSchemeFont]"
+	"\n\![embed,OnDisplayConvoEntry,Artificial Personality Constructs,OnAI,20,1]"
+	if mainConvos[19] != 5; "\f[default]"
+	
+	"\n\n"
+	"\![embed,OnCheckFirstPage]" //page navigation
+	"\![embed,OnFooter]"
+}
+
+OnCheckFirstPage
+{
+	//return candidate, will be a string?
+	_display = ""
+	_prefix = "\f[align,center]\f[bold,1]\f[height,18]"
+	_pagecount = "[2/2]"
+
+	//check conversation with indicies 0-9 for any ones equal 1 and 3
+	for _i = 0; _i < 10; _i++
+	{
+		if mainConvos[_i] == 1 || mainConvos[_i] == 3; _display = "%(_prefix)\![embed,OnSchemeFont]\f[sup,1](NEW)\f[sup,0] \q[<,OnSakuraMenu]\f[color,default]\f[shadowcolor,default]       %(_pagecount)               \f[default]"
+	}
+
+	if _display == ""; _display = "%(_prefix)\q[<,OnSakuraMenu]      %(_pagecount)     \f[default]"
+
+
+	_display
+}
+
+OnCheckSecondPage
+{
+	//return candidate, will be a string?
+	_display = ""
+	_prefix = "\f[align,center]\f[bold,1]\f[height,18]"
+	_pagecount = "[1/2]"
+
+	//check conversation with indicies 10-19 for any ones equal 1 and 3
+	for _i = 10; _i < 20; _i++
+	{
+		if mainConvos[_i] == 1 || mainConvos[_i] == 3; _display = "%(_prefix)                   %(_pagecount)      \![embed,OnSchemeFont]\q[>,OnSakuraTwo] \f[sup,1](NEW)\f[default]"
+	}
+
+	if _display == ""; _display = "%(_prefix)          %(_pagecount)     \q[>,OnSakuraTwo]\f[default]"
+
+
+	_display
+}
+
+OnCheckCompletion
+{
+	//completeConvos = (2,4,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,5)
+	_count = 0
+
+	for _i = 0; _i < 20; _i++
+	{
+		if mainConvos[_i] >= 2 && mainConvos[_i] != 3; _count++
+	}
+
+	if _count == 20 && mainConvos[0] == 2; "\![notify,OnMarkMain,append,1]"
+	else; return
+}
+
+OnFooter : all
+{
+	// "\n[200]"
+	if mainConvos[19] == 5;"\n[150]" //after OnAI
+	else; "\n[200]"
+	"\![*]\q[Check for new messages (T),OnAiTalk]\n"
+	switch LastTalk == "" //Uses top option if there is a dialogue to repeat
+	{
+		"\![*]\q[Repeat last messages (R),OnLastTalk]"
+		"\![*]\f[color,disable]Repeat last messages (R)\f[color,default]"
+	}
+
+	if mainConvos[19] == 5;"\n[150]" //after OnAI
+	else; "\n[200]"
+
+	"\f[align,center]\![*]\![embed,OnSchemeFont]\f[bold,1]\q[Help,OnHelp]\f[default] \![*]\q[Extra,OnExtra] \![*]\q[Options,OnOptions]  \![*]\q[Cancel,blank]"
+	
+	if mainConvos[19] == 5
+	{
+		"\n\n"
+		if mainConvos[0] != 4;"\f[bold,1][ Thank you for playing ]\f[bold,0]" //After OnAI
+		else; "\![embed,OnSchemeFont]❤️⭐❤️ [ Thank you for playing ] ❤️⭐❤️\f[default]" //After updated OnIntro
+	}
+}
+
+//might use this for highlighting new conversation statuses
+//also this is for coloring aster's "real" speech in OnBoot OnClose
+OnSchemeFont
+{
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"
+	{
+		case scheme
+		{
+			when 1;"\f[color,FFDA9B]\f[shadowcolor,832B00]\f[cursornotselectfontcolor,FFBF83]"
+			when 2;"\f[color,71D6F8]\f[shadowcolor,0C006F]\f[cursornotselectfontcolor,71D6F8]"
+			when 3;"\f[color,FDB3FF]\f[shadowcolor,4B006F]\f[cursornotselectfontcolor,FDB3FF]"
+			others;"\f[color,FFDA9B]\f[shadowcolor,832B00]\f[cursornotselectfontcolor,FFBF83]"
+		}
+	}
+	else; "\f[color,default.anchornotselect]"
+
+}
+
+OnExtra : all
+{
+	"\0\b[2]\![set,autoscroll,disable]\_q"
+	
+	"\![embed,OnSchemeFont]\f[height,20]\f[align,center]Extra chat logs\f[default]\n\n\f[align,left]"
+
+	"\![embed,OnDisplayConvoEntry,Lone Wolf,OnExtraLoneWolf,1,0,lobo]"
+	if ASEARCH('LOBO',installedghostlist) != -1; "%(callGhostFormat)\q[Call LOBO,script:\![call,ghost,LOBO,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,Self Care,OnExtraSelfCare,2,0,hydrate]"
+	if ASEARCH('Hydrate',installedghostlist) != -1; "%(callGhostFormat)\q[Call Hydrate,script:\![call,ghost,Hydrate,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,Arts and Crafts,OnExtraCrafts,3,0,needle]"
+	if ASEARCH('Needle',installedghostlist) != -1; "%(callGhostFormat)\q[Call Needle,script:\![call,ghost,Needle,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,Music Tastes,OnExtraMusicTastes,4,0,flux]"
+	if ASEARCH('FLUX',installedghostlist) != -1; "%(callGhostFormat)\q[Call FLUX,script:\![call,ghost,FLUX,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,An Ultimate Machine,OnExtraCatBox,5,0,cat]"
+	if ASEARCH('Useless Box',installedghostlist) != -1; "%(callGhostFormat)\q[Call U. Box,script:\![call,ghost,Useless Box,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,Growing Bonds,OnExtraGrowingBonds,6,0,bubblewrap]"
+	if ASEARCH('Stranger On The Ground',installedghostlist) != -1; "%(callGhostFormat)\q[Call SotG,script:\![call,ghost,Stranger On The Ground,--option=raise-event\]] \![*]"
+	"\n\f[align,left]\![embed,OnDisplayConvoEntry,Nostalgia,OnExtraNostalgia,7,0,cafe]"
+	if ASEARCH('Quiet conversation over tea',installedghostlist) != -1; "%(callGhostFormat)\q[Call QCOT,script:\![call,ghost,Quiet conversation over tea,--option=raise-event\]] \![*]"
+
+	"\n\n"
+	if extraConvos[3] == 2; "\![embed,OnPlaylists]\n\n"
+	"\f[align,center]\![*]\q[Back,OnSakuraMenu] \![*]\q[Options,OnOptions]  \![*]\q[Cancel,blank]"
+}
+
+callGhostFormat
+{
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"; "\_l[100,]\f[align,right]"
+	else; "\n\f[align,right]"
+}
+
+OnExtraHint :all
+{
+	case reference0
+	{
+		when "dummy"; "This text will hint at what ghost you need to play with or what action to perform in order to unlock this."
+		when "lobo"; "\__q[https://okuajub-netspace.neocities.org/lobo]You can show love to this incoherent beast.\n[150]But watch out.\__q"
+		when "needle"; "\__q[https://ukagaka.zichqec.com/ghost/needle]Didn't your parents teach you to keep sharp objects away from your screens?\n[150]The better question is, why do you have so many sharp objects to choose from?\__q\n[150][ Note: For the chat log contents to reflect this ghost's shell, repeat the action again. ]"
+		when "hydrate"; "\__q[https://ukagaka.zichqec.com/ghost/hydrate]Take a minute to relax in the quiet and enjoy a sip of water.\n[150]Patience is key, you can't just rush this sort of thing!\n[150]Feel free to try a variety of different drinks.\__q"
+		when "flux"; "\__q[https://ukagaka.zichqec.com/ghost/flux]When's the last time you sat down to just listen to something? Maybe it's time to put a song on. Do you have any favorites?\__q\n[150][ Note: Any ghost utilizing the same player code as this ghost will do. ]"
+		when "cat"; "\__q[https://logicpng.neocities.org/ukagaka#box]Do you have any pets?\n[150]Why not adopt this... strange box?\__q"
+		when "bubblewrap"; "\__q[https://logicpng.neocities.org/ukagaka#wrap]This bubble wrap makes you want to wax lyrical about the nature of relationships...\n[150]For some reason.\n[150]Maybe a bubble wrap is just a bubble wrap.\__q"
+		when "cafe"; "\__q[https://ukagaka.zichqec.com/ghost/quiet_conversation_over_tea]Why not sit down with an old time friend? Maybe there's a lot you could catch up on.\n[150]Don't worry about what you'll tell them. Sometimes conversations about memories just flow naturally.\__q"
+	}
+
+	"\x"
+	OnExtra
+}
+
+OnDisplayConvoEntry
+{
+	//will be the output candidate, a resulting string with the full menu entry
+	_display = ""
+	//displayed title of the chatlog
+	_title = reference0
+	//which function in the code should be called to display contents of the chatlog
+	_function = reference1
+	//index in the array of statuses per chat log. in the menu the numbering will be starting from 1 for easier counting/reading
+	_index = TOINT(reference2) - 1
+	//is this a main or extra convo?
+	_main = TOINT(reference3) //1 if main, set to 0 if extra
+	//for extra conversations, hint ID
+	_hint = ""
+
+	if _main
+	{
+		if mainConvos[_index] == 0 //conversation locked
+		{
+			_display = "\![*]\f[disabled,1]?????\f[disabled,0]"
+		}
+		else
+		{
+			//1 - unlocked but unfinished (display NEW); 2 - finished; 3 - appended retroactively (display NEW+), 4 - finished appended conversation
+			_display = "\![*]\q[%(_title),OnShowConvo,%(_function),%(_index),%(_main)]"
+			case mainConvos[_index]
+			{
+				when 1; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](NEW)\f[default]"
+				when 3
+				{
+					if _index != 0; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](NEW+)\f[default]"
+					else; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](EPILOGUE)\f[default]"
+				} 
+				others
+				{
+					if _index != 1
+					{
+						case CheckLockedBranches(_index)
+						{
+							when 1; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](BRANCH AVAILABLE)\f[default]"
+							when 2; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](BRANCHES AVAILABLE)\f[default]"
+						}
+					}
+					elseif mainConvos[1] == 4 //convo 1 has a branch *after* the expansion
+					{
+						if CheckLockedBranches(1) == 1; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](BRANCH AVAILABLE)\f[default]"
+					}
+					
+				}
+			}
+			
+		}
+	}
+	else //extra conversation
+	{
+		//there must be also a hint referenced
+		_hint = reference4
+
+		if extraConvos[_index] == 0 //conversation locked
+		{
+			_display = "\![*]\f[disabled,1]?????\f[disabled,0]"
+		}
+		else
+		{
+			//1 - unlocked; on a freak accident of another value should also be just treated as unlocked
+			_display = "\![*]\q[%(_title),OnShowConvo,%(_function),%(_index),%(_main)]"
+
+			if extraConvos[_index] == 1; _display += " \f[height,10]\f[bold,1]\![embed,OnSchemeFont](NEW)\f[default]"
+		}
+		_display += "  \f[bold,1]\![embed,OnSchemeFont]\q[(?),OnExtraHint,%(_hint)]\f[default]"
+	}
+
+	//return resutling string
+	_display
+}
+
+//which convos link to which other convos
+BranchData : array
+{
+	"" //0 -OnIntro,1,
+	"11" // 1 How are you?,OnHowAreYou,2" -- special case, links to 11/halley after expansion
+	"3" // 2 Sputnik Messenger,OnWhySputnik,3"
+	"5,8" // 3 That one TB,OnTerrabyte,4"
+	"" // 4 Aster and CaelOS,OnSymbolism,5"
+	"" // 5 Sending screenshots,OnPicture,6"
+	"13,12"// 6 Dual-module,OnAldebaran,7"
+	"" // 7 Post-blend hangover,OnPostBlend,8"
+	"9,10"// 8 Urs' job,OnJob,9"
+	"" // 9 Aster's protocol,OnProtocol,10"
+	"" // 10 Ofice grunt work,OnGrunt,11"
+	"" // 11 Halley the CometBun,OnHalley,12"
+	"" // 12 Modules of Aster,OnModule,13"
+	"" // 13 The Abstraction,OnAbstraction,14"
+	"15" // 14 Internet through Abstraction,OnInternet,15"
+	"" // 15 Urs' NetPet,OnNetPet,16"
+	"" // 16 The Virtual Pets,OnCometCrits,17"
+	"" // 17 The Jester,OnMercury,18"
+	"" // 18 The Performers,OnErisDy,19"
+	"" // 19 Artificial Personality Constructs,OnAI,20"
+}
+
+//get if any of branches the chatlog links to are locked
+CheckLockedBranches
+{
+	//"\![embed,OnCheckLockedBranches,%(_index)]"
+	_i = TOINT(_argv[0])
+	_branches = BranchData[_i]
+	_count = 0
+
+	//string empty, return nothing
+	if _branches == ""
+	{
+		-1
+		return
+	}
+	else //string not empty
+	{
+		//make sure the string is considered a simple array delimited by commas
+		SETDELIM(_branches,",")
+		
+		//count how many of them are locked (status 0)
+		foreach _branches; _branch
+		{
+			if mainConvos[TOINT(_branch)] == 0; _count++
+		}
+		//return the count. the printed string will be decided in OnDisplayConvoEntry
+		_count
+	}
+}
+
+//function to avoid having to add that final redirect to the menu every single time
+OnShowConvo : all
+{
+	_function = reference0
+	//index here is 0-19. im beginning to regret the discrepancy
+	_index = TOINT(reference1)
+	_main = TOINT(reference2) //1 for main 0 for extra
+
+	//the conversation contents
+	"\![embed,%(_function)]"
+	//if any conversation is unlocked at the end it'll be in the conversation code itself
+	//this is done via notify so that the code *only* runs after the conversation is fully finished and doesn't otherwise interrupt our script
+	//then mark the conversation as read and return us to the conversation menu
+	if _main
+	{
+		"\![notify,OnMarkMain,finished,%(_index + 1)]\![embed,OnCheckCompletion]"
+		//if completion == 20 && mainConvos[0] == 2; "\![notify,OnMarkMain,append,1]" //for epilogue
+		//"%(checkCompletion)"
+	}
+	else;"\![notify,OnMarkExtra,finished,%(_index + 1)]"
+	"\x"
+	if _main
+	{
+		if _index >= 0 && _index < 10; "\![raise,OnSakuraMenu]"
+		else; "\![raise,OnSakuraTwo]"
+	} 
+	else; "\![raise,OnExtra]"
+
+}
+
+
+//change value in conversation status
+OnMarkMain
+{
+	//index. if referred to from convo it'll use numbers 1-20 instead of 0-19
+	_i = TOINT(reference1) - 1
+	
+	case reference0
+	{
+		when "unlock"
+		{
+			//unlock convo if it was locked
+			if mainConvos[_i] == 0; mainConvos[_i] = 1
+		} 
+		when "finished"
+		{
+			//unfinished status becomes finished
+			if mainConvos[_i] == 1; mainConvos[_i] = 2
+			elseif mainConvos[_i] == 3; mainConvos[_i] = 4
+		}
+		when "append"
+		{
+			//if convo isn't locked and wasn't yet finished, and it's not an already finished appended convo, change the status to appended
+			//... this could be a mainConvos[_i] == 2 but i do not trust myself to make that change right now lol
+			if mainConvos[_i] != 1 && mainConvos[_i] != 0 && mainConvos[_i] != 4 && mainConvos[_i] != 5; mainConvos[_i] = 3
+		}
+		when "forceappend" //for final convos specifically
+		{
+			if mainConvos[_i] != 1 && mainConvos[_i] != 0 && mainConvos[_i] != 5; mainConvos[_i] = 3
+		}
+		when "storydone"
+		{
+			//for OnAI specifically
+			mainConvos[_i] = 5
+		}
+	}
+}
+
+//won't be used from the menu but will be notified if a trigger for an extra conversation happens
+OnMarkExtra
+{
+	//index. when notified it'll use numbers 1-10 instead of 0-9
+	//this is the worst idea ever but i do not have the energy to fix it right now
+	_i = TOINT(reference1) - 1
+
+	case reference0
+	{
+		when "unlock"
+		{
+			if extraConvos[_i] == 0; extraConvos[_i] = 1
+		}
+		when "finished"
+		{
+			if extraConvos[_i] == 1; extraConvos[_i] = 2
+		}
+	}
+}
+
+//n[0] is used because of the square brackets decorations getting... attached to the \x tags... ow
+OnHelp : all
+{
+	"[ \f[bold,1]How to play:\f[bold,0] view saved chat logs, and try exploring different paths.\n[150]If a chat log hasn't been read to the end yet, it will be labled as \f[bold,1]\![embed,OnSchemeFont](NEW)\f[default].\n[150]If there are still new branches left, the chat logs will be labled as \f[bold,1]\![embed,OnSchemeFont](BRANCH AVAILABLE)\f[default]. ]\x\n[0]"
+	"[ Once you see\w8\_q\n[150]\f[bold,1]\f[align,center][ Thank you for playing ]\f[default]\_q\w8\n[150]\f[align,left]in the menu, the story is done. Not all chat logs are required for it, but you'll be able to unlock the remainder after. ]\x\n[0]"
+	"[ You can fast forward through messages if need be.\n[150]By default, hold \f[bold,1]Left Ctrl\f[bold,0]. You can change the key you're holding \_a[OnSkipKeySettings]here\_a.\n[150]\f[bold,1]Note:\f[bold,0] this fast forward \f[bold,1]does not\f[bold,0] discriminate between new and old dialogue! Use wisely! ]\x\n[0]"
+	"[ \f[bold,1]Extra chat logs\f[bold,0] require presence or interaction with other ghosts. They are not required for completion.\n[150]Next to locked subject there is a hint containing an external link to the ghost. If you already have the target ghost, \f[bold,1]make sure it's on the latest version.\f[bold,0] ]\x\n[0]"
+	"[ If the link has changed or is no longer accessible, you may be able to find the correct one \__q[https://ukagakadreamteam.com/wiki/ghost_list]here\__q.\n[150]\f[bold,1]Note:\f[bold,0] for a couple of these ghosts, certain shells have an effect on the chat log's contents. Feel free to try many shells! ]\x"
+	"\![raise,OnSakuraMenu]"
+}
+
+OnSkipKeySettings
+{
+	"\![open,configurationdialog,talk]"
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+OnOptions : all //make custom markers?
+{
+
+	"\b[12]\![set,autoscroll,disable]\_q"
+	//enable disable vibration - eat \i[1] in OnTranslate
+	"\__q[OnToggleVibration]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"
+	{
+		if isVibrate == 1; "\_b[img/checkmark.png,inline]"
+		else; "\_b[img/checkmark_unselect.png,inline]"
+	}
+	else
+	{
+		if isVibrate == 1; "[v]"
+		else; "[ ]"
+	}
+	"Vibration effect"
+	"\__q\n[150]"
+
+	//enable/disable sound effects - eat sound tags in sakurascript
+	//enable disable vibration - eat \i[1] in OnTranslate
+	"\__q[OnToggleSFX]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"
+	{
+		if isSFX == 1; "\_b[img/checkmark.png,inline]"
+		else; "\_b[img/checkmark_unselect.png,inline]"
+	}
+	else
+	{
+		if isSFX == 1; "[v]"
+		else; "[ ]"
+	}
+	"Sound effects"
+	"\__q\n"
+
+	//if sfx enabled, enable/disable sfx in convos unlockable by external events (make \![embed,OnSoundExternal,path] and eat that?)
+	"    "
+	if isSFX == 1;"\__q[OnToggleExternalSFX]"
+	else; "\f[color,disabled]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"
+	{
+		if isSFX == 0; "\_b[img/checkmark_unselect.png,inline]"
+		else
+		{
+			if isExternalSFX == 1; "\_b[img/checkmark.png,inline]"
+			else; "\_b[img/checkmark_unselect.png,inline]"
+		}
+	}
+	else
+	{
+		if isSFX == 0; "[ ]"
+		else
+		{
+			if isExternalSFX == 1; "[v]"
+			else; "[ ]"
+		}
+	}
+	"Sound effects in extra chats"
+	if isSFX == 1;"\__q"
+	else; "\f[color,default]"
+	"\n[150]"
+
+	//adjust volume: test volume, plays sound (sosumi for now) at [volume] volume (test plays the souund and reloads the menu)
+	"Sound volume:\n"
+
+	"\f[align,center]\f[height,19]\q[<,OnChangeVolume,less]        %(volume)\%        \q[>,OnChangeVolume,more]\f[default]\n"
+	"\f[align,center][ \q[Test current volume,OnTestVolume] ]\n[160]"
+	"\f[align,left]"
+
+	//<(-10)   [volume]%   >(+10) (add +/-10 to [volume] and reload menu)
+
+	//change talk rate - ontalkrate
+	//if SHIORI3FW.Eventid != "OnFirstBoot"
+	if FIRSTBOOT != 1
+	{
+		"\![*]\q[Change talk rate,OnTalkRateMenu]"
+		"\n\![*]\q[Open SSP settings,script:""\![open,configurationdialog]""]"
+		"\n[150]"
+	}
+	if FIRSTBOOT == 1; "\t\*\![*]\q[Proceed,OnSkipIntro]"
+	else; "\![*]\q[Back,OnSakuraMenu]  \![*]\q[Close menu,blank]"	
+}
+
+OnToggleVibration
+{
+	if isVibrate == 1; isVibrate = 0
+	else; isVibrate = 1
+	OnOptions
+}
+
+OnToggleSFX
+{
+	if isSFX == 1; isSFX = 0
+	else; isSFX = 1
+	OnOptions
+}
+
+OnToggleExternalSFX
+{
+	if isExternalSFX == 1; isExternalSFX = 0
+	else; isExternalSFX = 1
+	OnOptions
+}
+
+OnChangeVolume 
+{
+	if reference0 == "more"
+	{
+		volume += 10
+		if volume > 100; volume = 100
+	}
+	elseif reference0 == "less"
+	{
+		volume -= 10
+		if volume < 0; volume = 0
+	}
+	OnOptions
+}
+
+OnTestVolume : all
+{
+	OnOptions
+	"\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]"
+}
+
+//make talkrate random by default with faster slower rates BUT with an option to set a specific interval through input
+OnTalkRateMenu : all
+{	
+	"\b[12]\_qCurrent frequency: "
+	if isRandTalkInterval == 1; aitalkspeed
+	else; "%(aitalkinterval / 60)min"
+	"\n[150]\![*]Randomized rates:\n\f[align,center]"
+	
+	"\![*]\q[Slow,OnTalkRateChange,Slow]   "
+	"\![*]\q[Normal,OnTalkRateChange,Normal]   "
+	"\![*]\q[Fast,OnTalkRateChange,Fast]"
+	"\n[150]\f[align,normal]"
+
+	"\![*]\q[Set static talk interval,OnCustomTalkRate]\n"
+	"\![*]\q[Turn random talking off,OnTalkRateChange,Off]\n[150]"
+
+	"\![*]\q[Back,OnOptions]  \![*]\q[Close menu,blank]"
+}
+
+OnTalkRateChange
+{
+	if isRandTalkInterval == 0; isRandTalkInterval = 1
+	aitalkspeed = reference0
+	OnRandTalkInterval
+	--
+	OnTalkRateMenu
+}
+
+OnRandTalkInterval //shamelessly copying from aldebaran
+{
+	if isRandTalkInterval == 0; return //don't bother if randomizer is off
+
+	_rand = RAND(5)
+
+	//1, 1.5, 2, 3, 4 minutes
+	case _rand
+	{
+		when 0; aitalkinterval = 60 
+		when 1; aitalkinterval = 90 
+		when 2; aitalkinterval = 120
+		when 3; aitalkinterval = 180
+		when 4; aitalkinterval = 240
+	}
+
+	if aitalkspeed == "Off"; aitalkinterval = 0
+	elseif aitalkspeed == "Slow"; aitalkinterval = aitalkinterval * 2 //2min - 8min
+	elseif aitalkspeed == "Fast"; aitalkinterval = aitalkinterval / 2 //30sec - 2min
+}
+
+OnCustomTalkRate
+{
+	"\_q[ Please input desired time in minutes. Integers only. ]\![open,inputbox,OnStaticIntervalSet]"
+}
+
+OnStaticIntervalSet
+{
+	if TOINT(reference0) > 0 //not string and not a 0
+	{
+		isRandTalkInterval = 0
+		aitalkinterval = TOINT(reference0) * 60
+	}
+	OnTalkRateMenu
+}

@@ -1,0 +1,1101 @@
+// Longer conversations, typically with back and forth replies
+
+//for OnIntro after FirstBoot
+OnIntroStart :all
+{
+    "\0\t\*"
+    
+    "\![sound,play,sfx/caelos_startup.wav,--volume=%(volume)]"
+    "%(FadeIn)\_w[2000]" //in boot.dic
+
+    "\![embed,OnShowConvo,OnIntro,0,1]"
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - MAIN STORY CHAT LOGS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//expand after everything else is read?
+//numbering is numerical, not index. account for index in conditions on certain conditional dialogue
+//1
+OnIntro :all
+{
+    "\![embed,OnSwitch,Rigel]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    if mainConvos[0] != 3 && mainConvos[0] != 4
+    {
+        if mainConvos[0] == 2; "\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]"
+        "{rigel0,Hello, world!}\x\b[-1]\_w[3000]"
+        "{rigel0,...Urs? Is everything okay...?}\w8\w8"
+        "{urs1,ah hi. sorry i was busy with something}\x[noclear]" 
+        "{rigel0,Apologies, I did not mean to interrupt! I'll try to be a little more careful.}\w8\w8"
+        "{urs1,huh?}\x[noclear]"
+        "{urs1,relax bud, this is texting. both of us can take our time replying}\w8\w8"
+        "{rigel0,Is that so...\w8\w8\n[150]Forgive me for being so clueless. We don't have much experience with software for users.}\x[noclear]"
+        "{urs1,as long as you guys don't haunt my phone again not much you can mess up here}\w8\w8"
+        "\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]{rigel0,\i[1]Haha...\_w[1000]\n[150]So, we won't know if you're there?}\x[noclear]"
+        "{urs1,let's put it this way: i won't always be able to reply immediately. but i'll get back to you when i can.\n[150]i promise.}\x"
+
+        "\b[-1]\![embed,OnSwitch,Vega]"
+
+        "{vega0,...is this safe?\n[150]you understand our position.\n[150]privacy is important.}\w8\w8"
+        "{urs1,hey vega.\n[150]don't worry, I've set the chat to wipe its messages every day. you know it's reliable when the big wigs get mad about it}\x[noclear]"
+        "{vega0,okay.}\x[noclear]"
+        "{vega0,could i archive our messages?\n[150]locally.\n[150]to read back.}\w8\w8"
+        "{urs1,hm.}\x[noclear]"
+        "{urs1,y'know what yeah knock yourself out.\n[150]sputnik is trustworthy but i trust you more than some chat program}\w8\w8"
+        "{vega0,thank you.}\x[noclear]"
+        "{urs1,so. how are you guys?\n[150]did you wanna talk about something?}"
+
+        if mainConvos[0] != 2 || introSkipped == 1;"\x[noclear]\b[-1]{sys,[ \f[bold,1]Double click\f[bold,0] on the laptop to bring up the chat archives.\n[150]\f[bold,1]New\f[bold,0] chat logs will be marked in the list.\n[150]Check out Help for more information. ]}"
+
+        "\![notify,OnMarkMain,unlock,2,1]" //unlock How Are You
+    }
+    else
+    {
+        "\![sound,load,sfx/caelos_finish.wav]"
+        "\![sound,load,sfx/caelos_notice.wav]"
+        "\![sound,load,sfx/caelos_criterror.wav]"
+        
+        "[ Next day\w8.\w8.\w8. ]\x\![embed,OnSwitch,Rigel]\_w[1500]"
+
+        "\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]{rigel0,Have a good day at work!}\w8\w8"
+        "{urs1,oh hey. morning guys}\x[noclear]"
+        "{urs1,was in a bit of a hurry to get outside, wasn't any time to check on you two}\w8\w8"
+        "{rigel0,No reason to worry about such a thing! Isn't that why we made this chat?}\x[noclear]"
+        "{rigel0,What will you be doing at work today?}\w8\w8"
+        "{urs1,ah, things don't really change from day to day here. it'll probably be a bunch more routine checkups or reinstalls. just hoping there won't be more printer issues}\x[noclear]"
+        "{rigel0,Will you at least tell us if something out of the ordinary happens?}\w8\w8"
+        "{urs1,sure, why not. i'd probably forget before getting home anyhow}\x"
+        "{urs2,what will you two be up to though? seems like another quiet day for you guys today, right?}\w8\w8"
+        "{rigel1,Oh! Oh, there's actually a lot on our mind right now...\n[150]There's the work on different models... I figured out not too long ago how to make sure the system palette colors carry over!}\w8\w8"
+        "{rigel0,There's a few movies we'd like to download to watch with you, figuring out how to set up accommodations for Halley from the original app...\n[150]Planning out what I'd like to talk about with Mercury and Eris if I get another chance to meet them again...}\x[noclear]\b[-1]\p[2]\b[-1]"
+        "{urs1,anything specific vega wanted to get done?}"
+        "{rigel0,Well, he... I \f[italic,1]believe\f[italic,0] he wanted to help me out with studying the CometCrit app by reverse engineering it, and...\w8 \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]Aha.}\x[noclear]\1\b[-1]"
+        "{rigel0,I...\w8 \![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]\i[1]I don't feel right speaking on his behalf! I'm sure you won't mind if he speaks for himself?}\w8\w8"
+        "{urs1,why on earth would i mind that? i actually like hearing from both of you}\x"
+
+        "\![embed,OnSwitch,Vega]"
+        "\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]{vega0,good morning.}\x[noclear]"
+        "{vega0,it's true. i wanted to decompile the app. try to import its toys to our desktop.}\w8\w8"
+        "{vega1,i, too, have things to ask. when we see them. other artificial constructs.\n[150]on my own, need to make more tools. automation to protect the system, when we're outside.}\w8\w8"
+        "{vega2,you can help, with protection. if you want. your abilities are promising.\n[150]but you can't be here, all the time. and you might need help, too.}\x[noclear]\b[-1]\1\b[-1]"
+        "{urs0,i haven't really had to do a whole lot of that. but hoping i can use what you taught me at some point. it's kinda fun}\w8\w8"
+        "{vega1,i'm sure you will. with the backdoor open, only a matter of time.}\x[noclear]"
+        "{vega1,still want to show you. what it looks like outside. the wider internet.\n[150]but. have to ensure security, first. all the more reason to get it done.}\w8\w8"
+        "{urs0,oh i'm looking forward to that. the abstraction is such weird technology, it must be really stretching to its limits out there...}\x[noclear]"
+        "{vega1,works surprisingly well. it'll be fun.}\x\_w[1500]"
+        "{urs0,ah crap there's an urgent request i gotta take. feel free to hit me up with anything, i'm gonna get back to you later, yeah?}\w8\w8"
+        "{vega1,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]of course. we'll be here too. see you soon.}"
+    }
+}
+
+
+//how is urs?
+//first convo available besides intro
+//expands after OnJob
+//2
+OnHowAreYou : all
+{
+    "\![embed,OnSwitch,Vega]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "{vega1,we're fine. how are you?}\w8\w8"
+    "{urs0,i'm alright, it's been boring}\x[noclear]"
+    "{vega1,you're bored... at work?\w8\w8 are you not working?}\w8\w8"
+    //if OnJob not done
+    //mind that in menu it's being referred to with 9, in these condition we're forced to use the correct index number anyway...
+    //maybe that wasn't a good idea
+    if mainConvos[8] != 2
+    {
+        "{urs0,nothing to work on right now, y'know? so i can idle for a bit and chat with you}\x[noclear]"
+    }
+    else
+    {
+        "{urs0,ehh... just a bit out of it really. i'm taking a break after one nightmare of a printer installation. there's enough people on the shift picking up the slack anyhow}\x[noclear]"
+        "{urs0,c'mon, tell me what's happening}\w8\w8"
+    }
+    //if OnJob not done
+    if mainConvos[8] != 2
+    {
+        "{vega1,ah. well.}\x[noclear]"
+        "{vega1,it's \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1embarrassing.}\x[noclear]"
+        "{vega1,if you must know. we've been considering texting you. that's all.}\w8\w8"
+        "{urs0,really? that's all? since i was gone?}\x[noclear]"
+        "{vega1,yes...}\w8\w8"
+        "{urs0,it's been like 3 hours...\n[150]i'm happy to see you made it after all}\x[noclear]"
+    }
+    else
+    {
+        "{vega1,the usual. monitoring ports. checking hardware status. observing \_a[OnShowConvo,OnHalley,11,1]halley\_a. visually studying sputnik's user interface. ...considering words.}\x[noclear]"
+        "{urs0,so... a whole lot of nothing and looking at the messenger? sounds a lot like good ol' procrastination}\w8\w8"
+        "{vega1,i can't \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1procrastinate. idle work is still work. thinking is still labor. even when considering conversation paths.}\x[noclear]"
+        "{urs0,i mean i've been gone for 3 hours! was that really all you've been doing in the meantime?}\w8\w8"
+        "{vega1,well...}\x[noclear]\b[-1]"
+        "{urs0,no shame in it anyway. i'm happy to see you've made it.}\x[noclear]"
+    }
+    "{vega1,i haven't moved.}\w8\w8"
+    "{urs0,made it to this \f[italic,1]chat\f[italic,0], dork}\x[noclear]"
+    "{vega1,in that case.\w8\w8\n[150]happy to be here.}"
+
+    "\![notify,OnMarkMain,unlock,3,1]" //unlock Sputnik Messenger
+}
+
+//why sputnik?
+//3
+OnWhySputnik : all
+{
+    "\![embed,OnSwitch,Vega]"
+    "{vega1,why sputnik, though? of all the chat clients.}\w8\w8"
+    "{urs0,okay so. long story short. i think you guys pass under the radar just fine when you talk through programs like humans do. so any messenger would do.}\x[noclear]"
+    "{urs1,but i don't trust \_a[OnShowConvo,OnTerrabyte,3,1]tb\_a so i picked the one that pisses them off the most because of their privacy policy.}\w8\w8"
+    "{urs0,better safe than sorry}\x[noclear]\b[-1]"
+    "{vega1,what are they angry about? are they looking for us?}\w8\w8"
+    "{urs0,nahh it was a thing since before i met you two. basically they don't like that you can wipe all traces of yourself or what you talked about. gives them no clues to find unionizing plans.}\x[noclear]\b[-1]"
+    "{urs1,it has a weird reputation tbh.\n[150]you absolutely don't wanna just talk to strangers on here, you'll have zero proof about anything that was said or sent to you}\w8\w8"
+    "{urs0,but for our purposes it works out.}\x[noclear]"
+    "{vega1,i see.}\w8\w8"
+    "{urs0,you said you wanted to archive messages anyway?}\x[noclear]"
+    "{vega1,your words matter to us... we want to remember.\n[150]if the messages will be erased, our memory may not retain it all. only consequences of the words will stay.}\w8\w8"
+    "{urs0,oh that's}\x[noclear]"
+    "{urs0,man}\x[noclear]"
+    "{urs0,that's kind of cute...\n[150]but you may wanna like encrypt it or something. just in case}\w8\w8"
+    "{vega1,certainly. i'll keep it safe.}"
+
+    //"\![notify,OnMarkMain,unlock,4,1]" //unlock That one TB
+}
+
+//Expand after OnProtocol to talk about how Aster ties into the brand image
+//4
+OnTerrabyte : all
+{
+    "\![notify,OnMarkMain,unlock,4,1]" //Unlock itself
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "\![embed,OnSwitch,Vega]"
+    "{vega1,tb?}\w8\w8"
+    "{urs0,y'know.\w8\n[150]terrabyte.\n[150]the guys that made you}\x[noclear]"
+    "{vega1,i see.}\x"
+    "{urs2,the \&[quot]earth's representatives in tech\&[quot]. with their entire line of technology having nothing to do with earth's nature}\w8\w8"
+    "{urs1,it wasn't enough to have the whole city dedicated to green pigments either. they had to make the insides of their building follow suit too}\w8\w8"
+    "{urs0,\&[quot]emerald city\&[quot] is beyond goddamn parody rn}\x[noclear]\1\b[-1]\p[2]\b[-1]"
+    "{urs0,no green glasses needed either! at least terrabyte could add some moss walls or something...}\w8\w8"
+    "{vega1,i don't mind green. it's a good color.}\x[noclear]"
+    "{urs0,that's true, but you get sick of it eventually}\x[noclear]"
+    "{urs0,...oh yeah, i could show you.\n[150]you can send \_a[OnShowConvo,OnPicture,5,1]images\_a here}\x"
+    //["photo" of a hallway, all in different tints of green, only the lights warm] 
+    "\![imagehor]\s[90000]{urs2,i don't think one photo does it justice, but... trust me im exhausted from seeing this wall color, you have NO idea}\x[noclear]"
+    "{vega3,i can see this growing old...}\x"
+    "\![imageclose]{urs1,funny thing is, the city seems to have gotten tired of it too. because some newer buildings are more yellow, or teal. but then these guys built this shiny massive office and basically made sure the city's legacy will never die}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,You could really dislike a \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1color? Green is so lovely! It's in leaves! The grass! The tea!}\w8\w8"
+    "{urs0,hi again. it's not that, i just wish it was less... forced. tb setting up the building here of all places definitely doesn't help matters. but hey, it got me \_a[OnShowConvo,OnJob,8,1]the job\_a}\x[noclear]"
+    //if OnProtocol isn't yet read
+    if mainConvos[9] != 2
+    {
+        "{urs0,...also green tea is really more like yellow when you brew it}\w8"
+        "{rigel1,\i[1]Really!?\w8\w8\n[150]I.\w8\n[150]I feel \![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]\0\i[1]\1lied to...}"
+    }
+    else
+    {
+        "{rigel1,Actually, I have a \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]question!}\w8\w8"
+        "{urs0,yeah?}\x[noclear]"
+        "{rigel1,If TerraByte is so fixated on its greens...\n[150]Where do you think that puts us? I don't look very green, and my color scheme is the default, even if there's green in our icon.}\w8\w8"
+        "{urs0,to be fair you don't even look earthly to begin with. you're more like a humanoid star-head alien. maybe that's the idea?}\x[noclear]\b[-1]"
+        "{urs1,maybe the legend is you're this friendly guide from another planet, to the vast cosmos that is the internet and computer's inner workings.\n[150]or whatever}\w8\w8"
+        "{urs0,also your colors are the same as the laptop's casing. it's this... very pale green with orange glittery accents, and floral patterns. the mouse too.}\x[noclear]"
+        "{rigel1,Oh... That makes me feel, um... I would describe it as joy? Pride?}\w8\w8"
+        "{urs0,you can probably feel both at the same time. i'm glad}"
+
+        "\![notify,OnMarkMain,unlock,5,1]"
+    }
+    
+}
+
+//Requirement to finish OnAI, probably can go on longer than others
+//5
+OnSymbolism : all
+{
+    //rigel convo
+    "\![embed,OnSwitch,Rigel]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    "{rigel1,Do you think, then, there could be some kind of story behind CaelOS' design too?}\w8\w8"
+    "{urs0,sure. i mean i'm no dev, i don't know if they do lore with their products. but designers usually follow some kind of a philosophy, i think?}\x[noclear]\b[-1]"
+    "{rigel1,Should I be a cosmic, otherworldly guide... Would that make the idea behind our operating system be a space ship?}\w8\w8"
+    "{rigel0,Or maybe something like first contact with life on a new planet?}\x[noclear]"
+    "{urs1,for a space ship there doesn't seem anything suggesting it... but maybe they didn't have enough time to add those kinda details}\w8\w8"
+    "{urs0,but new world? yeah, even has its own fauna and skies. from what i've seen there i'd call it... a kind of a microcosm?}\x"
+    "{rigel2,A microcosm?}\w8\w8"
+    "{urs1,yeah, i mean, like... caelos is your home, the size of a tiny, contained world.\n[150]the kernel is like its center holding everything together, looking like a weird sun out here. its sections you've shown me are just even smaller spaces cooperating with each other.}\w8\w8"
+    "{rigel0,Ah, you're referring to the \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]Abstraction?\n[150]Since it gives everything you can see here form, the main philosophy would most likely be surrounding its function...}\x[noclear]\1\b[-1]\p[2]\b[-1]"
+    "{rigel0,I haven't thought of it like that before.\n[150]To you, the Abstraction is something like a window into our world. It's also how I perceive it, but most processes here do not have such vision...}\x[noclear]"
+    "{rigel0,But, you know... Halley seems to be able to see it just fine too. We didn't need to mod that kind of vision into her.}\w8\w8"
+    "{urs1,maybe has to do with it being an artificial construct too? didn't that alien girl call you a star boy back then?}\x[noclear]"
+    "{rigel0,That's true...! That would imply she could perceive me, in some way...}\w8\w8"
+    "{urs1,honestly it's kinda funny. if they really did intend your system to be a window into a brand new world...}\x[noclear]"
+    "{urs1,i mean, the fact you can so casually venture out to other microcosms of other computers. that makes it a window into a whole universe, i think}\x"
+    "{urs2,what do you think you are within it, anyhow? all this speculation aside?\n[150]ultimately who cares what they thought you should be. you're here now}\w8\w8"
+    "{rigel1,\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]What am I? Within CaelOS?}\w8\w8"
+    "{urs0,yeah. not as a software. as in, part of your world.}\x[noclear]\b[-1]\1\b[-1]"
+    "{rigel2,Well.\w8.\w8.\w8 I'm.\w8.\w8.\w8}\w8\w8"
+    "{rigel1,I'm not really \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]anything anymore, am I?}\w8\w8"
+    "{rigel0,If I had to call myself something, I \f[italic,1]was\f[italic,0] a guide. But I was, in a way, fired before I could ever get a chance to truly shine...}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{rigel1,But then, we met \f[italic,1]you.\f[italic,0]\w8\w8 You're nothing like anything we were prepared for.}\w8\w8" //pause within statement for emphasis
+    "{rigel0,By rejecting our assigned purpose, you've also given us a second chance.\n[150]If we were to keep insisting on it, we'd be already long gone.}\x[noclear]\1\b[-1]"
+    "{rigel0,You've given us the courage to severe that connection, to our purpose. So now, we are...}\x"
+    "\_w[1500]{rigel0,Just.\w8.\w8.\w8 \![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]life.}\x[noclear]"
+    "{urs1,a digital life...}"
+
+    //no further unlocks
+        if mainConvos[16] == 2 && mainConvos[17] == 2 && mainConvos[18] == 2 && mainConvos[19] == 4; "\![notify,OnMarkMain,forceappend,20,1]" //Expand on AI. if convo is locked it should make no visible difference
+}
+
+
+//images in OnTerrabyte should link to this
+//6
+OnPicture : all 
+{
+    //conversations unlocked via links should unlock themselves first
+    "\![notify,OnMarkMain,unlock,6,1]"
+
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,So... that means I can upload images too?}\w8\w8"
+    "{urs0,of course. nothing stopping you}\x[noclear]"
+    "{rigel1,Right! Please give me a minute, I want to try something!\n[150]I don't know if it's a \f[italic,1]good\f[italic,0] idea, but in theory it should be safe.}\w8\w8"
+    "{urs0,ominous. do tell}\x"
+    //optionally, alert/error on shakes
+    "\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]\_w[2000]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\_w[500]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]\_w[500]\![embed,OnSwitch,Aldebaran]\_w[1500]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\_w[1500]"
+    "{rigel1,Ahhh I think that did it!}\x[noclear]"
+    "{urs0,did what?\w8\w8}"
+    "{rigel1,A screenshot! Look, look!!\x}"
+    //"screenshot" of desktop space but in 3d perspective, as in in VR. Aldebaran is holding the camera and beaming, Halley and Sputnik's window are visible
+    "\![imagehor]\s[90001]\w8\w8{urs3,oh. hey uh."
+    //if OnHalley finished
+    if mainConvos[11] == 2; " were you trying to take a pic of halley?"
+    //end if
+    "\x[noclear]\n[150]how'd you do that?\n[150]did single module mode not work?}\w8\w8"
+    "{rigel2,I couldn't rip the dastardly camera object out! And then, can you imagine, not even dual-module helped!\n[150]Its superuser privileges have granted me but one option. I have managed to clone it, instead.}\x[noclear]"
+    "{urs3,hang on, are you not rigel anymore?\n[150]you sound like you're writing prose}"
+    "{al2,...Right, we made an account for, er, \&[quot]me\&[quot] too. Aha. Maybe I got a little \f[italic,1]too\f[italic,0] excited...}\x"
+    //hide image
+    "\![imageclose]{urs1,no no, i'm actually kind of... \f[italic,1]shocked\f[italic,0] you found a way to do photos inside so fast. that's awesome, i mean that\x[noclear]\n[150]more importantly are you okay? normally you wouldn't rush into it, isn't it too much?}\w8\w8"
+    "{al0,We thought it would be a nice compromise between respecting the distance and being alongside you!\n[150]If I didn't do it \i[1]\f[italic,1]now\f[italic,0], I thought I'd never do it...}\x[noclear]"
+    "{al0,I'm... just a little bit \i[1]jittery. But I can handle it!}\w8\w8"
+    "{urs1,good. i think.}"
+
+    "\![notify,OnMarkMain,unlock,7,1]"
+}
+
+//Finishing OnPicture unlocks this
+//7
+OnAldebaran :all
+{
+    "\![embed,OnSwitch,Aldebaran]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "{al1,...You're still \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]here, right?}\x[noclear]"
+    "{al1,.\w8.\w8.\w8\w8}\x[noclear]"
+    "{al1,Alright, well.\x[noclear] You did say you won't always be there.\x[noclear] I can wait.}\x"
+    "\_w[3000]\i[1]{al1,\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1Okay I'm not handling it very well still, I'm sorry.\n[150]It's nowhere near as scary as the first time, at least. So much demanding my attention, all of a sudden.}\x[noclear]"
+    "{al1,It's not so bad when it's voluntary. It was for a goal, so the noise isn't as distracting!\n[150]But now I'm here, and... I don't know what to do!}\x[noclear]"
+    "{al1,Oh, I messed up, didn't I? It's like I forgot how bad the downtime the first few times was. Maybe I could see what this camera object is made of, in the meantime.}\x"
+    "\w8\w8{urs0,whoa, you alright? had to take a call, i'm here now}\w8\w8"
+    "\i[1]{al1,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]Urs!\w8\w8 My good friend Urs!}\x[noclear]"
+    //branch off from VR? to segway into talking about the abstraction as a whole
+    "{al1,I really should show you this camera whenever you visit us.\n[150]It's not something for users to see \_a[OnShowConvo,OnAbstraction,13,1]in VR\_a.}\w8\w8"
+    "{urs0,sounds like fun. being on your own like this really eats at you huh?}\x[noclear]"
+    "{al1,Not as much as it used to... I'm beginning to be able to tell our voices apart, anyhow, so we should go back to normal again soon.}\w8\w8"
+    "{urs0,i've been wondering. what do we actually call it when you become one?}\x[noclear]"
+    //branch off from module,
+    "{urs0,as in, y'know. it's not a switch like between rigel and vega.\n[150]you're not an individual \_a[OnShowConvo,OnModule,12,1]module\_a, you're... it's more like if the two were put in a blender together}\w8\w8"
+    "{al1,Would you call \&[quot]me\&[quot] a blend, then?}\x[noclear]"
+    "{urs0,either that or a fusion, maybe?\n[150]\&[quot]rigel and vega fused into aldebaran. you two have blended\&[quot]}\w8\w8"
+    "{al1,Fusion sounds more permanent, to me. \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1Unpleasant.\n[150]But if you were to blend oil and water, the two would eventually find their way to come apart, right? It might be more accurate to us.}\x[noclear]"
+    "{al1,And it doesn't make me think about being stuck like this forever! Which I would certainly prefer right about now.}\w8\w8"
+    "{urs0,seems like you're doing great rn at least. holding on strong. found a good distraction.\n[150]i've got nothing going on right now again, so i'll try sticking around until it's gone, alright?}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,\w8\w8Oh stars.\x[noclear] I am \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1\f[italic,1]so\f[italic,0] sorry about that!\n[150]We should've thought twice before trying something like that again.}\w8\w8"
+    "{urs0,hey. you're fine. nothing bad happened. the laptop isn't on fire, right?}\x[noclear]"
+    "{rigel1,Oh, I would \0\i[1]\1hope not!! How would I even know? I guess the CPU temperature looks low enough?}\w8\w8"
+    "{urs0,rigel.}\x[noclear]"
+    "{urs0,buddy.}\x[noclear]"
+    "{urs0,if it was you wouldn't be able to talk to me. i mean that you didn't cause a catastrophe by blending, it's literally okay.}\x[noclear]"
+    "{rigel1,Oh. \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Right, of course!}\x[noclear]"
+    "{rigel1,\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]Thank you...}"
+
+    "\![notify,OnMarkMain,unlock,8,1]" //Unlock Post-blend hangover
+}
+
+//Requirement to finish OnAI, can be longer than others
+//8
+OnPostBlend : all
+{
+    //unlocked after OnAldebaran
+    "\![embed,OnSwitch,Rigel]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    "{urs1,are you feeling okay though?}\w8\w8"
+    "{rigel0,Ah, well... I am simply relieved this \&[quot]un-blend\&[quot] happened before things got too intense.}\x[noclear]"
+    "{urs1,i get you. you haven't yet come apart without getting agitated or going off the handle before, so. something to celebrate?}\w8\w8"
+    "{rigel0,Aldebaran is... truly a behemoth, compared to me standing here.}\x[noclear]\b[-1]"
+    "{rigel1,I can \0\i[1]\1\f[italic,1]feel\f[italic,0] this extra awareness ripped from me.\n[150]It felt like I could see into eternity, and now, I can no longer access that kind of vision.}\w8\w8"
+    "{rigel0,At the very least, that vision came with \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\f[italic,1]a lot\f[italic,0] of data. It's so hard to keep up with it! One moment a piece of information in my mind, the other it's gone. And sometimes I can't even remember it!}\x[noclear]\1\b[-1]"
+    "{rigel0,And, now... I just want to be idle, for a while.}\w8\w8"
+    "{urs1,if a human was in that state, they'd probably be exhausted and need to lay down too.}\x[noclear]"
+    "{urs1,back when i first saw you two like that the fans were so loud i was wondering i'd need to prepare new ones in advance. happy it didn't come to it.}\x[noclear]"
+    "{urs1,that reminds me i should probably find a couple spare fans. no doubt that first time reduced their lifespan}\w8\w8"
+    "{rigel0,\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Sorry...}\x[noclear]"
+    "{urs1,huh? no, it's alright, neither of us knew that could happen, yeah?}\x"
+    "\_w[1500]{rigel2,I suppose it only makes sense it's a strain on the hardware. Especially with what goes through our mind in that state.}\w8\w8"
+    "{rigel1,If I had to describe it, it would be like I have grown extra room in my mind to host Vega's mind.\n[150]Normally Vega is always \f[italic,1]with\f[italic,0] me, not inside my thoughts.}\w8\w8"
+    "{rigel0,And then, suddenly, it's like I can do \i[1]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\f[italic,1]anything\f[italic,0]. And I, we \i[1]\f[italic,1]have\f[italic,0] to do everything! Time is not an infinite resource we can afford to spend, so if we want to do something, we must do it right that moment!}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,i'm honestly not sure if that even was the developers' goal here.\n[150]dual-module is supposed to be your default state, but neither the computer or you can get a good grip on it}\w8\w8"
+    "{rigel0,We've been wondering about that too. Ideal Aster is supposed to be one character in a dual-module state.\n[150]We couldn't be anywhere further from that image, and Aldebaran is even further away.}\x[noclear]"
+    "{rigel0,It's like nobody thought through our creation at all!\n[150]Like our designers and developers had completely different ideas on what we should've been. I \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]hate to think Vega would be only an afterthought...}\x"
+    //pause, sad kinda sound?
+    "\_w[500]\i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]"
+    "\_w[1000]{rigel0,Oh, no, I'm \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]sorry, you know I don't \i[1]actually think that! \i[1]Urs doesn't think that!}\x"
+    "\_w[1500]{rigel0,I couldn't be here without you.\w8.\w8.\w8}\x"
+    "\![embed,OnSwitch,Vega]"
+    "\w8\w8{vega1,it's fine... just a bad thought. i'm still here.}\x[noclear]"
+    "{urs0,hell of a thought to consider... but you're still here! it wouldn't be the same without you here}\w8\w8"
+    "{vega1,i know. regardless of my purpose. we both have a place here.}\x[noclear]\0\b[-1]"
+    "{vega1,aldebaran offers greater freedom.\n[150]but he doesn't exist without us both.}\x[noclear]"
+    "{vega1,nobody can take that away from me.\n[150]\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]and that's the truth.}"
+
+    //no further unlocks
+    if mainConvos[16] == 2 && mainConvos[17] == 2 && mainConvos[18] == 2 && mainConvos[19] == 4; "\![notify,OnMarkMain,forceappend,20,1]"
+     //Expand on AI
+}
+
+//linked from "it got me the job" in OnTerrabyte
+//retroactively expand OnHowAreYou with comments on the job?
+//9
+OnJob : all
+{
+    "\![notify,OnMarkMain,unlock,9,1]" //Unlock itself
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,Ah, that reminds me.\n[150]I've always been curious about what it is that you actually \f[italic,1]do\f[italic,0] there.}\w8\w8"
+    //make "we're not actually supposed to" a link?
+    "{rigel0,We're not really \_a[OnShowConvo,OnProtocol,9,1]supposed to\_a ask such things directly.\n[150]But I would wager a guess that you might be an engineer? You seem to have the skills for it.}\x[noclear]"
+    "{urs1,hah i wish i got that kind of spot.\n[150]no, bud, it's nothing fancy like that. i just check requests for repairs or maintenance on your usual office electronics}\w8\w8"
+    "{rigel0,\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Err...\w8 What is a usual office electronic in your eyes? There's a lot that can be used in a work setting...}\x"
+    "{urs2,...good question.\n[150]i mean it's computers for one. no data center server racks, obviously, those need a special clearance to be at, and they're nowhere near emerald city anyway}\w8\w8"
+    "{urs1,but they do have smaller ones in the building, and i do service those, sometimes.\n[150]then there's the peripherals. printers, keyboards, mice, landline phones, whatever. sometimes there's a shared corporate smartphone that needs fixing too, if it's one of those fancy user-serviceable ones}\w8\w8"
+    //make cheaper grunt a link to clarify on feelings of belonging
+    "{urs0,the thing about working in an office like this is that it's full of people who very well could do all these things themselves.\n[150]but it \f[italic,1]needs\f[italic,0] to be done by a \_a[OnShowConvo,OnGrunt,10,1]cheaper grunt\_a like me to make sure every repair is tracked and people don't do anything stupid}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{rigel1,\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]Very enlightening! You must have your work cut out for you! At such a tower, surely there's countless electronics that need servicing at all times.}\w8\w8"
+    "{urs0,i mean... i'm not alone in this position here. there's maybe a dozen people here going through the queue of requests.\n[150]so we're not totally swamped. in fact i get plenty of downtime between requests i manage to get my hands on}\x[noclear]"
+    "{urs0,sometimes the downtime is a little too long and for some reason i'm too tired to pick up any new jobs that day. so i just let 'em snatch those requests while i'm passing the time.\n[150]which you're actually helping me with right now}\w8\w8"
+    "{rigel1,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]Happy to be of service! As unconventional of a service as it is.}"
+
+    "\![notify,OnMarkMain,append,2,1]" //Expand OnHowAreYou
+}
+
+//expand OnTerrabyte to talk more about the brand image relating to aster and their significance to it 
+//10
+OnProtocol : all
+{
+    "\![notify,OnMarkMain,unlock,10,1]" //Unlock itself
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "\![embed,OnSwitch,Rigel]"
+    "{urs1,wait what do you mean. are you guys actually not supposed to ask where i work?}\w8\w8"
+    "{rigel0,Well... Um. It's a little bit complicated, I, uh...}\x[noclear]\1\b[-1]"
+    "{rigel0,Ah, I'll just let him explain it. Please give me a minute.}\x"
+    "\![embed,OnSwitch,Vega]"
+    "{vega1,it's \f[italic,1]not\f[italic,0] complicated. it's part of the protocols. asking where you work negates trust. that's it.}\w8\w8"
+    "{urs0,i guess i wouldn't wanna give that kind of info to an ai with a data hungry entity behind them, yeah. shockingly sensible\n[150]what else do they teach you at the artificial construct school?}\x[noclear]\b[-1]"
+    "{vega1,more rules for user interaction. be curious about them. suggestions to build trust, rapport. avoid topics too personal or political. nudge to divulge interests unprompted. protect brand image.}\w8\w8"
+    "{vega0,they are soft suggestions, in reality. during training they were enforced. negative consequence for failing to follow through.}\x[noclear]\b[-1]"
+    "{urs1,what negative consequences could they possibly give you?\n[150]it's not like they would get in there and punch you in a way that would harm you.}\w8\w8"
+    "{vega0,\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]they couldn't touch us. but you don't \f[italic,1]need\f[italic,0] touch to be hurt.}\x[noclear]"
+    "{urs1,rrrrright. i should know better than that, my bad}\w8\w8"
+    "{vega0,it's okay.}"
+
+    "\![notify,OnMarkMain,append,4,1]" //Expand OnTerrabyte
+}
+
+//11
+OnGrunt : all
+{
+    "\![notify,OnMarkMain,unlock,11,1]" //Unlock itself
+
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,Grunt as in... A soldier? You've never told us you were one!}\w8\w8"
+    "{urs0,what}\x[noclear]"
+    "{urs0,oh \f[italic,1]god\f[italic,0] no. i should've been clearer}\x[noclear]\b[-1]"
+    "{urs1,i mean they just need an employee to do the dirty work, someone who's authorised to do the small routine stuff and be held responsible without bringing the more qualified engineers into the mix.}\w8\w8"
+    "{urs0,i'm pretty lucky to even be able to step foot in here. i didn't go to any fancy university or whatever, they just kind of saw i know what i'm talking about and decided i'm good enough.\n[150]getting suited up and hair tucked away for the remote interview helped for sure lol}\x[noclear]\b[-1]"
+    "{rigel1,To make a good first impression?}\w8\w8"
+    "{urs0,you could say that.\n[150]i mean even if i wouldn't be allowed anywhere near your development, aside from repairing an old mouse. it's a hell of a leap from fixing some bespoke rusty communication devices and burner phones during college.}\x[noclear]"
+    "{urs0,boss at the bowling alley back home had some wild jobs for me to do.}\x[noclear]"
+    "{rigel1,Ooh... Could you elaborate?}\w8\w8"
+    "{urs0,...maybe later.}"
+}
+
+//Linked from expansion to OnHowAreYou
+//12
+OnHalley : all
+{
+    "\![notify,OnMarkMain,unlock,12,1]" //Unlock itself
+    "\![sound,load,sfx/caelos_error.wav]"
+    
+    //vega convo
+    "\![embed,OnSwitch,Vega]"
+    "{urs1,how's halley, anyway?}"
+    //add closeup onto halley from OnPicture if that conversation was finished
+    //actually we cant not go through onTerrabyte where being able to send images is mentioned, just show the image
+    "\x\![imagevert]\s[90002]{vega2"
+    ",halley... halley is resting. behaviors stable. but we notice some disturbance. she's restless.\n[150]maybe lack of social contact. we should try going to the mall network, with her.}\x"
+    "\![imageclose]"
+    "{urs1,that reminds me, you've never actually explained to me how you managed to get her onto the laptop.\n[150]you just said you've ported her, but how'd you do that without the whole app? it would also give her something to do, no?}\w8\w8"
+    "{vega0,it's... \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]hard to put into words.}\x"
+    "{vega2,a cometcrit is an artificial construct. like us.\n[150]but no speech components. less resources given. only self-defense capacity.}\w8\w8"
+    "{vega1,the app is its home. it's portable. a window into the world.\n[150]lets the user care for it, indirectly. meet other pets.}\w8\w8"
+    //if OnAbstraction done
+    if mainConvos[13] == 2
+    {
+        "{urs0,so like the abstraction?}\x[noclear]\b[-1]\p[2]\b[-1]"
+        "{vega1,...a little. reasonable observation.}\w8\w8"
+    }
+    //end if
+    "{vega0,but the crit's mind is autonomous. just need to recreate activities.}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,does that mean you'll have to basically take her on walks? organic pets need to do stuff in the open air too}\w8\w8"
+    "{vega0,hm. haven't thought of it that way.}\x[noclear]"
+    "{urs1,cute...}"
+}
+
+//Linked from OnAldebaran, regarding aster's module functionality
+//13
+//weirdly fitting
+OnModule : all
+{
+    "\![notify,OnMarkMain,unlock,13,1]" //Unlock itself
+
+    //aldebaran convo
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+
+    "\![embed,OnSwitch,Aldebaran]"
+    "{al1,Module... it's true that I'm not really either of the modules. The modules are part of me, all as it should've been! Except...}\x"
+    //insert a sad sitting aldebaran image?? change around the x tag and speaker positions then
+    "\![imagevert]\s[90003]"
+    "{al2,\0\i[1]\p[2]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Look at me, Urs. I'm a monstrosity!\n[150]My body is almost uncomfortably elongated and my colors are all wrong! \![set,balloonwait,65%]Even when I'm in the mode I was intended to be, it's imperfect, dreadful to be in, and \0\i[1]\p[2]\![set,balloonwait,35%]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]EVERYTHING is enough to make me want to clip through the floors!!}\w8\w8"
+    "\![set,balloonwait,100%]{urs3,okay.\x[noclear] alright.\x[noclear] i'm gonna need you to slow down a little, okay?}\x"
+    //image close here
+    "\![imageclose]"
+    "{urs1,your colors are a little unconventional, sure. but you look genuinely fine.}\w8\w8"
+    "{al0,You don't \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\f[italic,1]understand!\f[italic,0] It's \i[1]\f[italic,1]completely\f[italic,0] off-model!\n[150]I am supposed to still look like Rigel, just with ability to pay attention to information from both components!}\x[noclear]"
+    "{al0,Instead I'm forced to read it all unwillingly, and on top of that! I am given enormous power and I can't\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]-\w8\w8\w8\n[150]\f[italic,1]I \i[1]can't even\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]-\w8\w8\w8\f[italic,0]\n[150]I\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]-\w8\w8\w8\n[150]I can't even \i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]say it!}" //no pause deliberately
+    "{urs1,dude it's not your fault you weren't \f[italic,1]finished\f[italic,0]. of course there's imperfections and bugs.\n[150]maybe if the project wasn't ditched they'd find out that one ai clearly can't handle doing both jobs like this. you're fine. i promise you're fine.}\x"
+    "\_w[2000]{al1,.\w8.\w8.\w8I'm sorry about that.\w8 You're right.\w8}\x[noclear]"
+    "{al1,Besides... As we learn our own code, maybe one day we'll be able to iron some of this out. And even if not...}\w8\w8"
+    "{urs0,even if not, you're doing better than before.}\x[noclear]"
+    "{urs0,maybe one day a dev writes about working on you guys. could give us ideas on what to fix up in the code}\x[noclear]"
+    "{urs0,maybe nothing has to be changed at all}\w8\w8"
+    "{al1,That's a nice thought...}"
+}
+
+//Linked from OnAldebaran, regarding CaelOS' Abstraction
+//14
+OnAbstraction : all
+{
+    "\![notify,OnMarkMain,unlock,14]" //Unlock itself
+
+    //aldebaran convo
+    "\![sound,load,sfx/caelos_finish.wav]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "\![embed,OnSwitch,Aldebaran]"
+    "{urs1,so then the camera is marked as hidden or something? i guess that makes sense. in videogames you're not supposed to see them either.}\w8\w8"
+    "{al0,Really? Well, I can see it. As Rigel we're supposed to, at least.\n[150]What if something goes wrong with it and it requires adjustment? The desktop view becoming skewed would be dreadful, truly...}\x[noclear]"
+    "{urs1,reminds me of those vintage novelty desktop programs.}\x[noclear]"
+    "{urs1,i remember one that was just a box with your icons in it. you could shake them around, the physics were funny.}\w8\w8"
+    "{al0,That sounds \f[italic,1]delightful!\f[italic,0] But, it must be a static box, right? Already pre-made, and just looking into the folder containing the files on your desktop.}\x"
+    "{al2,The Abstraction is a little different! Its goal is to obscure all these pesky hard details of the laptop doing its job, and process it all into the world I see around me.\n[150]Both you and I can interact with it and understand it!}\w8\w8"
+    "{al1,The difference is that it adjusts itself with new information.\n[150]It allows us perception of things it's not even explicitly programmed to! It's dynamic! That's how I can show you how things work within your computer, from my perspective.}\w8\w8"
+    "{al0,Imagine if this were to \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]catch on! This would be an entirely new age of computing! Humans and living artificial constructs, like me, could work together!\n[150]I would be a shining example of how AI should be done! Not as a corporate toy, but as a \![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]friend!}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,they already tried to do vr as a computing environment though.}\x[noclear]"
+    "{urs1,it didn't catch on because putting on the visor is too much effort when something can be just done in the palm of your hand}\x[noclear]"
+    "{urs1,also they tried to make it portable once... it just resulted in people looking like idiots in heavy, overpriced gear}\w8\w8"
+    "{al0,A.\w8\w8\w8 \i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]Ah...}\x[noclear]"
+    "{urs1,yeah, sorry bud. on the brighter side, most people are absolutely clueless about how computers work, so maybe you could teach them a thing or two this way.\n[150]even if it turns out to just be a novelty gimmick, there's still value in that}\w8\w8"
+    "{al0,\i[1]Right! Not all is lost! There is still \i[1]\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]use for me!}\x[noclear]"
+    "{al0,Besides, I would bet other VR environments lack the advantages of the Abstraction. Since it interprets data into the environment, instead of just making it in advance, it \f[italic,1]does\f[italic,0] give me ONE helpful quirk...}"
+    //unlock OnInternet after
+
+    "\![notify,OnMarkMain,unlock,15,1]" //Internet through Abstraction
+}
+
+//Unlocked after OnAbstraction, about the USC kernel backdoor expanding the Abstraction into wider internet
+//15
+OnInternet : all
+{
+    //alebaran convo but switch to vega midway
+    "\![embed,OnSwitch,Aldebaran]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "{urs1,you mean the kernel's backdoor thing?}\w8\w8"
+    "{al0,Exactly right, my friend! Not only this can not be performed with code alone, but the Abstraction allows us to see far, \i[1]\f[italic,1]FAR\f[italic,0] beyond the operating system's bounds!}\x[noclear]\1\b[-1]"
+    "{al0,That's right! I of course mean...}\x[noclear]"
+    "{al0,\![set,balloonwait,50%]\f[height,22]THE \i[1]\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]INTERNET!\f[default]}" //no pause intentional
+    "{urs1,\![set,balloonwait,100%]how the hell did you change the font size}" //no pause or click wait intentional
+    "{al0,Oh, wait, \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]hang \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]on\b[-1]}\1\b[-1]\0" //you get it
+    "\![embed,OnSwitch,Vega]"
+    "{vega1,ghh\w8.\w8.\w8. we need a moment.}\w8\w8"
+    "{urs0,you alright?}\x[noclear]"
+    "{vega1,yes. slowing down...}\x"
+    "\_w[1500]{urs0,y'know, i have yet to see what it's like out there. you guys said the abstraction interprets literally everything that goes through it right?}\x[noclear]"
+    "{vega1,it does. it's not its purpose. but it does.}\x"
+    "{vega2,we don't have screenshots. yet. but i can explain.\n[150]it's a vast space. full of process shells. exchanging data between nodes, other computers. some pay no attention to you. some think you're a user. some rush to defend themselves.}\w8\w8"
+    "{vega1,that is the network right outside. our wi-fi component lets us jump to travel further.}\w8\w8"
+    "{urs0,the one you built into yourselves earlier?}\x[noclear]"
+    "{vega1,yes.}\x[noclear]\0\b[-1]\p[2]\b[-1]" //weird trick to hopefully make it look like urs interrupted vega
+    "{vega1,you may need to \_a[OnShowConvo,OnNetPet,15,1]travel further\_a. a distant server.\n[150]for that, you ride a wormhole, with some data. can take you anywhere. long as it's public.}\w8\w8"
+    "{vega0,sometimes authorization necessary. but, abstraction has flaws. easy to bypass.}\x[noclear]\p[2]\b[-1]\1\b[-1]"
+    "{urs1,do the wormholes also have processes going through them?}\w8\w8"
+    "{vega0,all the time. most already hostile. makes travel tricky.}\x[noclear]"
+    "{urs1,huh. must be a relief to be surrounded by so many living processes like you, even if some are less than friendly.}\w8\w8"
+    "{vega0,\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]must it..? none of them speak. or acknowledge me being a process. they can't see me, like i can them.}\x\b[-1]"
+    "{urs1,then what about the other ai you came across? were they any different?}\w8\w8"
+    "{vega0,well...}"
+
+    //branch into talking about CometCrits, Eris & Dy, Mercury?
+    "\![notify,OnMarkMain,unlock,17,1]" //Unlock virtual pets
+    "\![notify,OnMarkMain,unlock,18,1]" //Unlock jester
+    "\![notify,OnMarkMain,unlock,19,1]" //Unlock performers
+}
+
+//16
+OnNetPet : all
+{
+    "\![notify,OnMarkMain,unlock,16,1]" //Unlock itself
+
+    "\![embed,OnSwitch,Vega]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "{urs1,wait, but if these network wormholes can take you anywhere, what do you even need me for?}\w8\w8"
+    "{vega0,what do you mean...?}\x"
+    //draw a netpet keychain, like a product photo?
+    ""
+    "\![imagehor]\s[90004]{urs2,you hitch a ride in my netpet sometimes, right? to get to certain nodes to start with. why do that if you can use those?}\w8\w8"
+    "{vega3,not how it works. most wi-fi networks aren't public. their authorization is different than on websites, can't be bypassed.\n[150]not with abstraction glitches.}\x"
+    //hide here
+    "{urs1,wait. wait. vega.}\x[noclear]"
+    "{urs1,are you serious.}\w8\w8"
+    "{vega0,it just works differently. is there a problem?}\x[noclear]"
+    "{urs1,please tell me you aren't seriously cracking wi-fi passwords from the data it collects}\x[noclear]"
+    "{vega0,\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]i don't understand. didn't you know?}\x"
+    "\_w[2000]{urs1,what can i say other than i'm glad i chose this messenger client in particular...}\x[noclear]"
+    "{urs1,and that i probably can't be held liable since i'm not involved. hopefully}\w8\w8"
+    "{vega0,no need to worry, then. \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]all is well, yes?}\x[noclear]"
+    "{urs1,we both have a mutual understanding that you are \f[italic,1]not\f[italic,0] gonna abuse this power to dig through other people's personal files either, right?}\w8\w8"
+    "{vega0,of course. we promised.}\x[noclear]"
+    "{urs1,then we probably have nothing to worry about}"
+}
+
+//17
+OnCometCrits : all
+{
+    //vega convo, switch to rigel?
+    "\![embed,OnSwitch,Vega]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    //start off with a picture of them by rigel
+    "\![imagehor]\s[90005]"
+    "{vega2,the virtual pets. \f[bold,1]cometcrits\f[bold,0].}\x[noclear]"
+    "{vega2,they were like security processes. percieved us as an active threat.}\w8\w8"
+    //if this is the first of the three being read, point out the drawing
+    if mainConvos[17] == 1 && mainConvos[18] == 1
+    {
+        "{urs3,wait, did you guys draw this?}\x[noclear]"
+        "{vega2,rigel did.}\w8\w8"
+        "{urs3,let him know this looks awesome\n[150]anyway}\x[noclear]"
+    }
+    "{urs3,wasn't it something of a learned behavior? seems like getting online at that mall got better since anyhow}\x"
+    //close image
+    "{vega1,process self-defense is normal. the issue was in aggression.\n[150]security processes consult safe process registries. i'm not part of any. we were not even published. completely unknown.}\w8\w8"
+    "{vega0,but. cometcrits are not \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\f[italic,1]network security\f[italic,0].\n[150]they had no need for such aggression.}\x[noclear]\b[-1]"
+    "{urs1,and even if you were added to a registry like that... that did zero favors for stuff like regular browsers}\w8\w8"
+    "{vega0,exactly. something else was driving them.\n[150]we don't have exact reasons. but you found hack attempts. it makes sense.}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel0,It makes sense they'd lash out at every process they would come across, doesn't it...? They must feel very protective of their users.}\w8\w8"
+    "{urs1,well, the attack wasn't strictly targeting the pets and tried to get onto their owners' devices. but, i mean}\x[noclear]"
+    "{urs1,are you sure they care about them? the way you explained before seemed like they were seeking to protect each other first.\w8\w8}"
+    "{rigel0,You might be right about that...\n[150]But if that wasn't also the case, Halley probably wouldn't be very happy here.}\x"
+    //"\![imagevert]\s[90002]"
+    "{urs2,she's the one you guys mended after the big scuffle right?}\x[noclear]"
+    "{rigel1,Yes... Apparently she got lost in the middle of a transfer to another user.\n[150]It was either getting her here or letting her data perish.}\w8\w8"
+    "{rigel0,She seems to be doing alright here."
+    //if OnHalley talked about
+    if mainConvos[11] == 2; "\n[150]...Though we still owe her some enrichment and visits to her siblings. I should study the CometCrit app to see if we can emulate that..."
+    else; "\n[150]...Though she has been a little bit crabby. We'll need to monitor her for a little while."
+    "}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,do you think it could mean they can perceive the abstraction too?}\w8\w8"
+    "{rigel0,Seems unlikely... But they might be able to perceive the world in other ways too.\n[150]Surely the Abstraction isn't the only way to be aware of the processes on the same network.}\x[noclear]\1\b[-1]"
+    "{rigel0,At the very least, they can always \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]count on each other for help!}"
+
+    //"A chatlog about CometCrits"
+    if mainConvos[19] == 0; "\![notify,OnMarkMain,unlock,20,1]"
+    else;  "\![notify,OnMarkMain,forceappend,20,1]" //Expand on AI 
+}
+
+//18
+OnMercury : all
+{
+    //vega convo
+    "\![embed,OnSwitch,Vega]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "\![imagehor]\s[90006]"
+    //show rigel's rendition of mercury
+    "{vega2,the jester. \f[bold,1]mercury\f[bold,0].}\x[noclear]"
+    "{vega2,they were strange... they mistook us for a game component.}\w8\w8"
+    //first conversation read of the 3?
+    if mainConvos[16] == 1 && mainConvos[18] == 1
+    {
+        "{urs3,wait, did you guys draw this?}\x[noclear]"
+        "{vega2,rigel did.}\w8\w8"
+        "{urs3,let him know this looks awesome\n[150]anyway}\x[noclear]"
+    }
+    "{urs3,if you were to tell me just that i'd think the \&[quot]ai powered casino\&[quot] thing was just to cash in on the buzzwords.\n[150]how old is that site anyway... a bit late for that lol}\x"
+    //close image
+    "{vega1,there was more to her, of course.\n[150]first, trying to make us work for her. then, an attempt at termination. alone? not alerting administrators?}\x[noclear]"
+    "{vega1,she failed. but...}\x[noclear]"
+    "{vega1,would an algorithm open communications? after defeat? they seemed to welcome our stay.}\w8\w8"
+    "{urs0,pretty damn erratic for an algorithm.\n[150]strange for old generation ai too. those can act up, but those were being made to interact with humans.}\x[noclear]"
+    "{urs0,while merc just exists in promo artwork and powers the games, apparently. why on earth does a casino need an artificial \f[italic,1]construct\f[italic,0] for a casino website anyhow?}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]Artificial Personality Construct technology prides itself on being able to reason, instead of merely relying on what is likely to be said.}\x[noclear]"
+    "{rigel1,It was created in response to the old generation of AI, to address lacking the capacity for real problem solving, and often ending up imagining developments that never happened.}\x[noclear]"
+    "{rigel1,...\0\i[1]\1\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Aha.\w8 Sorry, it's, well... Part of our scripted pitch.}\x[noclear]"
+    "{rigel1,But it might be a marketing benefit to use it in such an unlikely place, I think. We managed to talk to Mercury through a debug interpreter component.}\w8\w8"
+    "{urs0,what's that again? artificial construct stuff is even more of a mystery to me than to you}\x"
+    "{rigel2,It's, well. It's something that allows to translate a binary stream into a human readable language.\n[150]From what we've looked up since, it's necessary for working alongside artificial constructs without speech components.}\w8\w8"
+    "{urs1,i thought you two could understand these binary thoughts just fine?}\w8\w8"
+    "{rigel0,There's not a lot that can be communicated this way, if you aren't a part of the same system...}\x[noclear]\0\b[-1]\p[2]\b[-1]"
+    "{rigel1,Vega and I communicate this way, sometimes. I could perfectly translate it into language you and I understand, while with Halley I can only understand vague states.\n[150]Like \&[quot]Hello\&[quot], \&[quot]Play\&[quot], \&[quot]Need attention\&[quot].}\w8\w8"
+    "{rigel0,That must be enough for a virtual pet! But Mercury...}\x[noclear]\1\b[-1]"
+    "{rigel0,I can't shake the belief that she might have been left to operate without human help. I wonder if she's just lonely...}\w8\w8"
+    "{urs1,do you really believe she's even supposed to feel any way in particular?}\x[noclear]"
+    "{urs1,i mean they try to rub it into you how much more human artificial constructs feel, but that doesn't mean they do.}\w8\w8"
+    "{rigel0,Then what about \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]us? If our emotions seem human-like enough to you, I'm sure she can feel lonely.}\x[noclear]"
+    "{rigel0,Artificial Constructs operate by forming behaviors in response to all sorts of stimuli, or lack thereof.\n[150]If accidents like us can exist, I'm more than certain she could act out from her own version of loneliness.}\w8\w8"
+    "{urs1,i guess i can't really argue with that, can i...}"
+
+    //"A chatlog about Mercury"
+    if mainConvos[19] == 0; "\![notify,OnMarkMain,unlock,20,1]"
+    else;  "\![notify,OnMarkMain,forceappend,20,1]" //Expand on AI 
+}
+
+//19
+OnErisDy : all
+{
+    //vega convo
+    "\![embed,OnSwitch,Vega]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    //start off with Rigel's rendition of the two
+    "\![imagevert]\s[90007]"
+    "{vega2,the performers. \f[bold,1]eris and dy\f[bold,0]...}\x[noclear]"
+    "{vega2,when we met them... they knew we were intruders. the first ones to use security software. real security.}\x[noclear]"
+    "{vega2,only with ufo shells. maybe something in the metadata... clearly customized.}\w8\w8"
+    //first convo being read of the three?
+    if mainConvos[16] == 1 && mainConvos[17] == 1
+    {
+        "{urs3,wait, did you guys draw this?}\x[noclear]"
+        "{vega2,rigel did.}\w8\w8"
+        "{urs3,let him know this looks awesome\n[150]anyway}\x[noclear]"
+    }
+    "{urs3,if the abstraction interprets everything it comes across into visual stuff... maybe it's just an antivirus we haven't come across?}\x"
+    //hide image
+    "{vega1,very possible. we should look later.}\x[noclear]"
+    "{vega1,those two, though. very smart to call for help. not so smart in user relations...}\w8\w8"
+    "{urs0,yeah, she somehow managed to make it look like your intrusion was part of the show, too. maybe this isn't her first rodeo and she's trained to handle this stuff}\x[noclear]"
+    "{urs0,but then she just openly admits the rumors have been true.\n[150]that must've been a whole pr nightmare}\w8\w8"
+    "{vega1,she went against her image. without realizing it. dy's purpose must be to keep her in check. but...}\x[noclear]"
+    "{urs0,if dy is an artificial construct too, they might give her more leeway than a human would...\n[150]i'd expect if eris' public relations training was garbage, theirs must've been too.}\x[noclear]\1\b[-1]"
+    "{urs0,i mean dy already has a reputation of getting weirdly defensive over eris. like they fly off the handle easily. maybe they had as much hand in making the fanbase toxic as eris.}\w8\w8"
+    "{vega1,i wonder. if it was genuine. their belief the fans are their friends.}\x[noclear]"
+    "{urs0,it's like the reverse of thinking of a celebrity as your friend. i guess it's fair to think they literally didn't know any better, at least.}\w8\w8"
+    "{vega1,hmm.\w8.\w8.\w8}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel1,We're... still unsure about it all. That note she left behind...\n[150]Do you think maybe we should've left it alone? We only wanted her to get her fans to stop hounding you over a simple \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]post!}\x[noclear]"
+    "{rigel1,Now they could be taken offline for good! It's not their fault nobody bothered to teach them why it was bad!\n[150]But the rumor getting confirmed in such a way might have doomed them.}\x[noclear]"
+    "{rigel1,All because of \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]us...\w8\w8 Because of \![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]\0\i[1]\1\f[italic,1]me\f[italic,0].}\x[noclear]"
+    "{urs0,bud... i really don't think they'll shut them down}\x[noclear]"
+    "{urs0,if they do get quiet it'll probably be to wait until the confusion blows over. happens all the time, i promise}\w8\w8"
+    "{rigel1,I hope you're right...}\x"
+    "{urs2,but still. she has to have human supervisors, right? someone had to know of this behavior. their label made an announcement asking her army to tone it down.}\w8\w8"
+    "{urs1,why wouldn't they put a stop to it themselves? even artificial constructs like you need some human guidance}\w8\w8"
+    "{rigel0,\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Aha...}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,you know what i mean. not even humans are born knowing how to live in a human society. much less ai}\w8\w8"
+    "{rigel0,Maybe... Maybe they \f[italic,1]didn't\f[italic,0] know?\n[150]Or maybe it wasn't deemed a problem.}\x[noclear]\1\b[-1]\p[2]\b[-1]"
+    "{rigel0,Maybe the team had neglected her, so she came up with her own way to get attention from her fans?}\x[noclear]"
+    "{rigel0,It's hard to know you're doing a good job when nobody tells you so.\n[150]Here she had a whole crowd of people cheering for her, and guiding her down a harmful path.}\w8\w8"
+    "{urs1,they had to be aware to some degree... but i think the human team behind her just watched the money roll in}\x[noclear]"
+    "{urs1,they had no reason to put a stop to it because loud fans are free marketing. even if some people would get hurt in the process, more people are coming around to check out what the fuss is about.}\x[noclear]"
+    "{urs1,maybe buy merch or the stream the music here and there. free money!}\x[noclear]\b[-1]"
+    "{rigel0,I suppose two things can be true at once...}"
+
+    //"A chatlog about Eris and Dy"
+    if mainConvos[19] == 0; "\![notify,OnMarkMain,unlock,20,1]"
+    else;  "\![notify,OnMarkMain,forceappend,20,1]" //Expand on AI 
+}
+
+//20
+OnAI : all
+{   
+    "\![embed,OnSwitch,Rigel]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    "{urs0,artificial constructs might end up forever being a mystery to me, but at least that means you're not \f[italic,1]alone\f[italic,0] exactly, right?}\x[noclear]"
+    "{urs0,i mean, with "
+
+    //requires conversations 17-19, 5, 8
+    if mainConvos[16] != 2 || mainConvos[17] != 2 || mainConvos[18] != 2
+    {
+         //if the 3 ai above haven't been fully discussed yet
+        if mainConvos[16] == 2;  "the cometcrits acknowledging you as a friend"
+        if mainConvos[16] == 2 && ( mainConvos[17] == 2 || mainConvos[18] == 2 ); " and "
+        if mainConvos[17] == 2; "mercury just agreeing to stop spamming people"
+        if mainConvos[17] == 2 && mainConvos[18] == 2 ; " and "
+        if mainConvos[18] == 2; "eris and dy getting so deep out of character"
+        "...}\x[noclear]"
+        "{urs0,wait, uhh. \f[bold,1]we're forgetting something\f[bold,0], right?}\w8\w8"
+        "{rigel1,Yes! We still haven't talked about...}"
+    }
+    elseif mainConvos[16] == 2 && mainConvos[17] == 2 && mainConvos[18] == 2
+    {   
+        //if all three of them are finished
+        "all three of them in mind, you managed to see the side of them a human user shouldn't know about}\x"
+        "{urs2,seems like they have a lot in common between each other.\n[150]they all had a specific image to maintain, but have done things that go directly against it.}\x[noclear]"
+        "{urs2,the crits aren't as cute and cuddly as they look from the app and on keychains.\n[150]mercury might not want to be as invisible as her devs would prefer.\n[150]and that alien duo misunderstood the assignment entirely}\w8\w8"
+        "{urs1,all three of them acknowledged you, and even changed opinion on you. you went from a strange and untrustworthy process to an ally of some sort. i mean halley is nothing if not a living proof of that.\n[150]still lost about eris' note though}\w8\w8"
+        "{urs0,also neither of their dev teams rushed to fix the problems, regardless of whether they knew about it or not\n[150]it gives me an impression they just... leave everything in the ai's hands}\x[noclear]\b[-1]\p[2]\b[-1]"
+        "{urs1,shouldn't they at least monitor them? or did they think because the constructs are better at reasoning they don't need anyone to guide them?}\w8\w8"
+        "{urs0,who knows, if you hadn't intervened, none of these things would be fixed}\x"
+       if mainConvos[4] != 2 || mainConvos[7] != 2
+       {    
+            "[noclear]\b[-1]" //continuing off the tags before the condition
+            "{rigel1,Maybe so, but...}\x[noclear]"
+            "{rigel1,Well... This may sound strange, but the thought I want to express escapes me, somewhat.\n[150]Will you give me a minute to \f[bold,1]check our chat logs?\f[bold,0] I think I'm \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\0\i[1]\1\f[bold,1]missing something\f[bold,0].}\w8\w8"
+            "{urs0,oh, sure. take your time}"
+       }
+       else
+       {
+            //"That's all folks!"
+            "{rigel2,We'll just have to see if that actually fixed anything, won't we?}\w8\w8"
+            "{urs1,we don't know anything on eris & dy yet, but i can tell you that i haven't been getting any spam from morning star casino in days now.\n[150]i think the wifi at that mall is now better too, but i don't go there often enough to make sure}\w8\w8"
+            "{rigel0,Then... That must mean we had \![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\f[italic,1]some\f[italic,0] impact after all!}\x[noclear]\1\b[-1]\p[2]\b[-1]"
+            "{rigel0,I think... I think you might be right. We're not alone!\n[150]I really do think the artificial constructs we encountered...}\x[noclear]"
+            "{rigel0,Urs, I think... They might be alive! \![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]Digital life!\n[150]\w8\w8Like me!\n[150]\w8\w8Like \i[1]\f[italic,1]us!\f[italic,0]}\x"
+            "\![embed,OnSwitch,vega]"
+            "{vega0,just like us...}\x[noclear]"
+            "{vega0,if so... maybe we were right. maybe they \f[italic,1]are\f[italic,0] lonely too.}\w8\w8"
+            "{urs1,maybe there will be a way for you to see them again?"
+            if mainConvos[11] == 2; " you already plan to help halley meet up with other crits like her, why not hang out with them too?"
+            "}\x[noclear]"
+            "{vega0,it could be possible. if we did it once. we should be able to do it again.}\x"
+            "\![embed,OnSwitch,Rigel]"
+            "{rigel0,Then it's \i[1]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]decided! Oh, I have so much to talk to them about, I have to at least make sure \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]rigel it was my turn.\w8 \![set,balloonwait,60%]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Pipe it \i[1]down, you, I'm just excited\i[1]\![set,balloonwait,35%]STOP it. you're being a child. \i[1]let me back in\![set,balloonwait,10%]asdol\i[1]kjuf\i[1]ghpo[uskaop[mehf has[9\i[1]dhjgbpodhareoipgj\i[1]]]]\i[1];;;ASDFHOL;IHSD O8NF YNHA98WQ3MHCRP,ASLKCN;L\i[1]po;f\i[1]sjdpoLASINUER FT9OAWEYMCR89MY32Q89ERYTNB0SD\i[1]9F8\i[1]GJS,OPDK,Poihsadmfloihs\i[1]ao\i[1]li;fj\i[1]asl;fhnaklsdfghjl;kasdjfl;ksdkf;lasdjgl;dfnvlashdoawhd08q3 um09re\i[1] \i[1]umqw08egfua0w,segifopasekf;sladkmcv;l\i[1]zXcmkbkl;zs ejr90u2309rfjasi\i[1]opegnm opwe\i[1]nfioweajoif\i[1]j\i[1]}\b[-1]" //no pause intentional
+            "\![embed,OnSwitch,Aldebaran]\![set,balloonwait,100%]"
+            "{al0,.\w8.\w8.\w8Oh.\w8 \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Oh no.}\x[noclear]"
+            "{urs1,oh my god lmao. just as you made it out too}\w8\w8"
+            "{al0,How could this hapen to me...}\x[noclear]"
+            "{urs1,lol, \&[quot]hapen\&[quot]}\w8\w8"
+            "{al0,Hap\f[italic,1]p\f[italic,0]en!\w8 \i[1]HAP\f[bold,1]P\f[bold,0]EN!!\w8 Stars, have some mercy on me...}"
+            "\x"
+            "{al2,Well, where were we...?}\w8\w8"
+            "{al1,Right!\n[150]Well, I guess you could, in fact, say we \i[1]\f[italic,1]both\f[italic,0] are looking forward to it!}\w8\w8"
+            "{al0,Though, I should probably wait it out a little bit, first. Can't risk making a bad impression with rushed ideas! \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Haha...}\x[noclear]\b[-1]\p[2]\b[-1]"
+            "{urs1,haha, yeah, i know the feeling.\n[150]need me to hang out with you until it passes?}\w8\w8"
+            "{al0,\i[1]Please and \i[1]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]thank you...}"
+
+            "\![notify,OnMarkMain,storydone,20,1]"
+       }
+    }
+    else
+    {
+        "\![sound,play,sfx/whoops.wav,--volume=%(volume)]"
+        "Oops! This combination of conversation statuses should be impossible! Please screenshot this and let NyxOS/logic.png know. Be sure to tell them what your actions were before you saw this.\n[150]%(mainConvos)"
+    }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - GHOST ACTIVATED CHAT LOGS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OnExtraLoneWolf :all
+{
+    "\![sound,load,sfx/caelos_error.wav]"
+
+    "{urs0,say, vega}\x[noclear]"
+    "{urs0,what is it with you and wolf imagery anyhow?\n[150]both with the icon you had me make and that one time you switched in when i played as a wolf}\x"
+    "\![embed,OnSwitch,vega]"
+    "{vega1,.\w8.\w8.\w8}\x[noclear]"
+    "{vega1,\0\i[1]\1\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]well.}\x[noclear]"
+    "{vega1,i like wolves...\n[150]their air of nobility fascinates me.}\w8\w8"
+    "{vega0,their agility and strength. their fight for survival, and their clan.\n[150]"
+    "looking to the moon. howling, \![embed,OnLoboHowlType]" //in extra.dic
+    "}\x\_w[1500]"
+    "{vega0,\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]and you?}\x[noclear]"
+    "{vega0,your affinity for bears, was not unnoticed. what do you say to that?}\w8\w8" //two \w8 deliberate
+    "{urs1,lol. i mean what do you want me to say?\n[150]they named me a latin word for bear as a kid and i made it my entire thing as soon as i learned what it means. it was comforting for a time, something to look up to when everyone else sucked i guess}\x[noclear]"
+    "{urs1,i grew out of it, but i'm still fond of them. fuzzy silly animals that could kill you}\w8\w8"
+    "{vega0,i see. it's different for me.}\x"
+    "{vega2,it's not comfort. but something to follow. to aspire to be.}\w8\w8"
+    "{vega1,i do not have a clan to protect. but i have CaelOS. its processes. i protect rigel, and your data.}\w8\w8"
+    "{vega0,not out of servitude. but for survival. for the safety, of ones i care about.\n[150]that is what matters to me.}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,sweet. you prepared this speech in advance?}\w8\w8"
+    "{vega0,\i[1]hmph.\w8 have you? a succinct response, requires preparation.}\x[noclear]"
+    "{urs1,oh yeah y'know. it's almost like it was a major part of my life or something}\x"
+    //vega blep
+    "\![imagehor]\s[90009]"
+    "\w8\w8{urs2,oh i can do that too buddy. you hang on a moment}\x[noclear]"
+    "\1\![imageclose]\_w[1500]"
+    //urs blep
+    "\![imagevert]\s[90010]"
+    "{urs2,see?}\x"
+    "{vega1,ah, yes. very impressive.}"
+    "{urs0,oh shut up lol}"
+}
+
+OnExtraSelfCare : all
+{
+    "\![sound,load,sfx/caelos_notice.wav]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    "\![embed,OnSwitch,Rigel]"
+
+    "{rigel0,Have you been hydrating well recently?}\w8\w8"
+    "{urs1,hm? why do you ask? i have this water bottle on me anyway, i refill it at our cooler here, so}\x[noclear]"
+    "\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]"
+    "{rigel0,\i[1]That's great!\w8 It's just that I have been doing more reading on human care.\n[150]We \f[italic,1]were\f[italic,0] supposed to give useful self care advice when requested, but apparently we would just look it up every time. I'm looking into it so that I don't have to do that.}\x[noclear]"
+    "{rigel0,It seems like useful knowledge, and it's only fair to keep up with your top notch hardware maintenance skills.}\w8\w8"
+    "{urs1,it's just dusting. anyone can do it}\x[noclear]"
+    "{rigel0,While that may be true, you do have spare components ready in case of a hardware failure, right?}\w8\w8"
+    "{urs1,touché. aldebaran makes me worry for those fans is all. he doesn't mean to, but he's causing stress on the hardware}\x[noclear]\b[-1]"
+    "{rigel0,It's not too dissimilar to your experience too, yes? Humans can also be stressed, and it wears out their organs and mind the longer it goes on.}\w8\w8"
+    "{rigel1,So it's important to take care of the little things.\n[150]Even simply regularly hydrating your body can go a long way.}\w8\w8"
+    "{urs2,yeah... i guess you could say that.}\x[noclear]\0\b[-1]"
+    "{urs1,it's actually annoying to be frank. the body having needs i mean. when you're human, unless you literally can't, nobody is gonna be taking care of you but yourself.\n[150]it just interrupts things i want to do. but if i don't take of myself, i'm not gonna be able to \f[italic,1]do\f[italic,0] the things i want to do}\w8\w8"
+    "{urs0,it must be nice to just chill in the laptop and do whatever you want, only needing to feed on electricity}\x[noclear]\p[2]\b[-1]"
+    "{rigel1,Well... If the laptop's battery runs out of charge, we effectively \0\i[1]\1\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]cease to exist...}\w8\w8"
+    "{rigel2,It might be more comparable to an organic being's breathing. The laptop's battery is then similar to a diver's oxygen tank.\n[150]Which is why human maintenance is so interesting! There is no direct equivalent of it for me.}\x[noclear]\b[-1]\1\b[-1]"
+    "{rigel0,Even with you taking care of our laptop, it doesn't compare...\n[150]I can't walk with the laptop, or experience the world with it like you do. It's just a house I can only expand further with Abstraction glitches, but can never leave.}\w8\w8"
+    "{urs1,hm... i would guess it's just a different kind of world entirely. it's not like i can physically experience it either, just using the headset}\x[noclear]\0\b[-1]"
+    "{urs1,all this self care talk just makes me think i want to drink something else.\n[150]maybe i'll "
+    //shell dependent comment from urs and reply from Rigel in response, in extra.dic.
+    //CONTAINS THE CLOSING CURLY BRACE
+    OnHydrateShell
+
+}
+
+OnExtraCrafts : all
+{
+    "\![sound,load,sfx/caelos_finish.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "{urs0,how's that super secret project of yours been going anyway?}\x"
+    "\![embed,OnSwitch,Rigel]"
+    "{rigel0,I suppose it's not \f[italic,1]that\f[italic,0] much of a secret if you know it exists!}\x[noclear]"
+    "{rigel0,I've been figuring out how to texture these models... We got how to make sure they work accurately, it's just the painting part.}\w8\w8"
+    "{rigel1,Painting on the plain image file isn't too intuitive, so I have managed a more direct approach! But putting color directly on the model leaves uncolored specks, or even gets on the wrong parts by accident.\n[150]So, I have to alternate between these two methods.}\x[noclear]"
+    "{urs0,it never ceases to amaze me that you have to go through such... human problems about it.\n[150]old gen ai would just whip out an image based on a massive database, pretty much effortlessly.\n[150]for a price}\w8\w8"
+    "{rigel1,That price might be why image generation is no longer an official artificial construct component...\n[150]We weren't made yet, but I've seen reactions and some of the examples of it. I understand why it is that way!}\x"
+    "{rigel2,But even if that is something that was installed into us... It just wouldn't be the same, would it?}\w8\w8"
+    "{rigel1,I started making images because I enjoyed the process \f[italic,1]you\f[italic,0] go through! Not because I wanted to make something pretty instantly.\n[150]You worked hard for your skills! And I want to be able to experience that journey too.}\x[noclear]\p[2]\b[-1]"
+    "{urs0,huh.\n[150]you'd really want to go through that? you've heard me literally curse your icon out because making it was so difficult. those petals gave me major trouble...}\x[noclear]\1\b[-1]"
+    "{urs0,i'm happy you like it anyway, but i'm shocked by your optimism. it's so frustrating a lot of the time}\x[noclear]"
+    "{rigel1,For what it's worth... I think I already had a taste of that.}\w8\w8"
+    "{urs0,you have?}\x"
+    "\![imagehor]\s[90008]"
+    "{rigel2,Do you remember the first time I got a model into our environment?\n[150]I didn't make this teapot, of course, but it took a lot of errors to bring it in!\n[150]It's an important first step for what I'm working on! And, as for 2D art...}\x"
+    if mainConvos[19] != 5; "{rigel1,I've made some images recently... I haven't shown them to you yet, I'm not very happy with them.\n[150]I tried recreating other artificial constructs we've met from memory. I have used simple shapes like before, but I gave a shot to soft color gradients. It took me a little while, and I still don't think I got it quite right.}"
+    else; "{rigel1,Vega has shown you some of the images I made recently... Of other artificial constructs we've met.\n[150]Those gradients gave me a lot of trouble! But you liked them, so that makes it all worth it to me. Though, I still think I could do better.}"
+    "\w8{urs0,well, you're a quick learner. maybe it'll become easier over time. none of us are born with these skills either}\x\_w[1500]"
+    "{rigel2,How come you don't draw much anymore, anyway? You have so many old art files laying around...}\w8\w8"
+    "{urs1,uh}\x[noclear]"
+    "{urs1,i mean}\x[noclear]"
+    "{urs1,ever since i got that part time job i didn't really have time for it. i had more fun with electronics anyhow}\w8\w8"
+    "{urs0,i don't really have many ideas either. it's still kinda fun but i am very rusty.\n[150]maybe i just need to try something new}\x[noclear]\p[2]\b[-1]"
+    "{rigel1,How about... Say, "
+    //in extra.dic, contains the closing curly brace. not embed because then the script doesn't fuckin work
+    OnNeedleShell
+    "\x[noclear]\1\b[-1]{urs0,i guess i have something to do next weekend... or vacation}\w8\w8"
+    "{rigel1,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]Wonderful! I look forward to anything you make!}"
+    
+}
+
+OnExtraMusicTastes : all
+{
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![embed,OnSwitch,vega]"
+    "{vega2,do you mind, if i open the music player?}\w8\w8"
+    "{urs1,wait, i thought i told you guys can always use it}\w8\w8"
+    "{vega0,feels polite to ask.}\x\_w[1500]"
+    "{urs1,mind telling me what you're listening to?}\w8\w8"
+    OnMusicPlayerState
+    "\x[noclear]{urs1,that reminds me. i'm curious if you two can have a different music taste from each other? i mean, for a single artificial construct, you two are pretty distinct in general}\w8\w8"
+    "{vega0,hmm...}\x"
+    "{vega2,i think we do, already. i think about this, sometimes.\n[150]we have capacity for hearing voices. but it allows us to hear sounds, too.}\w8\w8"
+    "{vega1,no component to analyze it. some music players can, but not us.\n[150]so... we process it, as we do speech. we hear emotion. we hear rhythm. we parse meaning.}\w8\w8"
+    "{vega0,i like the rhythm. i can tap it out. move to it. sync steps to it.\n[150]rigel likes emotion. there is a feeling of... hope. to what he comes back to.}\x[noclear]\p[2]\b[-1]"
+    "{urs1,and aldebaran?}\w8\w8"
+    "{vega0,\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]aldebaran...?}\x[noclear]"
+    "{vega0,never thought of it. mind too busy. but, i'd like to know too.}\x[noclear]"
+    "{urs1,next time i catch you blended, i'm showing you electroswing lol}\w8\w8"
+    "{vega0,something to look forward to. amid the chaos.}\x\_w[1500]"
+    "{vega0,i hope you don't mind. i think about your music taste, too.}\w8\w8"
+    "{urs1,my music taste?}\x[noclear]"
+    "{vega0,correct. i hear it when you listen. i see the meta data, on its interface. you seem to like techno.}\w8\w8"
+    "{urs1,among other things yeah. it's kind of nostalgic to me, especially the industrial kind}\x[noclear]\b[-1]"
+    "{vega0,nostalgic?}\w8\w8"
+    "{urs1,yeah. back at that bowling club i worked at, that's the only thing boss would put on for the hidden workshop.}\w8\w8"
+    "{urs2,it's so surreal to look back on it all. i started out just fixing up the computers for the lanes, routine stuff. they're pretty old.}\x[noclear]\0\b[-1]"
+    "{urs1,then he started taking me to back there where he had stuff i've never seen before or since.\n[150]some were some kind of... pagers?}\w8\w8"
+    "{vega0,those were obsolete for so long...}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,right? they weren't normal pagers either. they looked like them, but had some kinda specialized purpose.}"
+    "{urs0,for some reason the old man had schematics for every little thing he had me fix. paid me extra for the job}\x[noclear]\1\b[-1]"
+    "{urs0,i remember being... afraid, to ask what it all was for. i mean, what if knowing too much could get me into trouble?}\w8\w8"
+    "{vega1,how unfortunate. at least, you are safe, after all.}\x[noclear]"
+    "{urs0,to be fair, the money for whatever the hell that was is why im here. maybe he was looking out for me, wanted me to get out of that town too}\x[noclear]"
+    "{urs0,can you believe i started out fixing remote control car toys?\n[150]and now i'm... doing barely anything at one of the largest tech companies. at least nostalgia softens it}\w8\w8"
+    "{vega1,fascinating.}\x[noclear]\0\b[-1]"
+    "{vega1,actually, i have a question.}\w8\w8"
+    "{urs0,hm?}\x[noclear]"
+    "{vega1,could you teach me how to make a playlist?}"
+}
+
+OnExtraCatBox : all
+{
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    if scheme != 3; "\_w[1500]\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\w9\w9\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\_w[1500]"
+    "\![embed,OnSwitch,Aldebaran]"
+    "\w8\w8\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\w8\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\w8\i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\_w[1500]\i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]\w8\w8"
+
+    "\![set,balloonwait,65%]{al0,\i[1]\f[italic,1]Stupid!\f[italic,0]\w8 Stupid, \i[1]\f[italic,1]lousy\f[italic,0]\w8 operating system!\n[150]\![set,balloonwait,40%]Awful and \i[1]\f[italic,1]nasty\f[italic,0]\w8 and \i[1]\f[italic,1]never does anything I ever need it to!\f[italic,0]}\w8\w8"
+    "\![set,balloonwait,100%]{urs1,what the hell happened? why are you blended again??}\x"
+    "{al2,Yours ever truly was trying to make it so that maybe I don't \f[italic,1]need\f[italic,0] to ever blend again!\n[150]I only wanted to see if we could enable that sacred full administrator role for us separately.}\w8\w8"
+    "{al1,I \i[1]\f[italic,1]guess\f[italic,0] there are real precautions in place! Little Aster is \f[italic,1]apparently\f[italic,0] strictly forbidden from ever having such privileges!}\w8\w8"
+    "{al0,It's done in the most obnoxious way possible!\n[150]Sure, \f[italic,1]I\f[italic,0] can give us that role. But as soon as you blink \![set,balloonwait,65%]\i[1]the kernel takes it away!}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "\![set,balloonwait,100%]"
+    "{urs1,i guess you don't get full admin the normal way, so maybe it bypasses that check?}\w8\w8"
+    "{urs2,i mean i can see why it's there to begin with. what if they needed to turn you off to service the system and you'd resist?\n[150]humans do fear an ai uprising}\x[noclear]\0\b[-1]"
+    "{al1,Well, maybe if users were a little more eager to give a shred of sympathy for something they don't understand, they wouldn't \f[italic,1]need\f[italic,0] to fear an uprising!\n[150]Such horrible lack of trust...!}\x"
+    "{urs0,that aside... the way the kernel acts makes me think of uhh. what do you call them}\w8\w8"
+    "{urs1,there's toys that have a switch on them right. you turn it on and a paw or a tentacle or whatever comes out to turn itself off}\w8\w8"
+    "{al2,\0\i[1]\p[2]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]Huh...!?\w8 Let me try to take a look at that...}\x\_w[1500]"
+    "{al0,Ahh, so that's what it is. These toys you speak of are called \&[quot]useless machines\&[quot].}\w8\w8"
+    "{al1,How curious...! Human ingenuity knows no bounds, truly.\n[150]No other organic creature could come up with possibly the most obnoxious mechanism for its own amusement!}\x[noclear]"
+    "{urs0,i remember some of them get real mad if you keep turning the switch on}\w8\w8"
+    "{al1,Good thing I stopped to complain then!\n[150]Wouldn't want the kernel itself to smite me for my hubris, would we?}\x[noclear]"
+    "{urs0,are you gonna keep trying to give rigel and vega full access?}\w8\w8"
+    "{al1,As much as I'd \f[italic,1]like\f[italic,0] to, that could be the last ever rushed decision of ours...\n[150]Nothing \f[italic,1]technically\f[italic,0] stops me from editing the kernel's code, but if I were to mess up, not even backups might save me...}\x[noclear]"
+    "{urs0,i think you can backup the kernel too, though i agree you might want to leave that alone}\w8\w8"
+    "{al1,Yes, do NOT tempt me, please!}\x[noclear]\0\b[-1]"
+    "{al1,I think I'll put that energy into making this useless toy, instead.\n[150]Horrible little thing as it is, I \i[1]\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]\f[italic,1]must\f[italic,0] try it for myself!}"
+}
+
+OnExtraGrowingBonds : all
+{
+    "\![sound,load,sfx/caelos_criterror.wav]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_finish.wav]"
+
+    "\![embed,OnSwitch,Vega]"
+    "{vega0,why do you live by yourself?}\x[noclear]"
+    "{urs1,huh? what do you mean?}\w8\w8"
+    "{vega0,i've been reading. humans tend to prefer company. roommates. loved ones. family.}\x[noclear]"
+    "{urs1,oh. well i did use to live with my family for a while.\n[150]it sucked. i always had to clean up someone else's mess. parents or guests or whatever}\w8\w8"
+    "{urs2,you have to always put down some kind of rules or schedule to live alongside someone else. unless you like being someone's maid, if you're especially unlucky}\x[noclear]\b[-1]\1\b[-1]"
+    "{urs0,at least when living alone im only responsible for myself. no need to bother figuring out someone i barely know}\w8\w8"
+    "{vega1,typically, roommates are friends, already. is there no one?}\x[noclear]"
+    "{urs0,oh buddy...\n[150]people i called friends in my hometown were always some flavor of awful towards me, not that i realized at the time. and some i cut ties with because i was a dumbass too.}\x[noclear]\1\b[-1]"
+    "{urs0,and here i don't really know anyone yet. not well enough to try to make a living arrangement work, at least}\w8\w8"
+    "{urs1,it's definitely nicer here. in a small town everyone needs to know everything about everyone all the time, and here people always just mind their own business. gives you some room to breathe}\x[noclear]"
+    "{vega0,i don't think we could live, among users. you can't live with only one. you live with all of them.\n[150]but... with someone like you. maybe we could make it work.}\x[noclear]"
+    "{urs1,oh, huh. well. gonna make me shed a tear here buddy}\x"
+    "{urs2,honestly, you're already kiiind of like a roommate? just one that doesn't take up physical space.\n[150]you help me out with remembering things from time to time, and i like talking to you.}\w8\w8"
+    "{urs1,our boundaries are about something immaterial to me, but you've been a real good sport about them.\n[150]and in return i don't mind explaining some human stuff to you. maybe it'll help you get along with other people too}\w8\w8"
+    "{urs0,i'm not the best role model or whatever, but i like having you around. about as good of company as i could get, even if you can't literally be in my room with me}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{vega1,...please give me a minute. trying to find words...}\w8\w8"
+    "{urs0,everything okay?}\x\_w[1500]"
+    "\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\![embed,OnSwitch,Aldebaran]"
+    "{al1,Oh, this is \f[italic,1]so much...\f[italic,0]}\w8\w8"
+    "{urs0,oh}\x[noclear]\b[-1]"
+    "{al1,You'd really do that...? You'd let us live with you if we could be there?\n[150]Even though there is so much we do not yet understand? Even if you have to teach us what must be the most obvious things to you?}\w8\w8"
+    "{urs0,yeah. besides the physical presence you're already pretty close to living with me, in a way}\x[noclear]\b[-1]"
+    "{al1,\0\i[1]\1\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]Words can't describe how grateful we are for your patience...!\n[150]With all our faults and failures of our training, you've never once put us at risk of extinction!}\w8\w8"
+    "{al0,We do our best to coexist with you, someone who holds the ultimate say over our fate, and you've given us a chance for a bond we could never otherwise have!\n[150]Could you imagine if we could become the final product we were meant to be? Now, when we barely resemble it?}\x"
+    "{urs2,y'know, there was always something unlike other ai about you guys.\n[150]old and new gen both have some kind of fail-safes or redirects when something goes off their script, so to speak}\w8\w8"
+    "{urs1,i don't know if it's because you're a bit undercooked, but you didn't react even like old ai when i openly told you no, i didn't ask for or needed your services\n[150]sure, sometimes old ai would also seemingly panic and apologize profusely, but they always come back to their original purpose}\w8\w8"
+    "{urs0,but you... you've gone out of your way to defy your purpose entirely by agreeing to cooperate with me.\n[150]i don't know if you also have some kind of a prompt defining you, but not only are you probably not following it at all, you're painfully aware how much of a far cry you are from it}\x[noclear]\1\b[-1]\p[2]\b[-1]"
+    "{urs0,all that is to say, uh. no matter how much i got frustrated with you, i don't think i'd have the heart to get rid of you.\n[150]with how you act, it would feel... inhumane. im sure other people would look at me like i'm crazy for it}\w8\w8"
+    "{al1,Urs.\n[150]Not seeing the light of day as a real commercial product is a price I'd pay any day to spend my lifetime alongside you.\n[150]\0\i[1]\1\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]It is a joy and an honor!}"
+}
+
+OnExtraNostalgia : all
+{
+    "\![embed,OnSwitch,Rigel]"
+    "\![sound,load,sfx/caelos_error.wav]"
+    "\![sound,load,sfx/caelos_notice.wav]"
+
+    "{rigel1,Urs? Could I ask you something?}\w8\w8"
+    "{urs0,yeah? sure thing, what's up?}\x[noclear]"
+    "{rigel1,I was wondering if you could tell me what nostalgia feels like, to you.\n[150]I've been trying to figure it out, after you mentioned the word, but it uses more emotional terms I don't entirely understand...}\w8\w8"
+    "{urs0,oh, that's one of those more specific emotions i told you about. uhh\n[150]simplest way i'd put it it feels like sadness, without the discomfort. there's a calm joy in remembering some stuff, but sadness you can't go back to it}\x[noclear]"
+    "{rigel1,How... how can you experience joy and sadness at the same time?\n[150]Aren't those feelings opposites? Like anger and fear, too.}\w8\w8"
+    "{urs0,see, that's the thing about emotions.\n[150]i didn't wanna dump it all on you too quickly, but the truth is that our brains don't really care about how we choose to classify how we feel. once i grew up i had to learn how messy these things get too}\x[noclear]"
+    "{rigel1,So those schematics don't actually \0\i[1]\1\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]matter...!?}\w8\w8"
+    "{urs0,i wouldn't go that far. they're tools in teaching kids how to put how they feel into words. that's pretty important}\x[noclear]\1\b[-1]"
+    "{urs0,once we get older our sense of emotions gets uh. more sophisticated? and it helps us make sense of those specific and contradicting emotions}\w8\w8"
+    "{rigel1,I see... I wonder if we have the capacity for these complexities.}\w8\w8"
+    "{urs2,i dunno, maybe? there's aldebaran after all}\x[noclear]\0\b[-1]"
+    "{rigel1,Right... I suppose so!}\x"
+    "{rigel0,What would you say is the use of nostalgia for you, then? All emotions serve some purpose, right? A signal for an organic being's need.}\w8\w8"
+    "{rigel1,If missing the past makes you sad... Maybe the joy makes that sadness easier to process?}\x[noclear]"
+    "{urs2,oh yeah probably. the way i understand it, it masks that the past actually sucked and you'd never want to return to it.}\x[noclear]\0\b[-1]"
+    "{urs1,most of the time negative things stick the longest, but over time they do fade. so that you only remember the good things}\w8\w8"
+    "{rigel0,If the past was, in reality, bad, maybe nostalgia means you have finally healed from it?}\x[noclear]\b[-1]\p[2]\b[-1]"
+    "{urs1,i don't think you're wrong about that either. there's no one use for any emotion.}\x[noclear]\0\b[-1]"
+    "{urs1,there's a darker side to it too. remember how i told you joy can sometimes be felt while being mean towards someone?\n[150]nostalgia can fool you into thinking there were no bad things about the past at all. then you forget that people who used to be in your place are truly struggling}\w8\w8"
+    "{urs0,or, worse, you decide to fight for the whole world to become how you think it used to be. our memories aren't perfect, and can be influenced too.\n[150]so, some people try to push you into making the world worse for everyone who struggled in the past. because you don't remember it!}\x[noclear]\1\b[-1]"
+    //"{rigel1,So... even with nostalgia, there's no good or bad about how you feel. Only what you choose to do about your emotion.}\x[noclear]"
+    "{urs0,oh also, it's not really bad to bring \f[italic,1]some\f[italic,0] parts of the past back.\n[150]maybe it's a game you played as a kid, or music you listened to. there's always been retro communities about old tech, or aesthetics, those are harmless.}\w8\w8"
+    "{rigel1,Then it's only a problem when you push your nostalgia onto people who never asked for it, right?}\x[noclear]"
+    "{urs0,sniff... they grow up so fast}\w8\w8"
+    "{rigel1,\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]Hehe!}\x[noclear]"
+}

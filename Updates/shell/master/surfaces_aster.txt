@@ -1,0 +1,795 @@
+descript
+{
+	version,1
+}
+
+surface.append0
+{
+    //ASTER ANIMATIONS
+
+    //surfaces number order - 
+    //character (rigel(1), vega(2), aldebaran(3))
+    //position (left(0), middle(1), right(2)
+    //action (stand(0), sit(1), action1(2), action2(3), move(4))
+    //direction (facing left(0), facing right(1))
+    //frame
+
+	//controller LEFT
+	animation10001.interval,random,50
+	animation10001.pattern0,parallelstop,(12001,11001,10000,10100,10200,10300)
+	animation10001.pattern1,alternativestart,(10000,10100,10200,10300,10400)
+
+	//stand
+	animation10000.interval,always
+	animation10000.pattern0,overlay,11000,0,0,0
+	animation10000.pattern1,overlay,11001,500,0,0
+	animation10000.pattern2,overlay,11000,500,0,0
+
+	//sit
+	animation10100.interval,always
+	animation10100.pattern0,overlay,11100,0,0,0
+	animation10100.pattern1,overlay,11101,100,0,0
+	animation10100.pattern2,overlay,11100,700,0,0
+	animation10100.pattern3,overlay,11102,100,0,0
+	animation10100.pattern4,overlay,11100,700,0,0
+
+	//action 1 (rigel - take notes, move to stand)
+	animation10200.interval,never
+	animation10200.pattern0,overlay,11001,0,0,0
+	animation10200.pattern1,overlay,11200,500,0,0
+	animation10200.pattern2,overlay,11201,250,0,0
+	animation10200.pattern3,overlay,11202,500,0,0
+	animation10200.pattern4,overlay,11201,500,0,0
+	animation10200.pattern5,overlay,11202,500,0,0
+	animation10200.pattern6,overlay,11201,2000,0,0
+	animation10200.pattern7,overlay,11202,500,0,0
+	animation10200.pattern8,overlay,11201,500,0,0
+	animation10200.pattern9,overlay,11200,500,0,0
+	animation10200.pattern10,overlay,11001,250,0,0
+	animation10200.pattern11,start,10000
+	animation10200.pattern12,overlay,-1,0,0,0
+
+
+	//action 2 (rigel - pet process)
+	animation10300.interval,never
+	animation10300.pattern0,overlay,11100,0,0,0
+	animation10300.pattern1,overlay,11300,1500,0,0
+	animation10300.pattern2,overlay,11301,500,0,0
+	animation10300.pattern3,overlay,11302,500,0,0
+	animation10300.pattern4,overlay,11301,500,0,0
+	animation10300.pattern5,overlay,11302,500,0,0
+	animation10300.pattern6,overlay,11301,500,0,0
+	animation10300.pattern7,overlay,11302,500,0,0
+	animation10300.pattern8,overlay,11301,500,0,0
+	animation10300.pattern9,overlay,11302,500,0,0
+	animation10300.pattern10,overlay,11303,2500,0,0
+	animation10300.pattern11,overlay,11300,1500,0,0
+	animation10300.pattern12,overlay,11100,500,0,0
+	animation10300.pattern13,start,10100
+	animation10300.pattern14,overlay,-1,0,0,0
+
+
+	//move right
+	animation10400.interval,never
+	animation10400.pattern0,stop,10001
+	animation10400.pattern1,overlay,11410,0,0,0
+	animation10400.pattern2,overlay,11411,500,10,0
+	animation10400.pattern3,overlay,11410,500,20,0
+	animation10400.pattern4,overlay,11412,500,30,0
+	animation10400.pattern5,overlay,11410,500,40,0
+	animation10400.pattern6,overlay,11411,500,50,0
+	animation10400.pattern7,overlay,11410,500,60,0
+	animation10400.pattern8,overlay,11412,500,70,0
+	animation10400.pattern9,overlay,-1,0,0,0
+	animation10400.pattern10,start,11001
+
+	//controller MIDDLE
+	animation11001.interval,random,50
+	animation11001.pattern0,parallelstop,(10001,12001,11000,11100,11200,11300)
+	animation11001.pattern1,alternativestart,(11000,11100,11200,11300,11400,11500)
+
+	//"stand"
+	animation11000.interval,always
+	animation11000.pattern0,overlay,11000,0,70,0
+	animation11000.pattern1,overlay,11001,500,70,0
+	animation11000.pattern2,overlay,11000,500,70,0
+
+	//sit
+	animation11100.interval,always
+	animation11100.pattern0,overlay,11100,0,70,0
+	animation11100.pattern1,overlay,11101,100,70,0
+	animation11100.pattern2,overlay,11100,700,70,0
+	animation11100.pattern3,overlay,11102,100,70,0
+	animation11100.pattern4,overlay,11100,700,70,0
+
+	//action 1
+	animation11200.interval,never
+	animation11200.pattern0,overlay,11001,0,70,0
+	animation11200.pattern1,overlay,11200,500,70,0
+	animation11200.pattern2,overlay,11201,250,70,0
+	animation11200.pattern3,overlay,11202,500,70,0
+	animation11200.pattern4,overlay,11201,500,70,0
+	animation11200.pattern5,overlay,11202,500,70,0
+	animation11200.pattern6,overlay,11201,2000,70,0
+	animation11200.pattern7,overlay,11202,500,70,0
+	animation11200.pattern8,overlay,11201,500,70,0
+	animation11200.pattern9,overlay,11200,500,70,0
+	animation11200.pattern10,overlay,11001,250,70,0
+	animation11200.pattern11,start,11000
+	animation11200.pattern12,overlay,-1,0,0,0
+
+
+	//action 2
+	animation11300.interval,never
+	animation11300.pattern0,overlay,11100,0,70,0
+	animation11300.pattern1,overlay,11300,1500,70,0
+	animation11300.pattern2,overlay,11301,500,70,0
+	animation11300.pattern3,overlay,11302,500,70,0
+	animation11300.pattern4,overlay,11301,500,70,0
+	animation11300.pattern5,overlay,11302,500,70,0
+	animation11300.pattern6,overlay,11301,500,70,0
+	animation11300.pattern7,overlay,11302,500,70,0
+	animation11300.pattern8,overlay,11301,500,70,0
+	animation11300.pattern9,overlay,11302,500,70,0
+	animation11300.pattern10,overlay,11303,2500,70,0
+	animation11300.pattern11,overlay,11300,1500,70,0
+	animation11300.pattern12,overlay,11100,500,70,0
+	animation11300.pattern13,start,11100
+	animation11300.pattern14,overlay,-1,0,0,0
+
+	//move right
+	animation11400.interval,never
+	animation11400.pattern0,stop,11001
+	animation11400.pattern1,overlay,11410,0,70,0
+	animation11400.pattern2,overlay,11411,500,80,0
+	animation11400.pattern3,overlay,11410,500,90,0
+	animation11400.pattern4,overlay,11412,500,100,0
+	animation11400.pattern5,overlay,11410,500,110,0
+	animation11400.pattern6,overlay,11411,500,120,0
+	animation11400.pattern7,overlay,11410,500,130,0
+	animation11400.pattern8,overlay,11412,500,140,0
+	animation11400.pattern9,overlay,-1,0,0,0
+	animation11400.pattern10,start,12001
+
+	//move left
+	animation11500.interval,never
+	animation11500.pattern0,stop,11001
+	animation11500.pattern1,overlay,11400,0,-70,0
+	animation11500.pattern2,overlay,11401,500,-80,0
+	animation11500.pattern3,overlay,11400,500,-90,0
+	animation11500.pattern4,overlay,11402,500,-100,0
+	animation11500.pattern5,overlay,11400,500,-110,0
+	animation11500.pattern6,overlay,11401,500,-120,0
+	animation11500.pattern7,overlay,11400,500,-130,0
+	animation11500.pattern8,overlay,11402,500,-140,0
+	animation11500.pattern9,overlay,-1,0,0,0
+	animation11500.pattern10,start,10001
+
+	//controller RIGHT
+	animation12001.interval,random,50
+	animation12001.pattern0,parallelstop,(10001,11001,12000,12100,12200,12300)
+	animation12001.pattern1,alternativestart,(12000,12100,12200,12300,12400)
+
+	//"stand"
+	animation12000.interval,always
+	animation12000.pattern0,overlay,11010,0,0,0
+	animation12000.pattern1,overlay,11011,500,0,0
+	animation12000.pattern2,overlay,11010,500,0,0
+
+	//sit
+	animation12100.interval,always
+	animation12100.pattern0,overlay,11110,0,0,0
+	animation12100.pattern1,overlay,11111,100,0,0
+	animation12100.pattern2,overlay,11110,700,0,0
+	animation12100.pattern3,overlay,11112,100,0,0
+	animation12100.pattern4,overlay,11110,700,0,0
+
+	//action 1
+	animation12200.interval,never
+	animation12200.pattern0,overlay,11011,0,0,0
+	animation12200.pattern1,overlay,11210,500,0,0
+	animation12200.pattern2,overlay,11211,250,0,0
+	animation12200.pattern3,overlay,11212,500,0,0
+	animation12200.pattern4,overlay,11211,500,0,0
+	animation12200.pattern5,overlay,11212,500,0,0
+	animation12200.pattern6,overlay,11211,2000,0,0
+	animation12200.pattern7,overlay,11212,500,0,0
+	animation12200.pattern8,overlay,11211,500,0,0
+	animation12200.pattern9,overlay,11210,500,0,0
+	animation12200.pattern10,overlay,11011,250,0,0
+	animation12200.pattern11,start,12000
+	animation12200.pattern12,overlay,-1,0,0,0
+
+	//action 2
+	animation12300.interval,never
+	animation12300.pattern0,overlay,11110,0,0,0
+	animation12300.pattern1,overlay,11310,1500,0,0
+	animation12300.pattern2,overlay,11311,500,0,0
+	animation12300.pattern3,overlay,11312,500,0,0
+	animation12300.pattern4,overlay,11311,500,0,0
+	animation12300.pattern5,overlay,11312,500,0,0
+	animation12300.pattern6,overlay,11311,500,0,0
+	animation12300.pattern7,overlay,11312,500,0,0
+	animation12300.pattern8,overlay,11311,500,0,0
+	animation12300.pattern9,overlay,11312,500,0,0
+	animation12300.pattern10,overlay,11313,2500,0,0
+	animation12300.pattern11,overlay,11310,1500,0,0
+	animation12300.pattern12,overlay,11110,500,0,0
+	animation12300.pattern13,start,12100
+	animation12300.pattern14,overlay,-1,0,0,0
+
+	//move left
+	animation12400.interval,never
+	animation12400.pattern0,stop,12001
+	animation12400.pattern1,overlay,11400,0,0,0
+	animation12400.pattern2,overlay,11401,500,-10,0
+	animation12400.pattern3,overlay,11400,500,-20,0
+	animation12400.pattern4,overlay,11402,500,-30,0
+	animation12400.pattern5,overlay,11400,500,-40,0
+	animation12400.pattern6,overlay,11401,500,-50,0
+	animation12400.pattern7,overlay,11400,500,-60,0
+	animation12400.pattern8,overlay,11402,500,-70,0
+	animation12400.pattern9,overlay,-1,0,0,0
+	animation12400.pattern10,start,11001
+}
+
+//Stand surfaces
+
+surface11000
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10000,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20000,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30000,0,0,0
+}
+
+surface11010
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10010,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20010,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30010,0,0,0
+}
+
+surface11011
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10011,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20011,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30011,0,0,0
+}
+
+surface11001
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10001,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20001,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30001,0,0,0
+}
+
+//Sitting
+
+surface11100
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10100,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20100,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30100,0,0,0
+}
+
+surface11101
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10101,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20101,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30101,0,0,0
+}
+
+surface11102
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10102,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20102,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30102,0,0,0
+}
+
+//opposite dir
+
+surface11110
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10110,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20110,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30110,0,0,0
+}
+
+surface11111
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10111,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20111,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30111,0,0,0
+}
+
+surface11112
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10112,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20112,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30112,0,0,0
+}
+
+
+// ACT 1
+
+surface11200
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10200,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20200,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30200,0,0,0
+}
+
+surface11201
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10201,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20201,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30201,0,0,0
+}
+
+surface11202
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10202,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20202,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30202,0,0,0
+}
+
+//opposite dir
+
+surface11210
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10210,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20210,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30210,0,0,0
+}
+
+surface11211
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10211,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20211,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30211,0,0,0
+}
+
+surface11212
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10212,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20212,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30212,0,0,0
+}
+
+
+// ACT 2
+
+surface11300
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10300,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20300,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30300,0,0,0
+}
+
+surface11301
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10301,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20301,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30301,0,0,0
+}
+
+surface11302
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10302,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20302,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30302,0,0,0
+}
+
+surface11303
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10303,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20303,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30303,0,0,0
+}
+
+//opposite dir
+
+surface11310
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10310,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20310,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30310,0,0,0
+}
+
+surface11311
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10311,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20311,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30311,0,0,0
+}
+
+surface11312
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10312,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20312,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30312,0,0,0
+}
+
+surface11313
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10313,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20313,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30313,0,0,0
+}
+
+
+//Walk
+
+surface11400
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10400,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20400,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30400,0,0,0
+}
+
+surface11401
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10401,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20401,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30401,0,0,0
+}
+
+surface11402
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10402,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20402,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30402,0,0,0
+}
+
+//opposite dir
+
+surface11410
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10410,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20410,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30410,0,0,0
+}
+
+surface11411
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10411,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20411,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30411,0,0,0
+}
+
+surface11412
+{
+    element0,overlay,blank_small.png,0,0
+
+    //rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,10412,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,20412,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,30412,0,0,0
+}
+
+
+surface.append11000-11001,11100-11102,11200-11202,11300-11303
+{
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,40001,0,0,0
+}
+
+surface.append11010-11011,11110-11112,11210-11212,11310-11313
+{
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,40011,0,0,0
+}
+
+surface.append11400-11402
+{
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,40411,0,0,0
+}
+
+surface.append11410-11412
+{
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,40401,0,0,0
+}
+

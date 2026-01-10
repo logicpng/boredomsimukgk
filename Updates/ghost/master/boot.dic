@@ -1,0 +1,225 @@
+OnFirstBoot :all
+{
+	//If you add variables, make sure to initialize them here!
+	//stroke = 0
+	LastTalk = ""
+
+	isVibrate = 1 //vibration, on by default
+	isSFX = 1 //enable sfx by default
+	isExternalSFX = 0 //sfx in extenral events convos, off by default
+	volume = 70 //default sfx volume
+	isRandTalkInterval = 1 //randomized talk intervals
+	aitalkspeed = 'normal'
+
+	FIRSTBOOT = 1 //flag to make sure the settings correctly work during firstboot oh my god
+
+	//DON'T FORGET TO UNCOMMENT THESE IT'S JUST FOR TESTING
+	//conversation continuity arrays... things
+	mainConvos = (1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+	//%(mainConvos = (4,4,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,5))
+	//0 - locked; 1 - unlocked but unfinished (display NEW); 2 - finished; 3 - appended retroactively (display NEW+), 4 - finished appended conversation
+	extraConvos = (0,0,0,0,0,0,0)
+	//%(extraConvos = (2,2,2,2,2,2,2))
+	//0 - locked; 1 - unlocked but not finished; 2 - finished
+
+	//init message length vars
+	msgA = -1
+	msgB = -1
+	msgC = -1
+	msgD = -1
+	//init message variation vars
+	varA = -1
+	varB = -1
+	varC = -1
+	varD = -1
+	//init speaker icon selection vars
+	iconA = -1
+	iconB = -1
+	iconC = -1
+	iconD = -1
+	order = 0
+	
+	//firstboot sequence
+	"\![sound,load,sfx/door.wav]" //for closing
+	"\![sound,load,sfx/caelos_notice.wav]" //for settings
+	"\1\s[-1]\0\s[-1]\![set,alpha,0]\s[0]\![theme,rigel]\![sound,load,sfx/caelos_startup.wav]"
+	"\t\*\b[0][ Please configure settings to your comfort before continuing. More options will be available later. ]\x"
+	--
+	OnOptions
+}
+
+OnSkipIntro: all
+{
+	ERASEVAR('FIRSTBOOT')
+	"\t\*[ Skip introduction sequence? ]\n[150]"
+	"\_q\f[align,center]\![*] \q[Yes,OnIntroSkipped]  \![*] \q[No,OnIntroStart]\_q"
+}
+
+OnIntroSkipped: all
+{
+	introSkipped = 1
+	"\b[-1]\![sound,play,sfx/caelos_startup.wav,--volume=%(volume)]%(FadeIn){sys,[ \f[bold,1]Double click\f[bold,0] on the laptop to bring up the chat archives.\n[150]\f[bold,1]New\f[bold,0] chat logs will be marked in the list.\n[150]Check out Help for more information. ]}\x"
+}
+
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		LastTalk = ""
+
+			//for message scroll function. this is to start filling up the messages window once and then keep the order of messages between booting
+		//--
+		//init message length vars
+		msgA = -1
+		msgB = -1
+		msgC = -1
+		msgD = -1
+		//init message variation vars
+		varA = -1
+		varB = -1
+		varC = -1
+		varD = -1
+		//init speaker icon selection vars
+		iconA = -1
+		iconB = -1
+		iconC = -1
+		iconD = -1
+		order = 0
+
+	}
+}
+
+OnBoot :all
+{
+	//_temp = SHIORI3FW.UserBirthday
+	//_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	//_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	"\![sound,load,sfx/door.wav]" //for closing
+	"\1\s[-1]\0\s[0]\![set,alpha,0]"
+	
+	if scheme == 4; "\![theme,rigel]" //in case of somehow closing the ghost on Please Wait thing]
+	"\![set,alpha,100,1000]"
+	"\![embed,OnSchemeFont]"
+	case scheme
+	{
+		when 1; OnAltairBoot
+		when 2; OnVegaBoot
+		when 3; OnAlBoot
+		others; "\_q[ Scheme is set incorrectly! Please fix! ]\_q\x"
+	}
+
+	OnBootExtraCheck //in extra.dic
+
+	// if astBalloon == 1
+	// {
+	// 	"\w8\w8\s[-1]\b[-1]"
+		
+	// } 
+
+	// if _today == _user_birthday
+	// {
+	// 	"It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8 Developer,\w4 you can add an interesting message here.\w8 It can be as long as you like.\w8 Or, you can remove it entirely."
+	// }
+	// elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+	// {
+	// 	"It's new year's day.\w8 Happy %(year),\w4 %(username)."
+	// }
+	// else //Normal boot
+	// {
+	// 	"Hello %(username).\w8 Good to see you."
+	// 	"Hello.\w8 Ready to make something cool?"
+	// }
+}
+
+OnClose : all
+{
+	if !isSFX;"\_q\f[bold,1][ A sound of a door unlocking can be heard... ]\f[bold,0]\_q\_w[1000]\b[-1]\c"
+	else; "\![sound,play,sfx/door.wav,--volume=%(volume)]\_w[1500]"
+
+	//if !isSFX; "\b[1]"
+
+	"\![embed,OnSchemeFont]"
+	
+	case scheme
+	{
+		when 1, 4; OnAltairClose 
+		when 2; OnVegaClose
+		when 3; OnAlClose 
+	}
+
+	//change balloon back to the recommended one if it was changed during this
+	// if astBalloon == 1
+	// {
+	// 	//"\w8\w8\s[-1]\b[-1]\![change,balloon,Sputnik Messenger]"
+	// 	ERASEVAR('astBalloon')
+	// } 
+	
+	"\![set,alpha,0,1000]\_w[1500]\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}
+
+//this runs on boot too so this counts
+//basically to determine which color scheme are we currently using
+OnNotifyDressupInfo
+{	
+	scheme = -1
+	schemeKero = -1
+	//look through the whole array of references
+	//each item is an entry about an available dressup
+	foreach reference; _item
+	{
+		SETDELIM(_item, CHR(0x1)) //variables don't work as delims lol, C_BYTE1 didn't work
+		if _item[4] == 1 && _item[1] != "Wallpaper"  //if there is 1 in the entry, it is currently enabled + ignore wallpaper dressup entries
+		{
+			if _item[0] == 0 //sakura
+			{
+				//set down a flag which color scheme is currently selected
+				//fallback on please wait, should be obvious something went wrong
+				case _item[2] 
+				{
+					when "Early Sunrise"; scheme = 1
+					when "Northern Lights"; scheme = 2
+					when "Evening Carnival"; scheme = 3
+					when "Please wait..."; scheme = 4
+					others; scheme = 4 
+				}
+			}
+			elseif _item[0] == 1 //kero
+			{
+				case _item[2] 
+				{
+					when "Early Sunrise"; schemeKero = 1
+					when "Northern Lights"; schemeKero = 2
+					when "Evening Carnival"; schemeKero = 3
+					when "Please wait..."; schemeKero = 4
+					others; schemeKero = 4
+				}	
+			}
+		}
+	}
+}
+
+FadeIn
+{
+	// _display = "" //resulting output
+	// _time = 50 //number of steps
+	// _alpha = 0 //transparency level
+
+	// for _i = 0; _i < _time; _i++
+	// {
+	// 	_alpha = (100 / _time) * _i
+	// 	if _alpha > 100; _alpha = 100
+	// 	_display += "\w1\![set,alpha,%(_alpha)]"
+	// }
+	// _display += "\w1\![set,alpha,100]"
+
+	// _display
+
+	"\w8\![set,alpha,0]\![set,alpha,100,3000]"
+}

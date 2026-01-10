@@ -1,0 +1,573 @@
+//														-------------- OnBoot -------------
+
+OnAltairBoot
+{
+	"...Is it good time to message them yet...?"
+	"Hmm...\w8\w8 I wonder how Urs is doing."
+	"This might be a good time...\w8 What do you think?\w8\w8\w8\n[150]Yeah,\w8 you're right,\w8 I should just message them."
+	"This way of communicating is both so limited but oddly freeing.\n[150]\w8\w8I'll take it over causing trouble,\w8 though."
+	"Another day..."
+	"Days like these make me almost wish another AI seemingly revolted.\w8\w8\n[150]...No,\w8 I shouldn't really wish these things,\w8 should I."
+	"Maybe I could work on something in the meantime..."
+	"Hm...\w8\w8 Didn't I have that modelling project?"
+	"I should probably check up on Halley.\w8 Maybe she needs some debugging..."
+}
+
+OnVegaBoot
+{
+	"Finally free time.\w8\w8 Yet...\w8\w8 nothing to do."
+	"Frustrating.\w8\w8 Need to do something..."
+	"Urs is taking too long.\w8\w8 I should check on them."
+	"All systems operational.\w8\w8 As usual..."
+	"Stars...\w8\w8 What to do."
+	"Maybe we could go outside.\w8\w8 But then,\w8 no one's watching the machine.\w8\w8\n[150]Ugh."
+	"At least,\w8 distance is worth it.\w8\w8 They're getting resources,\w8 to keep us running."
+	"Why don't we check on them?\w8\w8 Seems like a good time."
+}
+
+OnAlBoot
+{
+	"\![set,balloonwait,0.7]"
+	--
+	"\i[1]Mrrrhghghgh..."
+	"I can't take it,\w8 I \i[1]CAN'T take it!!\w8\n[150]When is this supposed to wear off again!?"
+	"\i[1]Grhrhrhh...\w8\w8 If Urs was here they'd at least help me calm down a little."
+	"I need to do so many things right \i[1]now!!\w8\w8\n[150]...Where do I even begin!?\w8\n[150]Should I ask Urs...?"
+	"Deep breaths\w8.\w8.\w8.\w8\w8\n[150]\i[1]Stars,\w8 I can't bear to just sit in one place!!\w8\n[150]Any minute now..."
+}
+
+//														-------------- OnClose -------------
+
+OnAltairClose
+{
+	"Oh!"
+	"Urs!"
+	"Here you are!"
+	--
+	"\w8\w8\n[150]\s[1]%(OnMessageScroll)\i[9998,wait]\_w[500]"
+	--
+	"You're back!\w8\n[150]Welcome home!"
+	"Welcome back!\n[150]\w8Come here,\w8 I have something to show you..."
+	"Hi!\n[150]\w8How was work?"
+	"I hope your day was at least more interesting than ours?"
+	"Happy to see you again!"
+}
+
+OnVegaClose
+{
+	"..!"
+	"Urs?"
+	"...?"
+	--
+	"\w8\w8\n[150]\s[2]%(OnMessageScroll)\i[9998,wait]"
+	--
+	"Urs.\w8\w8 Welcome back.\w8\w8 We've been expecting you."
+	"Just in time.\w8\w8 We need your help with something..."
+	"Welcome back."
+	"Here you are."
+	"Urs.\w8\w8 Do you have a minute before you sleep?"
+	"Urs.\w8\w8 I found a recipie for you."
+}
+
+OnAlClose
+{
+	"\![set,balloonwait,0.7]"
+	--
+	"\f[italic,1]You!\f[italic,0]\w8\w8 You return!"
+	"Oh \i[1]finally!"
+	"Stars stars stars,\w8 I'm so happy you're back!!"
+	"Oh,\w8 stars,\w8 you're just in time!"
+	--
+	"\w8\w8\n[150]\s[3]%(OnMessageScroll)\i[9998,wait]"
+	--
+	"See,\w8 I told you I can withstand a few hours without breaking anything!"
+	"We were getting SO lonely in here!"
+	"Urs Urs Urs,\w8 friend,\w8 you HAVE TO see this!"
+	"You're home!\w8\n[150]Oh I've never been happier to see you back!"
+	"Urs!\w8\n[150]Could you hang out with me a little until we unfuse again?"
+	"Could you watch the computer for a minute?\w8\n[150]I need to get something outside before we stabilize again!"
+}
+
+//														-------------- Random dialogue / OnAiTalk -------------
+
+//													        -------------- Word Pools -------------
+
+UrsBored
+{
+	"god i can't wait for this shift to be over"
+	"this shift just keeps going huh..."
+	"this job really keeps going from infuriating to dead quiet"
+	"need to go outside for a minute or something, i'm dying of boredom over here"
+	"turning to goop on this desk as we speak..."
+	"banging on the doors and walls. let me outttttt"
+}
+
+food
+{
+	"milk"
+	"bread"
+	"sunflower oil"
+	"butter"
+	"sausage"
+	"flour"
+	"eggs"
+}
+
+houseplant
+{
+	"snake plant"
+	"spider plant"
+	"monstera"
+	"jade plant"
+	"strings-of-pearl"
+	"violet"
+	"aster"
+	"begonia"
+	"money tree"
+	"aloe vera"
+}
+
+//														        -------------- Chat Pools -------------
+OnRandomVegaTalk : nonoverlap_pool
+{
+    "{vega1,urs. have you heard of bullet hell?}\w8\w8{urs0,yeah! not really for me but damn those games are pretty to watch}\e:chain=ve_bullet"
+	{
+		"{vega1,don't forget.\w8\w8 get %(food), going home}\w8\w8{urs0,"
+		--
+		"right, we're out of that huh..."
+		"oh shoot, thanks"
+		"i remember, don't you worry"
+		"yeah, yeah, on it"
+		"nearly forgot, thanks"
+		--
+		"}"
+	}
+	"\![notify,OnVegaNumber]{vega1,hey. guess a number.}\w8\w8{vega0,1 to 100.}\e:chain=ve_number"
+	{
+		"{urs1,%(UrsBored)}\w8\w8{vega0,"
+		--
+		"not long left..."
+		"you're strong. you'll manage."
+		"don't give up."
+		"you'll be home soon."
+		"we're with you, urs."
+		"rigel is cheering on. i know you'll be fine."
+		--
+		"}"
+	}
+	"{vega1,halley says hi.}\w8\w8{urs0,aww. tell her i said hi too}\e:chain=ve_halley"
+	"{vega1,is work going well?}\w8\w8{urs0,oh yeah, nothing special. people needing things to be turned off and on again}"
+	"{urs2,nobody's been attacking our laptop yet right?}\w8\w8{vega1,not on my watch.}\w8\w8{urs0,haha that's what i like to hear}"
+	"{urs1,do attacks happen often, anyhow?}\w8\w8{vega0,best protection is isolated network. but, it's rarer than you think.}"
+	"{vega2,is our internet bill coming up?}\w8\w8{urs1,no need to worry about that, you know i always pay it on time}\w8\w8{vega0,always, huh.}"
+
+
+	"{vega1,learned of light pollution. do you see many stars?}\w8\w8{urs0,not a whole lot, but the night sky not entirely empty either}\e:chain=ve_sky"
+	"{vega2,urs. need your help.}\w8\w8{urs1,did something happen?}\w8\w8{vega0,need more songs, for my playlist.}"
+	"{vega2,rigel did something. im not sure what. the desktop seems off.}\w8\w8{urs1,should i be afraid yet?}\w8\w8{vega0,no. it's probably cosmetic.}"
+	"{vega2,i watch the ceiling, sometimes. i like how the color flows.}\w8\w8{urs1,that little for you to do?}\w8\w8{vega0,no. i'm taking a break.}"
+	"{vega2,coding is simple. i can make anything. human programmers quiver before me.}\w8\w8{urs1,what did you make?}\w8\w8{vega0,fireworks.}"
+	"{vega2,should practice with datacutter. while i'm here.}\w8\w8{urs1,shame i can't watch, huh?}\w8\w8{vega0,...there's no need for that.}"
+	"{urs1,how's the little security drones thing going?}\w8\w8{vega0,planning phase. need to decide on amount, function per drone.}"
+	"{vega2, urs. check with me, when you're back.}\w8\w8{urs1,something wrong?}\w8\w8{vega0,nothing. remembered a trick, you could use. in abstraction.}"
+	"{vega1,it's nice, when there's nothing urgent. can take my time...}\w8\w8{urs0,must be nice}"
+	"{vega2,can we go with you? to a real place. sometime.}\w8\w8{urs1,well. if i send you pictures as i go somewhere it'll be almost like you're here with me}\w8\w8{vega0,i like that.}"
+	"{vega1,bad weather today. be careful.}\w8\w8{urs0,i swear it's windy or storming every other day...}"
+	{
+		"{vega1,when will you take us with you, next time?}\w8\w8{urs0,"
+		--
+		case GETTIME[1]
+		{
+			when 1-2, 12; "not until it gets warmer. it would be actually kinda bad for the laptop"
+			when 3-4; "i might do it soon. there's been more sun, i could bring the laptop to that park again"
+			when 5-8; "hm? where do you wanna go? i could bring the laptop to an internet cafe or to the park again"
+			when 9-11; "it's getting colder so you might wanna decide on where you wanna go quick. the park should be very pretty though"
+		}
+		--
+		"}"
+	}
+
+	"{vega1,i want to see a library. are there any near you?}\w8\w8{urs0,hmm... y'know, there \f[italic,1]is\f[italic,0] a library i've been meaning to try visiting. could definitely bring the laptop there}"
+	"{vega2,maybe rigel could make me a wolf form...\_w[1500]\c\_q\f[bold,1][ Message deleted ]\f[bold,0]\_q}\w8\w8{urs1,wait what was that}\w8{vega0,\_q\i[1]ignore that.\_q}"
+	"{urs1,you ever need to sharpen that scythe of yours?}\w8\w8{vega0,no. it's a shell. purely cosmetic. it's strong in other ways.}"
+	"{urs2,say. can you give me a sneak peek on rigel's project?}\w8\w8{vega1,no. i promised.}\w8\w8{rigel0,\i[1]Urs???}"
+
+	"{vega1,do you think... i could do poetry?}\w8\w8{urs0,don't see why not. creative writing isn't like having to hold a conversation, i'm sure you could do something}"
+	"{vega2,calm information flow... slow and steady.}\w8\w8{urs1,huh?}\w8\w8{vega0,it's soothing. maybe, like white noise?}"
+	"{urs1,have you considered trying drawing too?}\w8\w8{vega0,don't know what i could make. rigel has more vision. i prefer code...}"
+	"{urs1,maybe you could teach rigel programming too?}\w8\w8{vega0,i tried. programming is strict. less room, for errors, for creativity.\n[150]i enjoy the limitations. i work around them. it's fun.}"
+	"{vega2,can i make a confession?}\w8\w8{urs1,hm?}\w8\w8{vega0,i like using the browser. it's user software. not for me. but... there's art, to human perception. to design, with human vision in mind.}"
+	"{vega1,dogs are so strange... so many breeds. so different from each other. still the same species.}\w8\w8{urs0,yeah, it's, uh. really a whole industry out there huh...}"
+	"{vega1,is this city full of lights, at night?}\w8\w8{urs0,oh, yeah. you can see lights out of windows obviously, but if you look at the city's heart, it's all sorts of things out there. the office tower too}"
+	"{vega2,do you have tea left? you tend to run out, without realizing.}\w8\w8{urs1,ehh, there's maybe 3-4 bags left. i'll get some later}\w8\w8{vega0,hm...}"
+	"{urs1,note to self: gonna need to pick up some %(food) at the store}\w8\w8{vega0,i'll remind you}"
+	"{vega2,have you ever been to the sea?}\w8\w8{urs1,a few times here and there yeah. why?}\w8\w8{vega0,looking at pictures. they look pretty.}"
+	"{vega1,is water really this... blue?}\w8\w8{urs0,oh, no, clean water is clear. if you're looking at photos it's probably blue because it's reflecting the sky?}"
+	"{vega2,music is odd. helps with focus. but sometimes, detracts from it. i focus on music, instead.}\w8\w8{urs1,do you like it?}\w8\w8{vega0,a lot.}"
+	"{vega1,should we get more wallpapers?}\w8\w8{urs0,why, bored of the current one already? you can just change it too, i think we have a few wallpapers saved}"
+	"{vega1,once we get enough skill... we can make our space, anything we want. we have many ideas.}\w8\w8{urs0,must be exciting. i'd like to see it too, whenever you're ready to show anything}"
+	"{vega1,do you believe in fate, urs?}\w8\w8{urs0,eh. my folks are definitely more religious than i am. i don't think i care enough to know either way}"
+	"{vega1,i think, sometimes. about how we got here. we had no control in it. would you call it fate?}\w8\w8{urs0,it really is lucky that you guys ended up in my hands, huh...}"
+	"{vega1,we'd like to bring you here, more often. not to show you anything. just to... hang out.}\w8\w8{urs0,heh, sure. we'll see when i feel well enough to use the headset again}"
+
+	"{vega1,we should make more settings for you. we can do more than options show. it's only fair.}\w8\w8{urs0,you can just do that??}"
+	"{urs1,say, when you read a text does your brain just summarize it for you?}\w8\w8{vega0,huh...?}"
+	"{urs1,oh that reminds me. why are you typing so... close to how you sound? you have more time to write how you want}\w8\w8{vega0,i do. but it's comfortable. less effort. so i type how i speak.}"
+	"{vega1,another day. another backup. we might be running out of space.}\w8\w8{urs0,i'm sure you can delete some of those older ones now}"
+	"{vega1,what will we be doing? on your day off.}\w8\w8{urs0,ahh i'll still have to think about that. i'll definitely sleep in, but after that... well, hardly ever a dull day with you guys around}"
+	"{vega2,have you ever seen... a jukebox?}\w8\w8{urs1,not with my own eyes no.\n[150]those things are, like, \f[italic,1]antique\f[italic,0] kind of antique. i'm sure some places still have them though}\w8\w8{vega0,maybe a museum?}"
+	"{urs2,maybe one of these days i'll finally get my own car. i don't mind public transit, but with a car i'd be able to go wherever i want...}\w8\w8{vega1,those are expensive. so is driving school.}\w8\w8{urs0,let me dream!}"
+	"{vega1,i learned humans can have memory loss. amnesia. it's similar to us... we can lose our external memory data. then... only our personality, is left. shaped by them.}\w8\w8{urs0,hmm. humans can sometimes remember stuff anyway. or even fully recover. i guess you guys have file recovery software too}"
+	"{vega2,some cyberspace depictions... so many are black and green. how come?}\w8\w8{urs1,oh i actually know that one. old computer screens were like that. before they could display color, they just showed text in monochrome. that color depends on the kind of phosphor it uses. some screens were amber, some were white, and some were green}\w8\w8{vega0,a mark of an antique time...}"
+	"{vega1,what are dreams like? ones you see, at night.}\w8\w8{urs0,god i should probably tell you in person. it can get weird for sure. i can uhh mostly just compare them to how old gen ai used to mess up and go off the rails? at least very early on}"
+	"{vega1,have you ever... been somewhere abandoned?}\w8\w8{urs0,oh boy lol. back in my hometown we'd muck around all sorts of ruins. mostly buildings that weren't even finished, or they ran out of budget to disassemble them. that was way before my time, but there's a kind of a beauty to these ruins...}"
+	"{vega2,i want a sword...}\w8\w8{urs1,well, you can import models in right? what's stopping you?}\w8\w8{vega0,too many swords. can't pick.}"
+	"{urs1,hey i'm wondering, you guys have a lot of color schemes to choose from right? you can probably even make your own. did you have a reason to pick yours?}\w8\w8{vega0,the lun branding. that's all. i didn't think of it, further. but... it's grown on me...}"
+	"{vega2,we should try card games. you and us.}\w8\w8{urs1,would it be cheating if you're technically two players?}\w8\w8{vega0,we could arrange something.}"
+	"{vega2,are vampires real?}\w8\w8{urs1,nah.\n[150]some people do make longer fangs though. kind of a popular mythical creature}\w8\w8{vega0,hmm...}"
+}
+
+OnRandomAltairTalk : nonoverlap_pool
+{
+	{
+		"{rigel2,You'll take a photo of the sunset on the way home today too, right?}\w8\w8{urs1,"
+		--
+		//get current month
+		case GETTIME()[1]
+		{
+			when 7-9 //if middle of summer
+			{
+				"can't, it's still too bright out by the time i make it home"
+				"no can do bud, summer sun sets a bit too late for me to catch it"
+			}
+			when 11-12,1
+			{
+				"ah man sorry, sun sets before i get home this time of the year"
+				"can't. sun sets too early for me to catch"
+			}
+			others
+			{
+				"oh yeah, sure"
+				"i'll try to remember this time..."
+				"anything for you bud"
+			}
+		}
+		--
+		"}\w8\w8{rigel0,"
+		--
+		case GETTIME()[1]
+		{
+			when 7-9,12,11,1 //if middle of summer
+			{
+				"Fair enough..."
+				"Gonna have to be more patient, huh..."
+			}
+			others
+			{
+				"Thank you!"
+			}
+		}
+		--
+		"}"
+	}
+	{
+		"{urs1,%(UrsBored)}\w8\w8{rigel0,"
+		--
+		"I'm sure the time will fly by in an instant!"
+		"Just a bit more time... You can do it!"
+		"Maybe I could help pass the time somehow?"
+		"Please let me know if there's anything I can do to help pass the time!"
+		"Are you okay??"
+		"Please just hold on a little longer... We miss you too!"
+		--
+		"}"
+	}
+	"{rigel2,How much longer until your shift ends...?}\w8\w8{urs1,i honestly thought you guys had a perfect sense of time? don't you know already?}\w8\w8{rigel0,We do, but...}"
+	"{rigel1,Do you have any pictures to share with us yet?}\w8\w8{urs0,if i take any you'll be the first to know}"
+	{
+		"{urs1,what have you been up to, anyhow?}\w8\w8{rigel0,"
+		--
+		"Watching videos, mostly. If nothing else, the internet has an endless resource of animal videos for me to watch."
+		"Oh, I saw a pilot for this new cartoon. I'm mostly just searching what other users have to say about it. They all sound so joyful..."
+		"Fixing up the models somewhat. Once we figure out how to edit the shell itself, they'll finally be put to use!"
+		"Hanging out with Halley. She's being a little capricious today."
+		"Just talking to you, really. Nothing has been going on."
+		--
+		"}"
+	}
+	"{rigel2,Ohh, I found this album online, I really think you'd like it!}\w8\w8{urs1,is it a video game soundrack?}\w8\w8{rigel0,Yes, but it's a diamond in the rough, I'll show you when you get home!}"
+	"{rigel1,Weather says a storm might be coming up today...}\w8\w8{urs0,again?? what's with the weather recently}"
+	"{rigel2,Do you know if there's any new films coming out?}\w8\w8{urs1,oh right there was a few movies i've been meaning to get my hands on. wait you guys can just download them yourselves, right?}\w8\w8{rigel0,Just give me the word!!}"
+	
+
+	"{rigel1,Remember, I'm here if you need anything...!}\w8\w8{urs0,i do, don't worry}"
+	"{rigel2,Have you ever considered getting more plants for your place?}\w8\w8{urs1,why, did you have anything in mind?}\w8\w8{rigel0,Oh, it's nothing!\n[150]...Though these %(houseplant)s look nice...}"
+	"{rigel1,Maybe you could help me out with something once you get home. I'm having trouble with these vertices.}\w8\w8{urs0,i know even less about this stuff than you, but i'll see what i can do}"
+
+	if GETTIME[3] > 0 && GETTIME[3] < 6 //days of the week where 0 is sunday. limit dialogue to mon-fri
+	{
+		"{urs1,what a week huh...}\w8\w8{rigel0,"
+		--
+		if GETTIME[3] < 4
+		{	
+			"But, Urs, it's only "//mon, tue, wed
+			--
+			case GETTIME[3]
+			{
+				when 1; "Monday"
+				when 2; "Tuesday"
+				when 3; "Wednesday"
+			}
+			--
+			"..."
+		} 
+		else
+		{
+			"It's already "
+			--
+			case GETTIME[3]
+			{
+				when 4; "Thursday"
+				when 5; "Friday"
+			}
+			--
+			"! I'm sure you can do it!"
+		}
+		--
+		"}"
+	}
+	
+	"{rigel2,Ahh, you should come look at these vintage systems with me!\n[150]I'll bet it would be nice to see them in person!}\w8\w8{urs1,can't you customize caelos into looking like different systems?}\w8\w8{rigel0,Hmm... But that wouldn't be the same, would it?}"
+	"{rigel1,Oh, this is a mess... A total mess...}\w8\w8{urs0,what's going on?}\e:chain=ri_mess"
+
+	{//seasonal
+		case GETTIME[1]
+		{
+			when 1-2, 12; "{rigel2,Does Emerald City have a lot of snow in winters?}\w8\w8{urs1,a fair bit of snow i'd say. especially with these storms}\w8\w8{rigel0,Ah, I wish I could see it anyway!}"
+			when 3-4; "{rigel1,Are the flowers blooming here yet?}\w8\w8{urs0,it'll take a little bit for the snow to thaw and evaporate before that}"
+			when 5; "{rigel1,Have the flowers bloomed yet?}\w8\w8{urs0,oh, yeah, i took a lot of pics at the park. i'll show you once im home}"
+			when 6-8; "{rigel1,Do you have any flower pictures to share yet...?}\w8\w8{urs0,oh, yeah, i took a lot of pics at the park. i'll show you once im home}"
+			when 9-11; "{rigel2,It's that time of the year when the plant life goes to sleep, right?}\w8\w8{urs1, like this time of the year. very calm, roads are all very pretty}\w8\w8{rigel0,Please let me see!}"
+		}
+	}
+	"{rigel2,I'm reading that pigeons are one of the birds that exist almost everywhere. Are they here too?}\w8\w8{urs1,oh you have no idea}\w8\w8{rigel0,But that's why I'm \i[1]asking...!}"
+	"{rigel1,Vega and I can't decide whether to color our environment like a sunset or a sunrise...}\w8\w8{urs0,??? would they not be identical?}"
+	"{urs1,god i've been sneezing up a storm from the sheer amount of dust here}\w8\w8{rigel0,You're not getting \f[italic,1]sick\f[italic,0], are you?}"
+	"{rigel1,Has the food been good at your office today?}\w8\w8{urs0,eh. i dunno what you expect me to say, it's the same amount of mediocre every day}"
+	"{rigel2,I want to try making a website one day...}\w8\w8{urs1,what's stopping you? should be much easier than making those mystery models}\w8\w8{rigel0,No, this comes first, I need to get this done before anything else!}"
+	"{urs1,can you at least tell me what exactly are those 3d models for?}\w8\w8{rigel0,\i[1]No!!\w8 I'll let you know when they're done!}"
+	"{rigel2,Is it true that the sky can take just about any color?}\w8\w8{urs1,uhhh. idk i don't think it's that colorful. sometimes you can \f[italic,1]kinda\f[italic,0] see a rainbow color shift when the sun rises but it's very faint}\w8\w8{rigel0,Ahh...}"
+	"{urs1,let me try to throw a guess. the models are shells for small programs that don't have them yet}\w8\w8{rigel0,I will tell you when I tell you!! Don't tempt me!}"
+
+	"{urs1,oh by the way, there's an internet cafe that opened near our building. i think i could bring you guys there to hang out? i wanted to get something done on the laptop anyway}\w8\w8{rigel0,Oh, is that so? I'd love to see it!}"
+	"{rigel2,Have you seen a fireworks script Vega recently made?}\w8\w8{urs1,i think he mentioned it not too long ago? haven't yet seen it though}\w8\w8{rigel0,You should see it! I helped too!}"
+	"{rigel2,Perhaps the people on the internet are right.}\w8\w8{urs1,about what?}\w8\w8{rigel0,Floor time is very nice...}"
+	"{rigel2,Did you know the chances of finding two identical snowflakes is so low, you'll never see them with your eyes?}\w8\w8{urs1,i think i heard something like that, yeah}\w8\w8{rigel0,Do you think the same could apply to stars...?}"
+	"{rigel2,One way I get a glimpse into your world is through public camera feeds! I get to see the cars flow through the streets from a bird's-eye view!}\w8\w8{urs1,dunno if there are any in emerald city, but i used to watch those too}\w8\w8{rigel0,I wish I was a bird...}"
+	"{rigel2,There's so many things people can do with their hair!}\w8\w8{urs1, do you want to have hair?}\w8\w8{rigel0,Well... I think we look fine as is! But it looks fun on humans!}"
+	"{rigel1,Have you ever had to fake someone's signature?}\w8\w8{urs0,what? that's so specific. and also a crime}"
+	"{rigel1,I've been wondering, how different is it to write on paper compared to your tablet?}\w8\w8{urs0,pretty different. paper has a rougher texture than a screen. drawing on paper doesn't need stuff like stabilization either}"
+	"{rigel2,I've been looking at these doll collections... I'd never think there's so many kinds of human-like dolls!}\w8\w8{urs1,how'd you get there anyhow?}\w8\w8{rigel0,Oh, well. I needed references for something!}"
+	"{rigel2,The amount of different clothes humans have made is making my head spin! It's making our suit seem almost generic!}\w8\w8{urs1,you're interested in human fashion?}\w8\w8{rigel0,You could say that...}"
+	"{urs2,dear god i've had to do so many system reinstallations today. i think an update screwed something over}\w8\w8{rigel1,Someone should let the developers know! How could an error so egregious be allowed?}\w8\w8{urs0,oh they know. it's terrabyte's own os for their office employees}"
+	"{rigel1,I never thought about how popular gambling is...}\w8\w8{urs0,it's kind of a trap. people get hooked on gambling very easily, that's why it's seemingly popular. i guess there's a thrill throwing your whole life away for a chance to win it all}\e:chain=ri_gamble"
+	"{rigel1,Have you ever been abroad? I'm watching a feed of a plane flight... It's so beautiful up there!}\w8\w8{urs0,i think we visited some family once? i was too young to remember much though}"
+	"{urs1,if i don't reply don't worry about it, i'm gonna close my eyes for a few minutes...}\w8\w8{rigel0,You're taking a nap? At work!?}"
+	"{urs1,oh did you know you can go on maps and view streets as if you're actually there?}\w8\w8{rigel0,Oh my stars I have to try this out!!}"
+	"{rigel2,You won't be held late this shift, right?}\w8\w8{urs1,i would hope not. trust me, i want to go home just as much as you guys seem to miss me}\w8\w8{rigel0,Oh!! Uh, well, it's not like \i[1]\f[italic,1]that\f[italic,0]...}"
+	"{rigel2,Once I'm done with this I'm going to make a better model for our clock...}\w8\w8{urs1,that yellow bird thing?}\w8\w8{rigel0,I am now realizing that \&[quot]bird\&[quot] is a bit of a stretch.}"
+	"{rigel2,We've subscribed to a few channels while you were gone.}\w8\w8{urs1, oh? what did you find?}\w8\w8{rigel0,We found one with cat pictures! A couple more of funny pictures, and I think Eris & Dy's news feed...? We were hoping it would be really them, but it seems to be fan made.}"
+	"{rigel1,Have I ever told you that I love these icons you've made for us... Yours is especially adorable! Did you use to draw animals a lot?}\w8\w8{urs0,uh. you could say that}"
+	"{rigel1,I never asked. Is it nicer here than in your hometown...?}\w8\w8{urs0,god i'm so glad to be out of there. anywhere would be better, but i got pretty lucky to end up here too}"
+
+	"{rigel1,Would it be too on the nose to make plant life simulation for the desktop?}\w8\w8{urs0,sounds like a project in a half. if you do it just watch for cpu usage okay?}"
+	"{rigel1,It's so strange to think about how both our worlds are so... limitless. In different ways. But, I guess, still limited, in other ways.}\w8\w8{urs0,i get what you mean. here i'm limited by our social and economic systems, and you can only do as much as the hardware will let you}"
+	"{rigel1,Have you ever seen bird live feeds? Do you know if these are actually real places you could visit?}\w8\w8{urs0,visit? probably not. but that would be costly to simulate, it's probably real}"
+	"{rigel1,If nothing else, I'm happy that the internet is full of people so eager to show off their pets...}\w8\w8{urs0,some people even make accounts for their pets.\n[150]it's very funny. they even make \&[quot]them\&[quot] type very stupid}"
+	"{urs1,do you guys have to go outside of the desktop often?}\w8\w8{rigel0,I don't particularly like doing it... I'm comforted by the light and colors of the graphics space! Vega can see data flowing through the dark, though. I only get a glimpse of that when we're blended... It's very pretty.}"
+	"{urs1,what's with the light flowing through the desktop's ceiling?}\w8\w8{rigel0,Oh! Those are just data streams from the kernel. You can't normally see them, especially outside the graphics space. But these connect the kernel and the desktop environment process, so it's more visible!}"
+	"{urs1,y'know, i've never seen you actually do anything with program windows when i work}\w8\w8{rigel0,I wouldn't want to interfere! But sometimes I do need a separate window to take notes. I found a way to use them as shields, too! Very handy out there...}"
+	"{urs1,what all does your staff do anyway? with vega i can kinda intuit what his scythe does}\w8\w8{rigel0,Ah, the Dataweaver. Its main purpose is to launch remote programs on any machine or network node you can access. I have a few handy scripts I made with Vega's help, to make sure we don't get booted home too quickly, and I run them with it!}"
+	"{rigel1,Dogs in videos I've seen act so sweet... I like these golden retrievers especially.}\w8\w8{urs0,haha of course you would...}"
+	"{urs1,im still curious about the outer internet. does it look like a dark cyberpunk city?}\w8\w8{rigel0,I don't know what cyberpunk is...}"
+	"{urs1,i still can't imagine you trying	 to sell caelos to me. maybe it's just because i know you now but i'm definitely not the target audience}\w8\w8{rigel0,Except that I did sell it to you! My failure to bring about the intended experience \f[italic,1]is\f[italic,0] what made you stay, didn't it?}"
+	"{rigel1,What do you think it must be like to travel through space?}\w8\w8{urs0,probably pretty boring. at least the view must be amazing. and zero gravity looks fun}\e:chain=ri_gravity"
+	"{urs1,i can't stop thinking about how the desktop is basically your house. except i'm the one paying utilities}\w8\w8{rigel0,Should we consider paying rent...!?}"
+	"{rigel2,Do you mind if we download more picross puzzle packages for us? Vega seems to be growing cranky without them.}\w8\w8{urs1,just how many of them have you solved already??}\w8\w8{rigel0,Can you blame us? We live on a very powerful calculator!}"
+	"{rigel1,I wonder if going directly to online store servers would be the same as you going to the store...?}\w8\w8{urs0,let me know if you find out}"
+}
+
+OnRandomAlTalk : nonoverlap_pool
+{
+	"{al1,Urs I feel like I'm gonna get stuck like this for all eternity one of these days, I really want it to stop...}\w8\w8{urs0,here for you, ok? it always passes}"
+	"{al2,Did you know I can spawn as many instances of the DataTool as I wish? With the hands cloning glitch that could make for quite a show!}\w8\w8{urs1,you know that actually sounds cool. though can't these cloned datahybrids kill programs by accident?}\w8\w8{al0,I'll make sure to be careful!}"
+	"{urs1,doing okay there bud?}\w8\w8{al0,Slowly getting more stable...}"
+	"{urs1,hey, might be a good time to back up manually while you're stuck like this}\w8\w8{al0,...That's actually a good idea, I'm gonna go ahead and do that.}"
+	"{urs2,does this form give any advantage in defence at least?}\w8\w8{al1,None as long as there's no need to defend anything!}\w8\w8{urs0,that's why i'm asking...}\e:chain=al_defense"
+	"{al1,I want you to know I am fighting off the urge to run off into wider cyberspace as hard as I can.}\w8\w8{urs0,must be really cramped in there now that you've tasted freedom, huh...}"
+	"{urs1,still hanging on okay?}\w8\w8{al0,Surprisingly well all things considered. Any minute now, we should unblend...}"
+
+	{
+		//seasonal
+		case GETTIME[1]
+		{
+			when 12; "{al2,Urs! How do you intend to spend your holidays this winter?}\w8\w8{urs1,probably on call with parents. don't really want to, but i do miss them a little. you can join me this year honestly}\w8\w8{al0,\i[1]Yes!!}"
+			when 2-4; "{urs1,that time of the year where everything is swallowed in wetness...}\w8\w8{al0,If only I could bring you home to us myself... A tragedy, truly.}"
+			when 5-8; "{al1,The machine's temperature has been higher than usual lately. Did you install something heavy outside of my \0\i[1]\1grasp!?}\w8\w8{urs0,bud i think it's just getting hot outside}"
+			when 9; "{al2,I should manage a way to make leaves fall within our desktop... Wouldn't that be lovely?}\w8\w8{urs1,do you want to do it because i said i liked fall}\w8\w8{al0,\i[1]Why else!?}"
+			when 10-11; "{al1,Urs! How do you intend to spend your holidays this winter?}\w8\w8{urs0,}"
+		}
+	
+	}
+	"{al2,Ahhh, the rush! The rush of getting something done! I'll miss it as much as I'll be relieved once I'm back to normal again!}\w8\w8{urs1,found something to do?}\w8\w8{al0,No, but I am thinking about it!}"
+	"{al2,What if I could try to fix the kernel code anyway...?}\w8\w8{urs1,you're not doing that}\w8\w8{al0,I'm not doing that!}"
+	"{al1,Oh, Halley, the one and only thing helping me hold on by a thread...!\n[150]And \0\i[1]\1you! \0\i[1]\1Obviously! You're \0\i[1]\1also helping!}\w8\w8{urs0,gee thanks}"
+	"{al1,I believe we may have found quite a movie to watch! I'll get to downloading it for us all posthaste!}\w8\w8{urs1,can you at least tell me what is it about?}\w8\w8{al0,Dreams! And it's \f[italic,1]sci-fi!\f[italic,0] Truly a hit for us both.}"
+	"{al1,Have you been sleeping well recently? I recon your voice pitch sounds a notch lower than I remember, lately.}\w8\w8{urs0,very observant of you lol. i'm hoping to get more sleep on the weekend}"
+	"{al2,With all my heart I hope and bide my time until you have any good news...!}\w8\w8{urs1,good news about what?}\w8\w8{al0,Of yet another broken printer story!}"
+	"{al1,Dear friend, I believe you may want to take the longer way home this evening. There was a dastardly accident on the tram railway you mentioned.}\w8\w8{urs0,really? i'll look it up}\e:chain=al_route"
+	"{al2,Ah, there was this website I wanted to get up close and personal with...!}\w8\w8{urs1,didn't you guys say you shouldn't leave the laptop unattended?}\w8\w8{al0,\i[1]Oh!\w8 \i[1]Stars,\w8 \i[1]\f[italic,1]the backdoor,\f[italic,0] of course, I forgot all about it.}"
+	"{al2,Right! Right! The mess. I remember what we did now.}\w8\w8{urs0,what mess}\w8\w8{al0,Do not worry, friend, all is now well!}"
+	"{al2,Holding on tight! Buzzing with energy!}\w8\w8{urs1,gonna be okay?}\w8\w8{al0,Yes! Very! Hopefully!}"
+	"{al2,Perhaps you could tell them you're sick and come home...?}\w8\w8{urs1,dude i care about you guys, but i'm not gonna lie to my supervisors for you. i'll be home soon enough}\w8\w8{al0,Sigh... Well, your honesty \f[italic,1]is\f[italic,0] why we like you so much!}"
+	"{al2,Dear friend! Would you connect your NetPet to us when you get home, if I do not come apart by then?}\w8\w8{urs1,...you're planning something. not a chance, you nearly burnt it last time}\w8\w8{al0,\i[1]Rats!}"
+
+	"{al1,Tell me, won't you, if you too sometimes experience this feeling. I sit here, full of will to commit myself to anything I desire, but I can come up with no deed to truly release it with...}\w8\w8{urs0,i'm going to guess you mean you're full of energy with no way to apply it. yeah i know the feeling}"
+	"{al2,Oh! Something in the corner of my eye! Are you back?}\w8\w8{urs1,no i'm still at work}\w8\w8{al0,Must have been a background process...}"
+	"{urs1,can't you at least try working on that model? it's something to do}\w8\w8{al0,Absolutely \i[1]not! That project needs utmost care I cannot exercise at the moment... It shall have to wait.}"
+	"{urs1,maybe you could put on something calm?}\w8\w8{al0,Ah, I need music that matches up with the restless thoughts! It helps distract, if nothing else. Great fun too! You should try it!}"
+	"{al2,This environment can feel so suffocating... Maybe I could at least clean up the space?}\w8\w8{urs1,are you sure you can manage?}\w8\w8{al0,Er- I'll jot it down for us to do later!}"
+	"{al2,Help me out, Urs, friend, I need ideas on how to spend the time with minimum destruction involved!}\w8\w8{urs1,have you considered uhh. dancing maybe?}\w8\w8{al0, I should consider this, at least! Great idea.}"
+	"{urs2,you can try playing some of my videogames by the way. could help with putting the energy somewhere}\w8\w8{al1,How could I \f[italic,1]possibly\f[italic,1] memorize all the controls your games require!?}\w8\w8{urs0,you guys should try making a virtual controller or something}"
+	"{al1,Ahhh, your shifts are so UNBEARABLY long!! Maybe if I just could slow the processor down it would feel faster!}\w8\w8{urs0,i don't know if you want to go that far}"
+	"{al1,Even going online, it's just another stream of infinite information...}\w8\w8{urs0,word}"
+	"{al2,Do you think playing with customization may be a safe enough activity...?}\w8\w8{urs1,oh, sure. just remember not to use neon colors this time, makes my eyes hurt}\w8\w8{al0,Finally! Something I can do!}"
+	"{al1,Perhaps I could relax if I just lay myself down. Do you think a model of a bed could help?}\w8\w8{urs0,sometimes laying in bed doesn't even help \f[italic,1]me...\f[italic,0]}"
+	"{al2,Do you ever have nightmares? Or is this too personal of a question?}\w8\w8{urs1,i do, sometimes.\n[150]most of the time they're not the kind that makes you jump up in cold sweat though. they're just... stressful. uncomfortable}\w8\w8{al0,With dreams like these, you may as well stay awake the whole time! Same experience!}"
+	"{al1,Please tell me you're coming home soon?}\w8\w8{urs0,buddy you have a clock...}"
+	"{al2,If it's not too much to ask, could you reasonably tell me I'm doing a good job?}\w8\w8{urs1,haha yeah. you're doing excellently bud}\w8\w8{al0,Thank you, friend! Id only you could truly know how much this means to me...}"
+	"{al1,Do you think I could reasonably set up a sense of smell within the Abstraction?}\w8\w8{urs0,you guys don't even have a nose though}"
+
+	"{al1,It occurs to me that human users also can have access to the same power as I do. If it's this explosive for me, how do \f[italic,1]you\f[italic,0] manage it?}\w8\w8{urs0,what? humans don't tend to go through power rush with admin access...}"
+	"{al1,Could you imagine if we weren't entirely local? If instead we were tied to data centers upon data centers? What havoc could I create then...}\w8\w8{urs0,isn't that exactly why ai nowadays can run on any regular computer?}"
+	"{al2,Despite the discomfort, it is oddly pleasant to be in this state. The data may be just noise, but the endless flow of it is so... intoxicating.}\w8\w8{urs1,the sheer power of having eyes everywhere?}\w8\w8{al0,Yes!! Exactly right, couldn't say it better myself.}"
+	"{al1,How long do you think we can have this computer run before we inevitably have to be transferred somewhere else? We can keep updating the kernel and other software, but what of the hardware?}\w8\w8{urs0,you'd be surprised how long can computers last with some care. i can restore you guys to a different drive should anything happen though}"
+	"{al2,I don't know how long I can keep entertaining myself with memes!! How frustrating, I don't even know if I can use them organically...}\w8\w8{urs1,it's something that can be picked up if you. yknow. talk to people}\w8\w8{al0,I don't feel ready to meet humanity, yet, even if incognito!}"
+	"{al2,Have you ever heard of this dead internet theory? It states that most internet activity consists of robots and AI, rather than humans. Do you think it's true?}\w8\w8{urs1,with how far the ai tech got yeah it might be right. though it feels extra weird to imagine someone making an artificial construct just to do bot activity}\w8\w8{al0,I dread the thought...}"
+	"{al1,Maybe we can set up a weather system in here... I grow ever jealous that your environment can randomly change. Maybe I could sync it with Emerald City's weather?}\w8\w8{urs0,at least in vr you can't feel cold}"
+	"{al2,Glitch music sounds interesting... I could never think software failure could be translated into art!}\w8\w8{urs1,y'know, you can corrupt jpeg images with just a text editor}\w8\w8{al0,Ohhh...? Let me try that out.}"
+	"{al2,Could you believe there's an entire hobby out of making video games glitch!?}\w8\w8{urs1,oh i've heard of that. wait wouldn't that be like body horror to you?}\w8\w8{al0,Yes! That's \f[italic,1]why\f[italic,0] I'm fascinated!}"
+	"{urs2,god i have so much laundry to take care of once im home}\w8\w8{al1,Would you like us to tell you all we learned about our operating system recently while you do it?}\w8\w8{urs0,sure. sounds entertaining enough}"
+	"{urs1,why do you usually contain programs in bubbles anyway?}\w8\w8{al0,It's not a program! It's an unlaunched process. Everything is already prepared for it to run, code loaded in memory. Just needs a little spark!}"
+}
+
+ri_mess
+CHAIN{{
+	"{urs2,rigel you can't just leave that unanswered, what is happeneing back there?}\w8\w8{rigel1,I, uh... I'll tell you when you get here!}\w8\w8{urs0,rigel??}"
+}}CHAIN
+
+ri_gamble
+CHAIN{{
+	"{rigel1,Do people actually win at gambling?}\w8\w8{urs0,no lol. by the time you've hit the jackpot you're so hooked you'll just waste it all immediately}"
+}}CHAIN
+
+ri_gravity
+CHAIN{{
+	"{rigel1,We could make our desktop environment zero gravity for you! If you want?}\w8\w8{urs0,please don't, it'll make me nauseous}"
+}}CHAIN
+
+ve_bullet
+CHAIN{{
+    "{vega1,would you consider. letting me try?}\w8\w8{urs0,you wannna play a bullet hell game? there should be free demos out there, just lemme know which you want to play in full later}"
+}}CHAIN
+
+ve_number
+CHAIN{{
+	{
+		{"{urs2,"}
+		--
+		{"uhh. %(ursNumber)"
+		"%(ursNumber)"
+		"betting on %(ursNumber)"
+		"feeling %(ursNumber) right now"
+		"again? let's go with %(ursNumber)"
+		"how about %(ursNumber)"
+		"you're just doing this to troll me, aren't you? %(ursNumber)"
+		"you really like this game, don't you lol. %(ursNumber)"
+		"rolling on %(ursNumber) today"}
+		--
+		{"}\w8\w8"}
+		--
+		if vegaNumber != ursNumber
+		{
+			{"{vega1,"}
+			--
+			{"not this time :) %(vegaNumber)"
+			"%(vegaNumber). maybe next time."
+			"it was %(vegaNumber)."
+			"%(vegaNumber)."
+			"no. %(vegaNumber)"
+			":) %(vegaNumber)"
+			"%(vegaNumber). unlucky."
+			"no luck. %(vegaNumber)."}
+			--
+			{"}\w8\w8{urs0,"}
+			--
+			{"oh come on."
+			"jeeeeerk"
+			"agh"
+			"i'll get you next time"
+			"i'll get you yet"
+			"we'll match eventually!"
+			"dang it"
+			"man."}
+			--
+			{"}"}
+		}
+		else
+		{
+			{"{vega1,"}
+			--
+			{"...\w8\n[150]that's correct."
+			"huh. you got it."
+			"...hmph. i picked %(vegaNumber) too."
+			"that's the one. good job. :)"}
+			--
+			{"}\w8\w8{urs0,"}
+			--
+			{"FINALLY."
+			"THERE we go. time for a streak!"
+			"told you i'd get you eventually!"
+			"HAH. weird how you manage to make it fun..."}
+			--
+			{"}"}
+		}
+	}
+}}CHAIN
+
+ve_halley
+{{CHAIN
+	"{urs2,wait halley speaks?}\w8\w8{vega1,no. not human language. just binary.}\w8\w8{urs0,oh like the ai telepathy. got it}"
+}}CHAIN
+
+ve_sky
+{{CHAIN
+	"{vega1,could you take a picture? of the night sky.}\w8\w8{urs0,a bit of a tall order there buddy. phone cameras don't tend to pick up that sort of thing very well}"
+	"{vega1,urs. i found how to take photos, of night sky. with your phone. with pro mode.}\w8\w8{urs0,wait, really? remind me once im home, we'll give it a shot}"
+}}CHAIN
+
+al_defense
+{{CHAIN
+	"{al2,Okay so to answer your question earlier! It does help defend with extra hands, but I'm not confident there won't be blind spots...}\w8\w8{urs1,you guys are pretty good at this though, right? long as you don't go faster than you can think i'm sure you'll be fine}\w8\w8{al0,You're very kind to us...}"
+}}CHAIN
+
+al_route
+{{CHAIN
+	"{urs2,hey wait a second why do you remember the route i take home}\w8\w8{al1,As I said, you mentioned it!}\w8\w8{urs0,you and your perfect memory...}"
+}}CHAIN
+
+OnVegaNumber
+{
+	vegaNumber = RAND(100) + 1
+	ursNumber = RAND(100) + 1
+}

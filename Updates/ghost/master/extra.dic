@@ -1,0 +1,352 @@
+//code for extra conversation unlocks
+//and also maybe word lists for random dialogue
+
+//a couple of these ghosts, for better or for worse, pass their variables on via NOTIFY events, which means you can't call scripts directly out of a function
+//instead we'll have to check for presence of a flag each second and respond that way
+//admittedly it looks horrifying to do it this way but the effect on performance should be negligible
+OnSecondChange
+{
+	//Hydrate response
+	if h2oflag == 1 && extraConvos[1] == 0 //locked convo and the variable Exists
+	{
+		"\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,2][ Unlocked extra chat log: \f[bold,1]Self Care\f[bold,0]. ]\x\![raise,OnShowConvo,OnExtraSelfCare,1,0]"
+		ERASEVAR('h2oflag') //don't need this anymore, convo being unlocked will make sure this no longer trips
+	}
+
+	//Flux/Music player ghost response
+	if fluxflag == 1 && extraConvos[3] == 0
+	{
+		"\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,4][ Unlocked extra chat log: \f[bold,1]Music Tastes\f[bold,0]. ]\x\![raise,OnShowConvo,OnExtraMusicTastes,3,0]"
+		ERASEVAR('fluxflag')
+	}
+
+	//for the other 3 convos
+	//the unlock elegibility is already completed but the message couldn't display on time
+	//check if the flag is set and whether the ghost is still talking
+	//a copy of this check is also in menu_sakura.dic, because it breaks when running full on convos ig
+	if extraflag == 1 && "talking" !_in_ status
+	{
+		extramessage
+	}
+}
+
+//Recieved howl from lobo
+OnLoboHowl
+{	
+	//global variable so that it can reflect in the conversation depending on what type of howl was last made
+	howl = reference0
+
+	//redirect to the unlock code: either run dialogue or leave in a flag to alert user of new extra dialogue
+	if extraConvos[0] == 0; "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,1][ Unlocked extra chat log: \f[bold,1]Lone Wolf\f[bold,0]. ]\x\![raise,OnShowConvo,OnExtraLoneWolf,0,0]"
+}
+
+//have vega express describing a wolf howling at the moon. the following code will modify exactly what said howl is supposed to convey
+//will change depending on the kind of a howl lobo did last
+OnLoboHowlType
+{
+	case howl
+	{
+		when "pain"; "to relieve their pain."
+		when "sad"; "to share their sorrows with it."
+		when "hopeful"; "to proclaim a hope, for a better time."
+		when "strange"; "to make a vow. to avenge. or to warn."
+		when "vulgar"; "to cry out in anger."
+		when "normal"; "in a cathartic cry."
+	}
+}
+
+//from Hydrate
+//like its name says, this is a NOTIFY event, which means we can't use sakurascript in it. fuck!
+//we can at least fill up a variable to use and then shuffle over to OnMinuteChange? lol
+OnHydrateStatsNotify
+{
+	//might be used in the context of the convo
+	h2oshell = reference0
+	//total sips 
+	
+	//take another sip, triggering the notify event again
+	//skip the whole thing if convo is already unlocked
+	if extraConvos[1] == 0
+	{
+		if h2osips != "" //if h2osips isn't empty, compare it to reference5
+		{	
+			//if reference5 is more than h2osips, set a flag to unlock conversation
+			if h2osips < reference5; h2oflag = 1
+		}
+		else; h2osips = reference5 //grab the current total sips counter
+	}
+}
+
+
+
+//little dictionary for dialogue specific to whichever shell Hydrate currently has
+//Hydrate and Needle famously have an absurd amount of shells so im definitely not hoping to cover even half of them
+OnHydrateShell
+{
+	//edit these after the chat log is set up to actually fit within dialogue
+	//should include both urs' idea and rigel's response
+	//"maybe i'll..."
+	case h2oshell
+	{
+		when "Clear"; "just get some bottled water for once, the water from the cooler kinda sucks}\w8\w8{rigel0,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]That would be wonderful! I did read there are different flavors to different kinds of water. It's good to have some variety.}"
+		when "Clear Remake"; "just get some bottled water for once, the water from the cooler kinda sucks}\w8\w8{rigel0,\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]That would be wonderful! I did read there are different flavors to different kinds of water. It's good to have some variety.}"
+		when "Ballpoint Pen"; "open up an ink cartridge from one of my pens. yum}\w8\w8{rigel0,P-\w8 \i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]Please don't! Isn't that toxic...?}"
+		when "A bottle of souls"; "get out my souls bottle for once. yummy}\w8\w8{rigel0,\i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]Huh?\w8 You aren't serious, are you?}\x[noclear]{urs1,just pulling your leg bud}\w8\w8{rigel0,Of course...}"
+		when "Air Freshener"; "try something new today. that air freshener looks nice}\w8\w8{rigel0,\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]Huh? Don't these things explode when you open them up...?}"
+		when "Battery Acid"; "pop open a battery for its acid juice}\w8\w8{rigel0,\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]\i[1]Battery acid!?\w8 I think that would would fit much better for a laptop instead...\n[150]Why not get an energy drink instead?}"
+		when "Blood Bag"; "get my hands on a medical blood bag. the iron in the blood always tastes funky}\w8\w8{rigel0,But-\w8 \![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]but you told us vampires aren't real!}"
+		when "Bucket of paint"; "try this paint that was left on the roadside by the entrance}\w8\w8{rigel0,\i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]Why would you say that!?}"
+		when "Dish Soap"; "sip on the dish soap from the kitchen}\w8\w8{rigel0,\i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]I know you're better than that...}"
+		when "Haiidrate :3"; "get a set of those cat paw glasses for work. something to brag about i guess}\w8\w8{rigel0,Please show me if you get them! I hope your coworkers appreciate them too.}"
+		when "I died and turned into a well hydrated hamster"; "get one of those hamster water feeders. no effort to even lift up the glass}\w8\w8{rigel0,That's... certainly one way to hydrate...}"
+		when "Ice Cream Coffee"; "just get coffee. i \f[italic,1]am\f[italic,0] getting a little sleepy...}\w8\w8{rigel0,I read those aren't the best for hydrating, but it's still preferable to not drinking at all...}"
+		when "Ramune"; "grab a ramune bottle from the vending machine}\w8\w8{rigel0,Didn't you have to almost break the bottle to push in the marble last time...?}"
+		when "Rilakkuma"; "get one of those cute bear muzzle glasses i saw once}\w8\w8{rigel0,It would be very like you!}"
+		when "Test Tubes"; "sneak into a chemistry lab to take a forbidden sip from their test tubes}\w8\w8{rigel0,I don't need to tell you why exactly that sip is forbidden, \i[1]\![sound,play,sfx/caelos_criterror.wav,--volume=%(volume)]right...?}"
+		when "Wine"; "sneak the good stuff into the office. would make the shift more fun.}\w8\w8{rigel0,The good stuff...? Will that not get you \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]fired?}"
+		when "Alkohol"; "sneak the good stuff into the office. would make the shift more fun.}\w8\w8{rigel0,The good stuff...? Will that not get you \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]fired?}"
+		when "Champagne"; "sneak the good stuff into the office. would make the shift more fun.}\w8\w8{rigel0,The good stuff...? Will that not get you \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]fired?}"
+		when "Whisky"; "sneak the good stuff into the office. would make the shift more fun.}\w8\w8{rigel0,The good stuff...? Will that not get you \i[1]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]fired?}"
+		when "Stratospheric Delivery"; "just help myself to the rain water next time it storms}\w8\w8{rigel0,That doesn't sound very effective...}"
+		others; "just... i dunno. i'm sure there's something in one of the vending machines}\w8\w8{rigel0,Variety is always good! Though, from what I read, clear water seems to be best.}"
+	}
+}
+
+//from Needle
+//Pretty simple
+OnNeedlePoke
+{
+	//seems to have a feature where it simultaneously pokes every character it's overlapping. this Could be a problem given that Boredom sim consists of 4 characters constantly overlapping, 3 invisible or hidden most of the time...
+	_char = reference0
+	//throw in shell specific dialogue changes too why not
+	needleshell = reference1
+
+	if _char == 0 && extraConvos[2] == 0; "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,3][ Unlocked extra chat log: \f[bold,1]Arts and crafts\f[bold,0]. ]\x\![raise,OnShowConvo,OnExtraCrafts,2,0]"
+	elseif _char == 0; "\![extranotif]\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]\i[1]"
+}
+
+//customized response depending on needle that did the poking
+//the chat log is titled arts and crafts and needle's shells are all in a variety of different mediums
+//have urs mention a kind of art that would be interesting to explore
+OnNeedleShell
+{
+	case needleshell
+	{
+		when "The True Needle"; "something more surreal?}\w8\w8{urs0,i guess i could try painting something more raw.\n[150]probably nothing bold and experimental, but at least i could make something more unfiltered}"
+		when "Sewing Pin"; "sewing?}\w8\w8{urs0,i guess i could try making outfits for my teddie? i haven't done anything like that before, but i'm sure it's easier when it's for dolls and toys}"
+		when "Safety Needle"; "embroidery?}\w8\w8{urs0,i did use to cross stitch... maybe i can pick up a pattern set. super chill time}"
+		when "Needle IRL"; "embroidery?}\w8\w8{urs0,i did use to cross stitch... maybe i can pick up a pattern set. super chill time}"
+		when "Sewing Machine Needle"; "sewing?}\w8\w8{urs0,i guess i could try making outfits for my teddie? i haven't done anything like that before, but i'm sure it's easier when it's for dolls and toys}"
+		when "3D Printed"; "3D modeling?\n[150]\0\i[1]\1\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]I could even teach you a thing or two myself!}\w8\w8{urs0,well, if you're offering your expert help...\n[150]did you know you can also print models? the printers for that are super expensive, but you can still pay to get things printed}\x[noclear]{rigel1,\0\i[1]\1Really!? I would be honored to have a model of mine made real...!}"
+		when "Needlegon"; "3D modeling?\n[150]\0\i[1]\1\![sound,play,sfx/caelos_finish.wav,--volume=%(volume)]I could even teach you a thing or two myself!}\w8\w8{urs0,well, if you're offering your expert help...}"
+		when "ASCIIdle"; "ASCII art?}\w8\w8{urs0,i dunno... this really seems like something you'd mostly do for bragging rights. still, maybe worth a shot}"
+		when "Ballpoint"; "something on paper?}\w8\w8{urs0,y'know, i heard sketching with a simple ballpoint pen can help getting out of an art block. maybe it'll ease me back into painting}"
+		when "Blushie"; "something on the cuter side?}\w8\w8{urs0,haha i dunno if i could do that. it's not \f[italic,1]really\f[italic,0] my kind of style?\n[150]i guess just for a laugh i could try}"
+		when "Eggdle"; "egg painting?}\w8\w8{urs0,maybe on easter? then again, nothing's really stopping me}"
+		when "Fashionable Needle"; "fashion design?}\w8\w8{urs0,oh god that'll require so much referencing... i know about fashion about as much as the next guy}\x[noclear]{rigel1,You could have me do the searching!}\w8\w8{urs0,well if only with your help}"
+		when "Tuxeedle"; "fashion design?}\w8\w8{urs0,oh god that'll require so much referencing... i know about fashion about as much as the next guy}\x[noclear]{rigel1,You could have me do the searching!}\w8\w8{urs0,well if only with your help}"
+		when "Fluffidle"; "something related to furs? Like taxidermy?}\w8\w8{urs0,i don't think i can stomach working with dead animals bud}\x[noclear]{rigel1,Ah-\w8 \0\i[1]\1\![sound,play,sfx/caelos_error.wav,--volume=%(volume)]My bad! Then... fursuiting?}\w8\w8{urs0,too expensive. i guess i haven't done anything with my fursona in a while... i could just draw them instead}"
+		when "Glitchy Needle"; "glitch art?}\w8\w8{urs0,honestly i think you guys would be better at this than me. i'll bet vega can make a kickass datamoshing script}\x[noclear]{rigel1,There's still tools you can use to do it yourself. But I'm sure Vega would also enjoy this!}"
+		when "Needle dog"; "making up creatures?}\w8\w8{urs0,now there's an idea. i guess i could put my older skills to some use}"
+		when "Needle hound"; "making up creatures?}\w8\w8{urs0,now there's an idea. i guess i could put my older skills to some use}"
+		when "Needlework (Crochet)"; "crocheting?}\w8\w8{urs0,i actually did try it once. could not wrap my head around it at all. maybe i could pick up a cross stitch set instead}"
+		when "Trusty Nail"; "making a small videogame?}\w8\w8{urs0,huh? i mean even if i have you guys' help with coding, none of us here can make music. i guess stock is always an option?}"
+		when "Spear"; "making a small videogame?}\w8\w8{urs0,huh? i mean even if i have you guys' help with coding, none of us here can make music. i guess stock is always an option?}"
+		when "Soul Edge"; "making a small videogame?}\w8\w8{urs0,huh? i mean even if i have you guys' help with coding, none of us here can make music. i guess stock is always an option?}"
+		when "Twemoji"; "making emotes? I read Sputnik supports importing custom ones!}\w8\w8{urs0,i mean, aren't the standard ones enough? if there's anything specific you want though, i could definitely try}"
+		when "Felting Needle"; "felting?}\w8\w8{urs0,oh, i've actually seen some felting kits around. some who do it say there's a lot of stabbing involved. maybe could help getting some steam off}"
+		when "Birthday Needle"; "baking?}\w8\w8{urs0,i already do that sometimes bud}\x[noclear]{rigel1,Well, you haven't really shown us any of your work before!}\w8\w8{urs0,maybe i should...}"
+		others; "well... There's just so many mediums to choose from! I'm sure you'll be able to pick something to your liking!}\w8\w8{urs0,thanks bud}"
+	}
+}
+
+
+//from FLUX, or any other ghost utilizing music player code
+//another NOTIFY event btw. will definitely need OnSecondChange
+OnMusicPlayer.SongInfo
+{
+	//_musicplayer = reference0 //what ghost is playing the music
+	song = ""
+
+	//reference1 is the exact pathway to the song, let's extract the file name and extension to it
+	//maybe in the dialouge urs can point out that songs typically have names and artists who made them, confusing aster for a moment, as they can't read those meta tags themselves
+	
+	if reference9 != 0  //current playlist counter. don't respond at all before there's anything in the playlist
+	{
+		if reference3 == 0; song = "stopped!"
+		elseif reference3 == 2; song = "paused!"
+		elseif reference3 == 1 //playing music
+		{
+			if reference1 != "" //part to the currently loaded song
+			{
+				song = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3]
+				if extraConvos[3] == 0; fluxflag = 1 //for OnSecondChange. for the unlock, something MUST be currently playing. any further conversation replays might respond to the player being stopped or paused
+			}
+		}
+	}
+}
+
+//vary dialogue depending on the current playback state
+OnMusicPlayerState
+{
+	//"mind telling me what you're listening to?"
+	if song == "stopped!"; "{vega0,nothing yet. i didn't start. still choosing.}"
+	elseif song == "paused!"; "{vega0,nothing currently. it's paused. something else caught attention.}"
+	else; "{vega0,it's called \&[quot]%(song)\&[quot].}\x[noclear]{urs1,haha you know the extension isn't actually part of the name, right?}\w8\w8{vega0,oh. it's easier to read the file name.\n[150]i'm not using your player. just the system one.}"
+}
+
+//will display in Extra menu after the Flux related convo is finished
+OnPlaylists : all
+{
+	"\![embed,OnSchemeFont]\f[height,16]\f[align,center]Playlists\n[150]\f[default]"
+
+	if SHIORI3FW.BalloonName == "Sputnik Messenger"; "\f[color,FFA4B0]\f[cursorshadowcolor,D70E51]"
+	"\![*]\q[Urs,https://www.youtube.com/playlist?list=PLJ8nDkIxbwRZFM0EfkXiyMOl7m0Xvdntz]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[default]"
+	" "
+
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[color,FFDA9B]\f[cursorshadowcolor,832B00]"
+	"\![*]\q[Rigel,https://www.youtube.com/playlist?list=PLJ8nDkIxbwRZT50rupNhqedlHzPH9XZRj]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[default]"
+	" "
+
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[color,71D6F8]\f[cursorshadowcolor,0C006F]"
+	"\![*]\q[Vega,https://www.youtube.com/playlist?list=PLJ8nDkIxbwRZKr6L1dO-bzeufNhfWWtEo]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[default]"
+	" "
+
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[color,FDB3FF]\f[cursorshadowcolor,4B006F]"
+	"\![*]\q[Aldebaran,https://www.youtube.com/playlist?list=PLJ8nDkIxbwRbIOAbVIZqxVt7reabElNg7]"
+	if SHIORI3FW.BalloonName == "Sputnik Messenger";"\f[default]"
+	" "
+}
+
+//Useless Box, Stranger on the Ground, and Quiet Conversation Over Tea
+//those ghosts don't have external events linked to them, so we'll just have to check if they're currently running instead
+
+//Check for target ghosts upon boot
+OnBootExtraCheck
+{
+	_isUselessBox = SHIORI3FW.IsGhostExist('Useless Box') //convo 5
+	_isStranger = SHIORI3FW.IsGhostExist('The Stranger') //convo 6
+	_isQCOT = SHIORI3FW.IsGhostExist('Tiffany') // convo 7
+	_display = ""
+	_convos = (_isUselessBox,_isStranger,_isQCOT)
+
+	_sum = _isUselessBox + _isStranger + _isQCOT
+
+	if _sum == 1
+	{
+		if _isUselessBox && extraConvos[4] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,5][ Unlocked extra chat log: \f[bold,1]The Ultimate Machine\f[bold,0]."
+		if _isStranger && extraConvos[5] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,6][ Unlocked extra chat log: \f[bold,1]Growing Bonds\f[bold,0]."
+		if _isQCOT && extraConvos[6] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1][ \![notify,OnMarkExtra,unlock,7]Unlocked extra chat log: \f[bold,1]Nostalgia\f[bold,0]."
+
+		_display += "\n[150]You can access it in the extra menu."
+	}
+	elseif _sum > 1
+	{
+		_j = 0
+
+		for _i = 0; _i < 3; _i++
+		{
+			if _convos[_i] == 1 && extraConvos[_i + 4] == 0
+			{
+				_display += "\![notify,OnMarkExtra,unlock,%(_i + 5)]"
+				_j++
+			}
+		}
+
+		if _j == 1
+		{
+			if _isUselessBox && extraConvos[4] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,5][ Unlocked extra chat log: \f[bold,1]The Ultimate Machine\f[bold,0]."
+			if _isStranger && extraConvos[5] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,6][ Unlocked extra chat log: \f[bold,1]Growing Bonds\f[bold,0]."
+			if _isQCOT && extraConvos[6] == 0; _display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,7][ Unlocked extra chat log: \f[bold,1]Nostalgia\f[bold,0]."
+
+			_display += "\n[150]You can access it in the extra menu. ]"
+		}
+		elseif _j > 1
+		{
+			if _j == 2; _display +="[ Unlocked \f[bold,1]two\f[bold,0] extra chat logs."
+			elseif _j == 3; _display += "[ Unlocked \f[bold,1]three\f[bold,0] extra chat logs."
+
+			_display += "\n[150]You can access them in the Extra menu. ]"
+		}
+	}
+
+	_display
+}
+//"\n[150]%(SHIORI3FW.EventidOld)\n%(status)"
+
+OnGhostCallComplete
+{
+	bootcheck
+}
+
+OnOtherGhostBooted
+{
+	bootcheck
+}
+
+OnOtherGhostChanged
+{
+	bootcheck
+}
+
+bootcheck
+{
+	//detect if the ghost that has just launched is a target ghost
+	_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1][ Unlocked extra chat log:"
+	_function = ""
+	_index = -1
+	_ghost = ""
+
+	if SHIORI3FW.Eventid == "OnOtherGhostChanged"; _ghost = reference1
+	else; _ghost = reference0
+
+
+	if _ghost == "Useless Box" && extraConvos[4] == 0
+	{
+		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,5]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]The Ultimate Machine.\f[bold,0]"
+		_function = "OnExtraCatBox"
+		_index = 5
+	} 
+	elseif _ghost == "The Stranger" && extraConvos[5] == 0
+	{
+		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,6]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]Growing Bonds.\f[bold,0]"
+		_function = "OnExtraGrowingBonds"
+		_index = 6
+	}
+	elseif _ghost == "Tiffany" && extraConvos[6] == 0
+	{
+		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,7]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]Nostalgia.\f[bold,0]"
+		_function = "OnExtraNostalgia"
+		_index = 7
+	}
+	else; _display = "" //null the whole thing
+
+	//check if the ghost is currently talking
+	//if so, set up a flag to be later picked up by OnSecondCheck
+	if _display != ""
+	{
+		if "talking" _in_ status //postpone the alert if the ghost is talking
+		{
+			extraflag = 1
+			//_display = "\b[-1]\w8\w8\b[0]" + _display
+			_display += "\n[150]You can access it in the Extra menu. ]"
+			extramessage = _display
+			_display = "" //null
+		} 
+		else //display the convo now if it wasn't
+		{
+			_display += " ]\x\![raise,OnShowConvo,%(_function),%(_index),0]"
+			_display //output convo
+		}
+		}
+}
+
+//separate function to be called w/ notify so that it erases the variables when i actually Need
+OnWipeExtraFlag
+{
+	ERASEVAR('extraflag')
+	ERASEVAR('extramessage')
+}

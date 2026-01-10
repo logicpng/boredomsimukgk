@@ -1,0 +1,319 @@
+//Some quick notes:
+//1: surfaces.txt does NOT support same line comments. If you want to write a comment, ALWAYS PUT IT ON ITS OWN LINE. If you put comments after other bits of code in the same line, it may seem to work at first, but it can cause cryptic errors down the line. Save yourself the trouble. Always put comments on their own lines in here. Additionally, it doesn't do block comments with /* and */
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+
+//normal operation
+surface0
+{
+	point.centerx,185
+	//the run once controller
+	animation99999.interval,runonce
+	animation99999.pattern0,parallelstop,(10000,10001,10100,11000,11001,11100,12000,12001,12100)
+	animation99999.pattern1,parallelstart,(9999,9997,9996,9994,9995,0)
+	//commenting anim below out turns off automaton
+	animation99999.pattern2,alternativestart,(10001,11001,12001)
+	//anim below for testing purposes
+	//animation99999.pattern2,parallelstart,(10300,11300,12300)
+}
+
+//rigel OnClose
+surface1
+{
+
+	animation99999.interval,runonce
+	animation99999.pattern0,parallelstop,(10000)
+	animation99999.pattern1,parallelstart,(9999,9994,9997,9996,9995,0)
+
+	//commenting anim below out turns off automaton
+	//animation99999.pattern2,alternativestart,(10001,11001,12001)
+
+	//appear. called from ghost to allow for easier timing
+	animation9998.interval,never
+	animation9998.pattern0,overlay,-1,0,0,0
+	animation9998.pattern1,overlay,10501,300,0,0
+	animation9998.pattern2,overlay,10502,60,0,0
+	animation9998.pattern3,overlay,10503,60,0,0
+	animation9998.pattern4,overlay,10504,200,0,0
+	animation9998.pattern6,start,10000
+
+	//wave
+	animation10000.interval,always
+	animation10000.pattern0,overlay,10521,0,0,0
+	animation10000.pattern1,overlay,10520,350,0,0
+	animation10000.pattern2,overlay,10521,350,0,0
+
+	//speak
+	animation11000.interval,talk,6
+	animation11000.pattern0,alternativestart,(11001,11002,11003)
+
+	animation11001.interval,never
+	animation11001.pattern0,overlay,10510,0,0,0
+	animation11001.pattern1,overlay,10511,100,0,0
+	animation11001.pattern2,overlay,-1,100,0,0
+
+	animation11002.interval,never
+	animation11002.pattern0,overlay,10510,0,0,0
+	animation11002.pattern1,overlay,-1,100,0,0
+
+	animation11003.interval,never
+	animation11003.pattern0,overlay,10511,0,0,0
+	animation11003.pattern1,overlay,-1,100,0,0
+}
+
+//Vega OnClose
+surface2
+{
+
+
+	animation99999.interval,runonce
+	animation99999.pattern0,parallelstart,(9999,9994,9997,9996,9995,0)
+
+	//appear
+	animation9998.interval,never
+	animation9998.pattern0,overlay,-1,0,0,0
+	animation9998.pattern1,overlay,20501,300,0,0
+	animation9998.pattern2,overlay,20502,60,0,0
+	animation9998.pattern3,overlay,20503,60,0,0
+	animation9998.pattern4,overlay,20504,60,0,0
+	animation9998.pattern5,overlay,20505,60,0,0
+	//animation9998.pattern5,overlay,20506,80,0,0
+
+	//speak
+	animation11000.interval,talk,6
+	animation11000.pattern0,alternativestart,(11001,11002,11003)
+
+	animation11001.interval,never
+	animation11001.pattern0,overlay,20510,0,0,0
+	animation11001.pattern1,overlay,20511,100,0,0
+	animation11001.pattern2,overlay,-1,100,0,0
+
+	animation11002.interval,never
+	animation11002.pattern0,overlay,20510,0,0,0
+	animation11002.pattern1,overlay,-1,100,0,0
+
+	animation11003.interval,never
+	animation11003.pattern0,overlay,20511,0,0,0
+	animation11003.pattern1,overlay,-1,100,0,0
+	
+}
+
+//Aldebaran OnClose
+surface3
+{
+
+
+	animation99999.interval,runonce
+	animation99999.pattern0,parallelstop,(10000)
+	animation99999.pattern1,parallelstart,(9999,9994,9997,9996,9995,0)
+
+	//appear
+	animation9998.interval,never
+	animation9998.pattern0,overlay,-1,0,0,0
+	animation9998.pattern1,overlay,30501,300,0,0
+	animation9998.pattern2,overlay,30502,60,0,0
+	animation9998.pattern3,overlay,30503,60,0,0
+	animation9998.pattern4,start,1
+	animation9998.pattern5,overlay,30504,300,0,0
+	animation9998.pattern6,overlay,30505,100,0,0
+	animation9998.pattern7,start,10000
+
+	//spark
+	animation10000.interval,always
+	animation10000.pattern0,overlay,30521,0,0,0
+	animation10000.pattern1,overlay,30520,350,0,0
+	animation10000.pattern2,overlay,30521,350,0,0
+
+
+	//speak
+	animation11000.interval,talk,6
+	animation11000.pattern0,alternativestart,(11001,11002,11003)
+
+	animation11001.interval,never
+	animation11001.pattern0,overlay,30510,0,0,0
+	animation11001.pattern1,overlay,30511,100,0,0
+	animation11001.pattern2,overlay,-1,100,0,0
+
+	animation11002.interval,never
+	animation11002.pattern0,overlay,30510,0,0,0
+	animation11002.pattern1,overlay,-1,100,0,0
+
+	animation11003.interval,never
+	animation11003.pattern0,overlay,30511,0,0,0
+	animation11003.pattern1,overlay,-1,100,0,0
+	
+}
+
+//laptop parts
+surface.append0-3
+{
+	//laptop
+	animation9999.interval,never
+	animation9999.pattern0,overlay,9999,0,0,0
+
+	//sputnik
+	animation9997.interval,never
+	animation9997.pattern0,overlay,120,0,0,0
+
+	//taskbar
+	animation9996.interval,never
+	animation9996.pattern0,overlay,119,0,0,0
+
+	//icons
+	animation9995.interval,never
+	animation9995.pattern0,overlay,390,0,0,0
+
+	//desktop
+	animation9994.interval,never
+	animation9994.pattern0,overlay,109,0,0,0
+
+	//sputnik message background
+	animation0.interval,never
+	animation0.pattern0,overlay,200,0,0,0
+
+}
+
+//taskbar
+surface119
+{
+	//rigel colors by default
+	element0,overlay,blank_small.png,0,0
+
+	//rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,110,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,111,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,112,0,0,0
+
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,113,0,0,0
+
+}
+
+//desktop wallpaper
+surface109
+{
+	element0,overlay,blank_small.png,0,0
+
+	//ruins
+	animation900.interval,bind
+	animation900.pattern0,base,100,0,0,0
+
+	//flower
+	animation800.interval,bind
+	animation800.pattern0,base,101,0,0,0
+
+	//moon
+	animation700.interval,bind
+	animation700.pattern0,base,102,0,0,0
+
+	//abstract space
+	animation600.interval,bind
+	animation600.pattern0,base,103,0,0,0
+
+}
+
+//desktop icons 
+surface390
+{
+	//rigel colors by default
+	element0,overlay,blank_small.png,0,0
+
+	//rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,300,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,310,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,320,0,0,0
+
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,330,0,0,0
+
+}
+
+//vibrate
+surface.append0,3
+{
+	animation1.interval,never
+	animation1.pattern0,move,0,25,-1,1
+	animation1.pattern1,move,0,25,2,-2
+	animation1.pattern2,move,0,25,-1,2
+	animation1.pattern3,move,0,25,0,-1
+	animation1.pattern4,move,0,25,-1,1
+	animation1.pattern5,move,0,25,2,-2
+	animation1.pattern6,move,0,25,-1,2
+	animation1.pattern7,move,0,25,0,-1
+	animation1.pattern8,move,0,25,-1,1
+	animation1.pattern9,move,0,25,2,-2
+	animation1.pattern10,move,0,25,0,0
+}
+
+//—————————————————————————————— Kero surfaces (Image Viewer) ——————————————————————————————
+
+surface10
+{
+	//is blank
+}
+
+//vertical viewer
+surface20
+{
+	element0,overlay,blank_vert.png,0,0
+
+		//rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,11,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,12,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,13,0,0,0
+
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,14,0,0,0
+}
+
+//horizontal viewer
+surface30
+{
+	element0,overlay,blank_hor.png,0,0
+
+		//rigel - 6k
+	animation6000.interval,bind
+	animation6000.pattern0,base,21,0,0,0
+
+	//vega - 7k
+	animation7000.interval,bind
+	animation7000.pattern0,base,22,0,0,0
+
+	//aldebaran -8k
+	animation8000.interval,bind
+	animation8000.pattern0,base,23,0,0,0
+
+	//loading - 9k
+	animation9000.interval,bind
+	animation9000.pattern0,base,24,0,0,0
+}
