@@ -17,7 +17,7 @@ file,ghost/master/emerg.dicef8b306068328d462f45308eb44a79f9size=501date=2025-
 file,ghost/master/extra.dic4ed0096d908ad1832c64c240c7c56a28size=21916date=2026-01-10T20:35:38
 file,ghost/master/menu_sakura.dic48b20c1b68a20932d3ec58a9695615f3size=22651date=2026-01-11T07:20:35
 file,ghost/master/meta.dic6348b91ca6885e3ff8edfdad02993414size=5939date=2025-12-27T17:00:30
-file,ghost/master/other.dicd92f7af7a896b4a55f235312b9b8a403size=18554date=2026-01-11T07:45:45
+file,ghost/master/other.dicd7f69726eeeaaf7fe44f85c456a78e29size=18636date=2026-01-11T08:00:56
 file,ghost/master/yaya.dll7ca71c0691df0379655530fcf6d0fa7csize=884736date=2025-01-16T06:08:02
 file,ghost/master/yaya.txt1f3030b5e3895849449bee78843c730csize=727date=2025-12-27T16:36:24
 file,ghost/master/yaya_emerg.txt9e43b4696366a536ecc69e45d80e392csize=607date=2023-04-15T05:44:19
