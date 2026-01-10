@@ -1,5 +1,3 @@
-//test edit
-
 OnAiTalk
 {
 	if isSwitching == 1; return //end function immediately if switching is currently happening
