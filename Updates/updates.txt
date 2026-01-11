@@ -14,7 +14,7 @@ file,ghost/master/chatter.dic14b10e0207d7bb7e2bad124f93350ebdsize=41854date=2
 file,ghost/master/convos.dic5184e565939603acc382a903bddaefb8size=95249date=2026-01-11T05:34:33
 file,ghost/master/descript.txt722dd256af6e76381c89db5713ec06e3size=358date=2025-12-18T08:06:45
 file,ghost/master/emerg.dicef8b306068328d462f45308eb44a79f9size=501date=2025-12-18T19:12:37
-file,ghost/master/extra.dic4ed0096d908ad1832c64c240c7c56a28size=21916date=2026-01-10T20:35:38
+file,ghost/master/extra.dicff4777f4b0ab805edccbfa00252f7a7asize=21916date=2026-01-12T05:15:20
 file,ghost/master/menu_sakura.dic48b20c1b68a20932d3ec58a9695615f3size=22651date=2026-01-11T07:20:35
 file,ghost/master/meta.dic6348b91ca6885e3ff8edfdad02993414size=5939date=2025-12-27T17:00:30
 file,ghost/master/other.dicd7f69726eeeaaf7fe44f85c456a78e29size=18636date=2026-01-11T08:00:56

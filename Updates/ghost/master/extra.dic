@@ -308,19 +308,19 @@ bootcheck
 	{
 		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,5]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]The Ultimate Machine.\f[bold,0]"
 		_function = "OnExtraCatBox"
-		_index = 5
+		_index = 4
 	} 
 	elseif _ghost == "The Stranger" && extraConvos[5] == 0
 	{
 		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,6]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]Growing Bonds.\f[bold,0]"
 		_function = "OnExtraGrowingBonds"
-		_index = 6
+		_index = 5
 	}
 	elseif _ghost == "Tiffany" && extraConvos[6] == 0
 	{
 		_display = "\![extranotif]\![sound,play,sfx/caelos_notice.wav,--volume=%(volume)]\i[1]\![notify,OnMarkExtra,unlock,7]\![notify,OnWipeExtraFlag]" + _display + " \f[bold,1]Nostalgia.\f[bold,0]"
 		_function = "OnExtraNostalgia"
-		_index = 7
+		_index = 6
 	}
 	else; _display = "" //null the whole thing
 
