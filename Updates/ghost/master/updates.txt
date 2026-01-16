@@ -8,9 +8,9 @@ file,thumbnail1.png9a5d87b633aba98dc260183d80c4c497size=191431date=2025-12-18
 file,thumbnail2.pna22bea6caf63248c267cf9591cd5d751esize=2086date=2025-12-18T14:47:53
 file,thumbnail2.pngcfc543cab18130735c68dc578478f5c1size=177012date=2025-12-18T14:46:48
 file,ghost/master/SPUTNIK.ico71254327f12a995d7bcaac07c88798fbsize=120285date=2025-12-18T08:04:23
-file,ghost/master/aitalk.dicd8b54ca9419be2c7fac8bb3d57c5fdabsize=4009date=2026-01-11T08:07:11
-file,ghost/master/boot.dic076f3469aae5b056c8d6e8cd91ff3bdcsize=6981date=2026-01-11T05:24:23
-file,ghost/master/chatter.dic14b10e0207d7bb7e2bad124f93350ebdsize=41854date=2026-01-11T06:34:12
+file,ghost/master/aitalk.dic71615ea1cc45cf2a0e75a9e2b609f2d1size=5579date=2026-01-16T10:51:13
+file,ghost/master/boot.dicee2e41894d69246bc33bdcb51efd9511size=5817date=2026-01-16T10:23:11
+file,ghost/master/chatter.dic21f200735e07fe0742ce4a6e3be38adcsize=41857date=2026-01-16T10:00:32
 file,ghost/master/convos.dic5184e565939603acc382a903bddaefb8size=95249date=2026-01-11T05:34:33
 file,ghost/master/descript.txt722dd256af6e76381c89db5713ec06e3size=358date=2025-12-18T08:06:45
 file,ghost/master/emerg.dicef8b306068328d462f45308eb44a79f9size=501date=2025-12-18T19:12:37

@@ -57,6 +57,53 @@ OnAiTalk
 	
 }
 
+//if ai talk is off switch by minutes rather than using randomtalk
+OnMinuteChange
+{
+
+	if aitalkinterval == 0 //%% _tick == 1 //ai talk off, handle switching a little bit differently.
+	{
+		if RAND(5) == 0 && mainConvos[0] == 4 && alCount == ""
+		{
+			"\t"
+			--
+			//if the fronter isn't already aldebaran, roll another die to make it a rarer occurence
+			if scheme != 3 && RAND(2) == 0; "\![embed,OnSwitch,Aldebaran]"
+			else
+			{
+				//if the dice roll fails or the fronter is already aldebaran, switch to rigel if the fronter isn't rigel, or to vega, if the fronter isn't vega
+				if scheme != 1; "\![embed,OnSwitch,Rigel]"
+				elseif scheme != 2; "\![embed,OnSwitch,Vega]"
+				//on the freak chance it's stuck in Please Wait... scheme or it equals something else
+				else; "\![embed,OnSwitch,Rigel]"
+			}
+		}
+		elseif alCount != "" //generated in OnSwitch if switch to al happens, can take values from 0 to 3
+		{
+			if scheme != 3
+			{
+				ERASEVAR("alCount") //if current aster isn't aldebaran this shouldn't even be here
+			} 
+			else //scheme set to aldebaran
+			{
+				if alCount <= 0 //coundown on 0 or less, countdown done, do the switch and skip random talk
+				{
+					"\t"
+					--
+					ERASEVAR("alCount") //don't need this anymore
+					"\![embed,OnSwitch,Rigel]" //let shiori pick either or as random candidates
+					"\![embed,OnSwitch,Vega]"
+				}
+				elseif alCount > 0 //countdown not done, show a random (aldebaran only eventually) line and decrease the countdown
+				{
+					alCount--
+				}
+			}
+		}
+	}
+	
+}
+
 OnEmbedExtraCheck
 {
 	if extraflag == 1; "\w8\w8"

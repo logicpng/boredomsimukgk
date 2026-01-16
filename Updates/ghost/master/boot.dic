@@ -69,6 +69,8 @@ OnInitialize
 	//If you add new variables in updates, I recommend initializing them like so:
 	//if !ISVAR("NewVariable"); NewVariable = 0
 	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+
+	if isSwitching == 1; isSwitching = 0
 	
 	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
 	{
@@ -102,7 +104,7 @@ OnBoot :all
 	//_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
 	//_today = "%(month)/%(day)" //Again, switch this around if using D/M
 	"\![sound,load,sfx/door.wav]" //for closing
-	"\1\s[-1]\0\s[0]\![set,alpha,0]"
+	"\t\1\s[-1]\0\s[0]\![set,alpha,0]"
 	
 	if scheme == 4; "\![theme,rigel]" //in case of somehow closing the ghost on Please Wait thing]
 	"\![set,alpha,100,1000]"
@@ -112,34 +114,15 @@ OnBoot :all
 		when 1; OnAltairBoot
 		when 2; OnVegaBoot
 		when 3; OnAlBoot
-		others; "\_q[ Scheme is set incorrectly! Please fix! ]\_q\x"
+		others; OnAltairBoot
 	}
 
 	OnBootExtraCheck //in extra.dic
-
-	// if astBalloon == 1
-	// {
-	// 	"\w8\w8\s[-1]\b[-1]"
-		
-	// } 
-
-	// if _today == _user_birthday
-	// {
-	// 	"It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8 Developer,\w4 you can add an interesting message here.\w8 It can be as long as you like.\w8 Or, you can remove it entirely."
-	// }
-	// elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
-	// {
-	// 	"It's new year's day.\w8 Happy %(year),\w4 %(username)."
-	// }
-	// else //Normal boot
-	// {
-	// 	"Hello %(username).\w8 Good to see you."
-	// 	"Hello.\w8 Ready to make something cool?"
-	// }
 }
 
 OnClose : all
 {
+	"\t"
 	if !isSFX;"\_q\f[bold,1][ A sound of a door unlocking can be heard... ]\f[bold,0]\_q\_w[1000]\b[-1]\c"
 	else; "\![sound,play,sfx/door.wav,--volume=%(volume)]\_w[1500]"
 
@@ -153,13 +136,6 @@ OnClose : all
 		when 2; OnVegaClose
 		when 3; OnAlClose 
 	}
-
-	//change balloon back to the recommended one if it was changed during this
-	// if astBalloon == 1
-	// {
-	// 	//"\w8\w8\s[-1]\b[-1]\![change,balloon,Sputnik Messenger]"
-	// 	ERASEVAR('astBalloon')
-	// } 
 	
 	"\![set,alpha,0,1000]\_w[1500]\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
 }
@@ -207,19 +183,5 @@ OnNotifyDressupInfo
 
 FadeIn
 {
-	// _display = "" //resulting output
-	// _time = 50 //number of steps
-	// _alpha = 0 //transparency level
-
-	// for _i = 0; _i < _time; _i++
-	// {
-	// 	_alpha = (100 / _time) * _i
-	// 	if _alpha > 100; _alpha = 100
-	// 	_display += "\w1\![set,alpha,%(_alpha)]"
-	// }
-	// _display += "\w1\![set,alpha,100]"
-
-	// _display
-
 	"\w8\![set,alpha,0]\![set,alpha,100,3000]"
 }

@@ -162,7 +162,7 @@ OnRandomVegaTalk : nonoverlap_pool
 	"{vega2,is our internet bill coming up?}\w8\w8{urs1,no need to worry about that, you know i always pay it on time}\w8\w8{vega0,always, huh.}"
 
 
-	"{vega1,learned of light pollution. do you see many stars?}\w8\w8{urs0,not a whole lot, but the night sky not entirely empty either}\e:chain=ve_sky"
+	"{vega1,learned of light pollution. do you see many stars?}\w8\w8{urs0,not a whole lot, but the night sky's not entirely empty either}\e:chain=ve_sky"
 	"{vega2,urs. need your help.}\w8\w8{urs1,did something happen?}\w8\w8{vega0,need more songs, for my playlist.}"
 	"{vega2,rigel did something. im not sure what. the desktop seems off.}\w8\w8{urs1,should i be afraid yet?}\w8\w8{vega0,no. it's probably cosmetic.}"
 	"{vega2,i watch the ceiling, sometimes. i like how the color flows.}\w8\w8{urs1,that little for you to do?}\w8\w8{vega0,no. i'm taking a break.}"
@@ -380,7 +380,7 @@ OnRandomAltairTalk : nonoverlap_pool
 	"{rigel1,Have I ever told you that I love these icons you've made for us... Yours is especially adorable! Did you use to draw animals a lot?}\w8\w8{urs0,uh. you could say that}"
 	"{rigel1,I never asked. Is it nicer here than in your hometown...?}\w8\w8{urs0,god i'm so glad to be out of there. anywhere would be better, but i got pretty lucky to end up here too}"
 
-	"{rigel1,Would it be too on the nose to make plant life simulation for the desktop?}\w8\w8{urs0,sounds like a project in a half. if you do it just watch for cpu usage okay?}"
+	"{rigel1,Would it be too on the nose to make plant life simulation for the desktop?}\w8\w8{urs0,sounds like a project and a half. if you do it just watch for cpu usage okay?}"
 	"{rigel1,It's so strange to think about how both our worlds are so... limitless. In different ways. But, I guess, still limited, in other ways.}\w8\w8{urs0,i get what you mean. here i'm limited by our social and economic systems, and you can only do as much as the hardware will let you}"
 	"{rigel1,Have you ever seen bird live feeds? Do you know if these are actually real places you could visit?}\w8\w8{urs0,visit? probably not. but that would be costly to simulate, it's probably real}"
 	"{rigel1,If nothing else, I'm happy that the internet is full of people so eager to show off their pets...}\w8\w8{urs0,some people even make accounts for their pets.\n[150]it's very funny. they even make \&[quot]them\&[quot] type very stupid}"
